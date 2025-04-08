@@ -6,11 +6,12 @@ class Article
 {
 public:
     Article() = default;
-    Article(const std::string title, 
-        const std::string author, 
-        const std::string date, // Format: year-month-day
+    Article(
+        const std::string t, 
+        const std::string a, 
+        const std::string d, // Format: year-month-day
         int id, 
-        const std::string body);
+        const std::string b);
     ~Article() = default;
 
     Article getArticle() const;
