@@ -33,3 +33,7 @@ std::string Article::getDate() const {
 int Article::getID() const {
     return idNbr;
 }
+
+std::string Article::getBody() const {
+    return body;
+}

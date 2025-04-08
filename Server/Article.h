@@ -1,5 +1,6 @@
 #ifndef ARTICLE_H
 #define ARTICLE_H
+
 #include <string>
 
 class Article
@@ -19,6 +20,7 @@ public:
     std::string getAuthor() const;
     std::string getDate() const;
     int getID() const;
+    std::string getBody() const;
 
 private:
     std::string title;
