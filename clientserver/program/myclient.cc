@@ -1,7 +1,7 @@
 /* myclient.cc: sample client program */
 #include "connection.h"
 #include "connectionclosedexception.h"
-#include "commanddecoder.h"
+#include "commandhandler.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -89,7 +89,7 @@ int app(const Connection& conn)
         string command;
         cin >> command;
         cout << "command is: " << command; */
-        commanddecoder cd(conn);
+        commandhandler cd(conn);
         while (true)
         {
                 cout << "Type a command: ";

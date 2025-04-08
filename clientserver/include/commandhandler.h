@@ -1,12 +1,12 @@
-#ifndef COMMANDDECODER_H
-#define COMMANDDECODER_H
+#ifndef COMMANDHANDLER_H
+#define COMMANDHANDLER_H
 #include "connection.h"
 #include <iostream>
 #include <fstream>
 
-class commanddecoder {
+class commandhandler {
 public:
-    commanddecoder(const Connection& conn);
+    commandhandler(const Connection& conn); //replcace with message handler
 
     void com_decode(std::istream& input);
 private:
