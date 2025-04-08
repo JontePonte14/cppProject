@@ -1,6 +1,7 @@
 #ifndef ARTICLE_H
 #define ARTICLE_H
 
+#include <vector>
 #include <string>
 
 class Article

@@ -8,7 +8,7 @@ DatabaseDS::DatabaseDS(){
 }
 
 std::string DatabaseDS::listGroup(){
-    return "temp";
+    return newsGroups[0];
 }
 
 bool DatabaseDS::makeGroup(){
@@ -19,7 +19,7 @@ bool DatabaseDS::removeGroup(){
     return false;
 }
 
-std::list<Article> DatabaseDS::listArticle(){
+std::vector<Article> DatabaseDS::listArticle(){
     return articles;
 }
 

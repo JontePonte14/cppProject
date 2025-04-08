@@ -3,7 +3,7 @@
 
 #include "Article.h"
 #include <string>
-#include <list>
+#include <vector>
 #include <filesystem>
 
 class DatabaseDS
@@ -16,14 +16,14 @@ public:
     bool makeGroup();
     bool removeGroup();
 
-    std::list<Article> listArticle();
+    std::vector<Article> listArticle();
     bool makeArticle();
     bool removeArticle();
     Article getArticle();
 private:
     /* data */
-    std::list<std::string> newsGroups;
-    std::list<Article> articles;
+    std::vector<std::string> newsGroups;
+    std::vector<Article> articles;
     Article temp;
 };
 #endif
