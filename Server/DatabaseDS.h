@@ -1,12 +1,17 @@
+#ifndef DATABASEDS_H
+#define DATABASEDS_H
+
 #include "Article.h"
 #include <string>
 #include <list>
+#include <filesystem>
 
 class DatabaseDS
 {
-private:
-    /* data */
 public:
+    DatabaseDS(/* args */);
+    ~DatabaseDS() = default;
+
     std::string listGroup();
     bool makeGroup();
     bool removeGroup();
@@ -15,14 +20,10 @@ public:
     bool makeArticle();
     bool removeArticle();
     Article getArticle();
-    DatabaseDS(/* args */);
-    ~DatabaseDS();
+private:
+    /* data */
+    std::list<std::string> newsGroups;
+    std::list<Article> articles;
+    Article temp;
 };
-
-DatabaseDS::DatabaseDS(/* args */)
-{
-}
-
-DatabaseDS::~DatabaseDS()
-{
-}
+#endif
