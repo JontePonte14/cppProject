@@ -15,9 +15,10 @@ public:
     ~Article() = default;
 
     Article getArticle() const;
-    std::string getArticleName() const;
-    std::string getArticleDate() const;
-    int getArticleID() const;
+    std::string getTitle() const;
+    std::string getAuthor() const;
+    std::string getDate() const;
+    int getID() const;
 
 private:
     std::string title;
