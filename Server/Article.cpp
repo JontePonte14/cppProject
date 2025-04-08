@@ -15,7 +15,7 @@ Article::Article(
     }
 
 Article Article::getArticle() const {
-    return *this; // returns a copy of the current object
+    return *this;
 }    
 
 std::string Article::getTitle() const {
