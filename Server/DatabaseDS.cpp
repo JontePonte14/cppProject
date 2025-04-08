@@ -11,7 +11,7 @@ std::string DatabaseDS::listGroup(){
     return newsGroups[0];
 }
 
-bool DatabaseDS::makeGroup(){
+bool DatabaseDS::makeGroup(std::string groupName){
     return false;
 }
 
