@@ -78,7 +78,18 @@ bool DatabaseDS::makeArticle(Article& article){
 }
 
 bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
-    return false;
+    fs::path groupName = root / articleGroup;
+
+    if (!fs::exists(groupName)) {
+        std::cout << "Group doesn't exist, Article wasn't removed" << std::endl;
+        return false;
+    }
+
+    std::string filename = std::to_string(articleID) + "_" + articleName;
+    fs::path filePath = groupName / filename;
+
+
+    return fs::remove(filePath);
 }
 
 Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName, int articleID){

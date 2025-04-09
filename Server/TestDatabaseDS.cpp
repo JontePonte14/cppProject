@@ -42,7 +42,18 @@ int main(){
         "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
     );
 
+    Article article2(
+        "Technology",                            // groupName
+        "AI is good",                            // title
+        "Jonathan von Bergen",                   // author
+        "2024-04-08",                            // date
+        1,                                       // idNbr
+        "AI is good"
+    );
+
     DS.makeArticle(article);
+    DS.makeArticle(article2);
+    DS.removeArticle("Technology", "AI Breakthrough in 2025", 999);
 
 
 
