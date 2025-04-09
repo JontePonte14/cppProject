@@ -10,20 +10,13 @@ using std::string;
 namespace fs=std::filesystem;
 
 int main(){
-    fs::create_directory("Data");
-
-    // const std::filesystem::path root{"Newsgroup"};
-
-
-    // for (auto const& dir_entry : std::filesystem::directory_iterator{root}) 
-    //     std::cout << dir_entry.path() << '\n';
     DatabaseDS DS("Newsgroup");
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
 
-    cout << DS.removeGroup("Sweden") << endl;
+    //cout << DS.removeGroup("Sweden") << endl;
     //cout << DS.removeGroup("Sweden") << endl;
     cout << DS.makeGroup("Technology") << endl;
 
@@ -54,6 +47,12 @@ int main(){
     DS.makeArticle(article);
     DS.makeArticle(article2);
     DS.removeArticle("Technology", "AI Breakthrough in 2025", 999);
+
+    cout << "List newsgroup: ";
+    for (const std::string& group : DS.listGroup()) {
+        cout << group << " ";
+    }
+    cout << endl;
 
 
 
