@@ -26,7 +26,6 @@ private:
     std::filesystem::path root;
 
     // Fast access?
-    std::vector<std::string> newsGroups;
     std::vector<Article> articles;
 };
 
