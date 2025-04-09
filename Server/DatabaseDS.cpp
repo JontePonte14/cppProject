@@ -53,7 +53,26 @@ bool DatabaseDS::makeArticle(Article& article){
     }
     article.setID(999);
     json newArticleFile;
+    newArticleFile["id"] = article.getID();
+    newArticleFile["groupName"] = article.getGroupName();
+    newArticleFile["title"] = article.getTitle();
+    newArticleFile["author"] = article.getAuthor();
+    newArticleFile["date"] = article.getDate();
+    newArticleFile["body"] = article.getBody();
 
+    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle();
+    fs::path filePath = groupName / filename;
+    
+
+
+    std::ofstream outFile(filePath);
+    if (!outFile) {
+        std::cout << "Error couldn't open file" << filePath << std::endl;
+        return false;
+    }
+
+    outFile << newArticleFile.dump(4);
+    outFile.close();
 
     return true;
 }
