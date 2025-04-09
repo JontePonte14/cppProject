@@ -15,8 +15,8 @@ std::vector<std::string> DatabaseDS::listGroup(){
     return newsGroups;
 }
 
-bool DatabaseDS::makeGroup(const std::string& groupName){
-    fs::path newGroup = root / groupName;
+bool DatabaseDS::makeGroup(const std::string& name){
+    fs::path newGroup = root / name;
 
     if (fs::exists(newGroup)) {
         std::cout << "Group exist already" << std::endl;
@@ -26,8 +26,15 @@ bool DatabaseDS::makeGroup(const std::string& groupName){
     return true;
 }
 
-bool DatabaseDS::removeGroup(const std::string& groupName){
-    return false;
+bool DatabaseDS::removeGroup(const std::string& name){
+    fs::path groupName = root / name;
+
+    if (!fs::exists(groupName)){
+        std::cout << "Group doesn't exist, nothing was removed" << std::endl;
+        return false;
+    }
+    fs::remove_all(groupName);
+    return true;
 }
 
 std::vector<Article> DatabaseDS::listArticle(){

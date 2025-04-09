@@ -13,8 +13,8 @@ public:
     ~DatabaseDS() = default;
 
     std::vector<std::string> listGroup();
-    bool makeGroup(const std::string& groupName);
-    bool removeGroup(const std::string& groupName);
+    bool makeGroup(const std::string& name);
+    bool removeGroup(const std::string& name);
 
     std::vector<Article> listArticle();
     bool makeArticle(const Article& article);

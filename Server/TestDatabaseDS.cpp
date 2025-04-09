@@ -20,6 +20,12 @@ int main(){
     DatabaseDS DS("Newsgroup");
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
+    cout << DS.makeGroup("Finland") << endl;
+
+
+    cout << DS.removeGroup("Sweden") << endl;
+    //cout << DS.removeGroup("Sweden") << endl;
+
 
 
 
