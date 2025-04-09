@@ -17,6 +17,7 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
 std::vector<std::string> DatabaseDS::listGroup(){
     std::vector<std::string> newsGroups;
 
+    // Måste lägga till så att ordningen är äldst grupp först
     // directory_iterator can be iterated using a range-for loop
     for (auto const& dir_entry : std::filesystem::directory_iterator{root}) {
          //std::cout << dir_entry.path() << '\n';
@@ -51,6 +52,7 @@ bool DatabaseDS::removeGroup(const std::string& name){
 }
 
 std::vector<Article> DatabaseDS::listArticle(){
+    // Ordningen för skötas av interface tycker jag.
     return articles;
 }
 
