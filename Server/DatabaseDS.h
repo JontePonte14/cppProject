@@ -28,7 +28,6 @@ private:
     // Fast access?
     std::vector<std::string> newsGroups;
     std::vector<Article> articles;
-    Article temp;
 };
 
 #endif
