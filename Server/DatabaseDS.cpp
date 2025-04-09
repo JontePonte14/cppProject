@@ -121,9 +121,6 @@ Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName
         articleJson["id"],
         articleJson["body"]
     );
-
-
-    
     return temp;
 }
 
