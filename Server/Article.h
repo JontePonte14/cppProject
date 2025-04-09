@@ -24,6 +24,7 @@ public:
     std::string getDate() const;
     int getID() const;
     std::string getBody() const;
+    void setID(const int& newID);
 
 private:
     std::string groupName;

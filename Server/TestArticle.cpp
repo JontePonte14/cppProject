@@ -61,4 +61,8 @@ int main(){
     cout << "ID: " << article.getID() << endl;
     cout << "Body: " << article.getBody() << endl;
     cout << endl;
+
+    cout << "New ID for article" << endl;
+    article.setID(123);
+    cout << "ID: " << article.getID() << endl;
 }

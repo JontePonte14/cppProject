@@ -43,3 +43,7 @@ int Article::getID() const {
 std::string Article::getBody() const {
     return body;
 }
+
+void Article::setID(const int& newID) {
+    idNbr = newID;
+}

@@ -30,11 +30,11 @@ bool DatabaseDS::removeGroup(const std::string& name){
     fs::path groupName = root / name;
 
     if (!fs::exists(groupName)){
+        // Group doesn't exist, nothing was removed
         std::cout << "Group doesn't exist, nothing was removed" << std::endl;
         return false;
     }
-    fs::remove_all(groupName);
-    return true;
+    return fs::remove_all(groupName);
 }
 
 std::vector<Article> DatabaseDS::listArticle(){
