@@ -10,7 +10,7 @@ DEPFLAGS = -MT $@ -MMD -MP -MF $*.d
 # Define preprocessor, compiler, and linker flags. Uncomment the # lines
 # if you use clang++ and wish to use libc++ instead of GNU's libstdc++.
 # -g is for debugging.
-CPPFLAGS =  -std=c++17 -I.
+CPPFLAGS = -std=c++17 -I. -Iexternal
 CXXFLAGS =  -O2 -Wall -Wextra -pedantic-errors -Wold-style-cast 
 CXXFLAGS += -std=c++17 
 CXXFLAGS += -g

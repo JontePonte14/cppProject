@@ -41,7 +41,9 @@ std::vector<Article> DatabaseDS::listArticle(){
     return articles;
 }
 
-bool DatabaseDS::makeArticle(const Article& article){
+bool DatabaseDS::makeArticle(Article& article){
+    article.setID(999);
+    
     return false;
 }
 

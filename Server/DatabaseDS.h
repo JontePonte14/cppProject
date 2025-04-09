@@ -1,6 +1,7 @@
 #ifndef DATABASEDS_H
 #define DATABASEDS_H
 
+#include "json.hpp"
 #include "Article.h"
 #include <string>
 #include <vector>
@@ -17,7 +18,7 @@ public:
     bool removeGroup(const std::string& name);
 
     std::vector<Article> listArticle();
-    bool makeArticle(const Article& article);
+    bool makeArticle(Article& article);
     bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
     Article getArticle(std::string articleGroup, std::string articleName, int articleID);
 private:
