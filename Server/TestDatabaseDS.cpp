@@ -48,11 +48,17 @@ int main(){
     DS.makeArticle(article2);
     DS.removeArticle("Technology", "AI Breakthrough in 2025", 999);
 
+    DS.removeArticle("Technology", "AI Breakthrough in 2025", 129);
+
+
     cout << "List newsgroup: ";
     for (const std::string& group : DS.listGroup()) {
         cout << group << " ";
     }
     cout << endl;
+
+    Article testGet;
+    testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
 
 
 

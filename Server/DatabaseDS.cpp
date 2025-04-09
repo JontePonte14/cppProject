@@ -32,7 +32,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
     fs::path newGroup = root / name;
 
     if (fs::exists(newGroup)) {
-        std::cout << "Group exist already" << std::endl;
+        std::cerr << "Group exist already" << std::endl;
         return false;
     }
     fs::create_directory(newGroup);
@@ -44,7 +44,7 @@ bool DatabaseDS::removeGroup(const std::string& name){
 
     if (!fs::exists(groupName)){
         // Group doesn't exist, nothing was removed
-        std::cout << "Group doesn't exist, nothing was removed" << std::endl;
+        std::cerr << "Group doesn't exist, nothing was removed" << std::endl;
         return false;
     }
     return fs::remove_all(groupName);
@@ -73,11 +73,9 @@ bool DatabaseDS::makeArticle(Article& article){
     std::string filename = std::to_string(article.getID()) + "_" + article.getTitle();
     fs::path filePath = groupName / filename;
     
-
-
     std::ofstream outFile(filePath);
     if (!outFile) {
-        std::cout << "Error couldn't open file" << filePath << std::endl;
+        std::cerr << "Error couldn't open file" << filePath << std::endl;
         return false;
     }
 
@@ -91,13 +89,17 @@ bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName
     fs::path groupName = root / articleGroup;
 
     if (!fs::exists(groupName)) {
-        std::cout << "Group doesn't exist, Article wasn't removed" << std::endl;
+        std::cerr << "Group doesn't exist, Article wasn't removed" << std::endl;
         return false;
     }
 
     std::string filename = std::to_string(articleID) + "_" + articleName;
     fs::path filePath = groupName / filename;
-
+    
+    if (!fs::exists(filePath)) {
+        std::cerr << "The article doesn't exist, Article wasn't removed" << std::endl;
+        return false;
+    }
     // if return false so was the articleID or articleName wrong
     return fs::remove(filePath);
 }
