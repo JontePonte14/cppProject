@@ -6,9 +6,18 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int main(){
+#include <filesystem>
+namespace fs=std::filesystem;
 
-    DatabaseDS DS("Newsgroup");
+int main(){
+    fs::create_directory("Data");
+
+    const std::filesystem::path root{"Newsgroup"};
+
+
+    for (auto const& dir_entry : std::filesystem::directory_iterator{root}) 
+        std::cout << dir_entry.path() << '\n';
+    //DatabaseDS DS("Newsgroup");
 
 
 }
