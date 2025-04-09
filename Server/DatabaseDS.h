@@ -9,7 +9,7 @@
 class DatabaseDS
 {
 public:
-    DatabaseDS(/* args */);
+    DatabaseDS(const std::filesystem::path& basePath);
     ~DatabaseDS() = default;
 
     std::vector<std::string> listGroup();
@@ -22,8 +22,12 @@ public:
     Article getArticle(std::string articleGroup, std::string articleName, int articleID);
 private:
     /* data */
+    std::filesystem::path root;
+
+    // Fast access?
     std::vector<std::string> newsGroups;
     std::vector<Article> articles;
     Article temp;
 };
+
 #endif

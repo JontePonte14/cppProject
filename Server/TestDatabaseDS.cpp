@@ -8,8 +8,7 @@ using std::string;
 
 int main(){
 
-    DatabaseDS DS();
-    cout << DS.listGroup() << endl;
+    DatabaseDS DS("Newsgroup");
 
 
 }

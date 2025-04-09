@@ -2,8 +2,11 @@
 #include "Article.h"
 #include <string>
 #include <filesystem>
+namespace fs=std::filesystem;
 
-DatabaseDS::DatabaseDS(){
+DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
+    root = basePath;
+    fs::create_directory(basePath);
     return;
 }
 
