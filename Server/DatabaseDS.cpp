@@ -2,8 +2,11 @@
 #include "Article.h"
 #include <string>
 #include <filesystem>
+#include <fstream>
 #include <iostream>
+#include <json.hpp>
 namespace fs=std::filesystem;
+using json = nlohmann::json;
 
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
@@ -42,9 +45,17 @@ std::vector<Article> DatabaseDS::listArticle(){
 }
 
 bool DatabaseDS::makeArticle(Article& article){
+    fs::path groupName = root / article.getGroupName();
+
+    if (!fs::exists(groupName)) {
+        std::cout << "Group doesn't exist, create one first" << std::endl;
+        return false;
+    }
     article.setID(999);
-    
-    return false;
+    json newArticleFile;
+
+
+    return true;
 }
 
 bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
