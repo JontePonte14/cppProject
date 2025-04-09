@@ -12,12 +12,15 @@ namespace fs=std::filesystem;
 int main(){
     fs::create_directory("Data");
 
-    const std::filesystem::path root{"Newsgroup"};
+    // const std::filesystem::path root{"Newsgroup"};
 
 
-    for (auto const& dir_entry : std::filesystem::directory_iterator{root}) 
-        std::cout << dir_entry.path() << '\n';
-    //DatabaseDS DS("Newsgroup");
+    // for (auto const& dir_entry : std::filesystem::directory_iterator{root}) 
+    //     std::cout << dir_entry.path() << '\n';
+    DatabaseDS DS("Newsgroup");
+    cout << DS.makeGroup("Sweden") << endl;
+    cout << DS.makeGroup("Sweden") << endl;
+
 
 
 }

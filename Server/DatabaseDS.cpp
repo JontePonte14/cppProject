@@ -2,6 +2,7 @@
 #include "Article.h"
 #include <string>
 #include <filesystem>
+#include <iostream>
 namespace fs=std::filesystem;
 
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
@@ -15,7 +16,14 @@ std::vector<std::string> DatabaseDS::listGroup(){
 }
 
 bool DatabaseDS::makeGroup(const std::string& groupName){
-    return false;
+    fs::path newGroup = root / groupName;
+
+    if (fs::exists(newGroup)) {
+        std::cout << "Group exist already" << std::endl;
+        return false;
+    }
+    fs::create_directory(newGroup);
+    return true;
 }
 
 bool DatabaseDS::removeGroup(const std::string& groupName){
