@@ -21,7 +21,6 @@ LDFLAGS =   -g
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-#PROGS =  ltest test_coding print_argv hello encode decode
 PROGS = TestArticle
 
 all: $(PROGS)
@@ -30,7 +29,6 @@ all: $(PROGS)
 #	./test_coding
 
 # Targets rely on implicit rules for compiling and linking
-#ltest: ltest.o list.o
 TestArticle: TestArticle.o Article.o
 
 
