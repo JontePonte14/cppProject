@@ -30,6 +30,7 @@ all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
 TestArticle: TestArticle.o Article.o
+TestDatabaseDS: TestDatabaseDS.o DatabaseDS.o Article.o
 
 
 # Phony targets
