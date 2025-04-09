@@ -88,11 +88,42 @@ bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName
     std::string filename = std::to_string(articleID) + "_" + articleName;
     fs::path filePath = groupName / filename;
 
-
+    // if return false so was the articleID or articleName wrong
     return fs::remove(filePath);
 }
 
 Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName, int articleID){
+    fs::path groupName = root / articleGroup;
+
+    if (!fs::exists(groupName)) {
+        std::cerr << "Group doesn't exist, couldn't get article" << std::endl;
+        return;
+    }
+
+    std::string filename = std::to_string(articleID) + "_" + articleName;
+    fs::path filePath = groupName / filename;
+
+    json articleJson;
+    std::ifstream inFile(filePath);
+
+    if (!inFile) {
+        std::cerr << "File was not found" << std::endl;
+        return;
+    }
+
+    inFile >> articleJson;
+    
+    Article article = Article(
+        articleJson["groupname"],
+        articleJson["title"],
+        articleJson["author"],
+        articleJson["date"],
+        articleJson["id"],
+        articleJson["body"]
+    );
+
+
+    
     return temp;
 }
 
