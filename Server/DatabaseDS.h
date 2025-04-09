@@ -12,14 +12,14 @@ public:
     DatabaseDS(/* args */);
     ~DatabaseDS() = default;
 
-    std::string listGroup();
-    bool makeGroup(std::string groupName);
-    bool removeGroup();
+    std::vector<std::string> listGroup();
+    bool makeGroup(const std::string& groupName);
+    bool removeGroup(const std::string& groupName);
 
     std::vector<Article> listArticle();
-    bool makeArticle();
-    bool removeArticle();
-    Article getArticle();
+    bool makeArticle(const Article& article);
+    bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
+    Article getArticle(std::string articleGroup, std::string articleName, int articleID);
 private:
     /* data */
     std::vector<std::string> newsGroups;

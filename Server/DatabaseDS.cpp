@@ -7,15 +7,15 @@ DatabaseDS::DatabaseDS(){
     return;
 }
 
-std::string DatabaseDS::listGroup(){
-    return newsGroups[0];
+std::vector<std::string> DatabaseDS::listGroup(){
+    return newsGroups;
 }
 
-bool DatabaseDS::makeGroup(std::string groupName){
+bool DatabaseDS::makeGroup(const std::string& groupName){
     return false;
 }
 
-bool DatabaseDS::removeGroup(){
+bool DatabaseDS::removeGroup(const std::string& groupName){
     return false;
 }
 
@@ -23,15 +23,15 @@ std::vector<Article> DatabaseDS::listArticle(){
     return articles;
 }
 
-bool DatabaseDS::makeArticle(){
+bool DatabaseDS::makeArticle(const Article& article){
     return false;
 }
 
-bool DatabaseDS::removeArticle(){
+bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
     return false;
 }
 
-Article DatabaseDS::getArticle(){
+Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName, int articleID){
     return temp;
 }
 
