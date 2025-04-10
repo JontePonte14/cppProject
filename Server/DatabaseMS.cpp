@@ -1,5 +1,14 @@
 #include "DatabaseMS.h"
+#include <map>
+#include <string>
+#include <vector>
+#include "Article.h"
 
+
+
+
+std::map<int, std::vector<Article>> gIDtoArticles;
+std::map<std::string,int> groupID;
 std::string DatabaseMS::listGroup()
 {
     return std::string();

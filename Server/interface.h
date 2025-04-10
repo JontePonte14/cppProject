@@ -21,10 +21,10 @@ public:
     bool makeGroup();
     bool removeGroup();
 
-    std::string listArticle();
-    bool makeArticle();
+    std::string listArticle(int groupID);
+    bool makeArticle(int groupID);
     bool removeArticle();
-    Article getArticle();
+    Article getArticle(int groupID, int articleID);
 
     int switchDateBase();
 

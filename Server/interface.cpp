@@ -43,7 +43,18 @@ bool interface::removeGroup()
     
 }
 
-std::string interface::listArticle()
+std::string interface::listArticle(int groupID)
+{
+    if(activeDB == 1)
+    {
+        return db1.listGroup();
+    }
+    else
+    {
+        return db2.listGroup();
+    }
+    
+}
 {  
     std::list<Article> articles;
     if(activeDB == 1)
@@ -71,7 +82,18 @@ std::string interface::listArticle()
    
 }
 
-bool interface::makeArticle()
+bool interface::makeArticle(int groupID, int articleID)
+{
+    if(activeDB == 1)
+    {
+        return db1.makeArticle();
+    }
+    else
+    {
+        return db2.makeArticle();
+    }
+    
+}
 {
     if(activeDB == 1)
     {
@@ -85,7 +107,7 @@ bool interface::makeArticle()
 
 }
 
-bool interface::removeArticle()
+bool interface::removeArticle(int groupID, int articleID)
 {
     if(activeDB == 1)
     {
