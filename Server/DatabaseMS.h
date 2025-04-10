@@ -6,7 +6,8 @@ class DatabaseMS
 {
 private:
     /* data */
-    
+    std::string dbPath;
+        
 public:
     std::string listGroup();
     bool makeGroup();

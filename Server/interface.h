@@ -17,11 +17,11 @@ private:
 
 public:
     
-    std::list<std::string> listGroup();
+    std::string listGroup();
     bool makeGroup();
     bool removeGroup();
 
-    std::list<Article> listArticle();
+    std::string listArticle();
     bool makeArticle();
     bool removeArticle();
     Article getArticle();
