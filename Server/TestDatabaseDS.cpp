@@ -1,5 +1,5 @@
-#include "DatabaseDS.h"
-#include "Article.h"
+#include "databaseDS.h"
+#include "article.h"
 #include <string>
 #include <iostream>
 using std::cout;
