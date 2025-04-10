@@ -1,13 +1,11 @@
-
-#include "Article.h"
+#include "article.h"
 #include <string>
 #include <list>
-class DatabaseMS
+
+class DatabaseDS
 {
 private:
     /* data */
-    std::string dbPath;
-        
 public:
     std::string listGroup();
     bool makeGroup();
@@ -17,15 +15,14 @@ public:
     bool makeArticle();
     bool removeArticle();
     Article getArticle();
-
-    DatabaseMS(/* args */);
-    ~DatabaseMS();
+    DatabaseDS(/* args */);
+    ~DatabaseDS();
 };
 
-DatabaseMS::DatabaseMS(/* args */)
+DatabaseDS::DatabaseDS(/* args */)
 {
 }
 
-DatabaseMS::~DatabaseMS()
+DatabaseDS::~DatabaseDS()
 {
 }

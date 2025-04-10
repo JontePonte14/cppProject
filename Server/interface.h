@@ -1,8 +1,8 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-#include "Article.h"
-#include "DatabaseMS.h"
-#include "DatabaseDS.h"
+#include "article.h"
+#include "databaseMS.h"
+#include "databaseDS.h"
 #include <string>
 #include <list>
 
@@ -12,7 +12,8 @@ private:
     /* data */
     DatabaseDS db1;
     DatabaseMS db2;
-    //db2
+    
+
     int activeDB;
 
 public:
