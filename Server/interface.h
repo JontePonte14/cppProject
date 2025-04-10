@@ -1,8 +1,8 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
-#include "Article.h"
-#include "DatabaseMS.h"
-#include "DatabaseDS.h"
+#include "article.h"
+#include "databaseMS.h"
+#include "databaseDS.h"
 #include <string>
 #include <list>
 
@@ -12,19 +12,20 @@ private:
     /* data */
     DatabaseDS db1;
     DatabaseMS db2;
-    //db2
+    
+
     int activeDB;
 
 public:
     
-    std::list<std::string> listGroup();
+    std::string listGroup();
     bool makeGroup();
     bool removeGroup();
 
-    std::list<Article> listArticle();
-    bool makeArticle();
+    std::string listArticle(int groupID);
+    bool makeArticle(int groupID);
     bool removeArticle();
-    Article getArticle();
+    Article getArticle(int groupID, int articleID);
 
     int switchDateBase();
 

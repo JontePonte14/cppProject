@@ -1,12 +1,13 @@
 
-#include "Article.h"
+#include "article.h"
 #include <string>
 #include <list>
 class DatabaseMS
 {
 private:
     /* data */
-    
+    std::string dbPath;
+        
 public:
     std::string listGroup();
     bool makeGroup();

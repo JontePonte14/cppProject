@@ -2,7 +2,7 @@
 #define DATABASEDS_H
 
 #include "json.hpp"
-#include "Article.h"
+#include "article.h"
 #include <string>
 #include <vector>
 #include <filesystem>
