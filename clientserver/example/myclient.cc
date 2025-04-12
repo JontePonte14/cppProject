@@ -1,6 +1,7 @@
 /* myclient.cc: sample client program */
 #include "connection.h"
 #include "connectionclosedexception.h"
+#include "client_commanddecoder.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -63,7 +64,7 @@ Connection init(int argc, char* argv[])
         return conn;
 }
 
-int app(const Connection& conn)
+/* int app(const Connection& conn)
 {
         cout << "Type a number: ";
         int nbr;
@@ -74,6 +75,27 @@ int app(const Connection& conn)
                         string reply = readString(conn);
                         cout << " " << reply << endl;
                         cout << "Type another number: ";
+                } catch (ConnectionClosedException&) {
+                        cout << " no reply from server. Exiting." << endl;
+                        return 1;
+                }
+        }
+        cout << "\nexiting.\n";
+        return 0;
+} */
+
+int app(const Connection& conn)
+{
+        cout << "Connected to server, To see commands type help_com ";
+        string com;
+        Client_commanddecoder comdec(conn);
+        while (true) {
+                cout << "Type a command: " << endl;
+                try {
+                        
+                        comdec.com_decode(cin);
+                        
+                        
                 } catch (ConnectionClosedException&) {
                         cout << " no reply from server. Exiting." << endl;
                         return 1;

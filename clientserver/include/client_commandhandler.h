@@ -1,7 +1,6 @@
 #ifndef CLIENT_COMMANDHANDLER_H
 #define CLIENT_COMMANDHANDLER_H
 #include "connection.h" 
-//include messege handler
 #include <iostream>
 #include <fstream>
 #include <vector>

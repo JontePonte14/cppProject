@@ -3,4 +3,6 @@ target_sources(clientserver
     PRIVATE
         connection.cc
         server.cc
+        client_commandhandler.cc
+        client_commanddecoder.cc
 )
