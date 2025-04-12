@@ -28,9 +28,9 @@ all: lib/libclientserver.a
 # Create the library; ranlib is for Darwin (OS X) and maybe other systems.
 # Doesn't seem to do any damage on other systems.
 
-lib/libclientserver.a: src/connection.o src/server.o src/commandhandler.o
+lib/libclientserver.a: src/connection.o src/server.o client/commandhandler.o
 	mkdir -p lib
-	ar rv lib/libclientserver.a  src/connection.o src/server.o src/commandhandler.o
+	ar rv lib/libclientserver.a  src/connection.o src/server.o client/commandhandler.o
 	ranlib lib/libclientserver.a
 
 # Phony targets

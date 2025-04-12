@@ -1,4 +1,5 @@
-#include "commandhandler.h"
+#include "client_commanddecoder.h"
+#include "client_commandhandler.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -9,12 +10,11 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
-commandhandler::commandhandler(const Connection& conn){ //replace with messagehandler
+Client_commanddecoder::Client_commanddecoder(const Connection& conn){ //replace with messagehandler
 
 }
 
-void commandhandler::com_decode(std::istream& input){
+void Client_commanddecoder::com_decode(std::istream& input){
     string command;
     input >> command;
     
@@ -25,6 +25,7 @@ void commandhandler::com_decode(std::istream& input){
         cout << "FAIL! command needs to be string" << endl;
     }
     else {
+        cout << "Reply from server: " << endl;
         if (command == "help_com") {
             HELP_COM();
         }
@@ -54,11 +55,9 @@ void commandhandler::com_decode(std::istream& input){
         }
         
     }
-
-    
 }
 
-void commandhandler::HELP_COM(){
+void Client_commanddecoder::HELP_COM(){
     cout << "List of commands: " << endl;
     cout << "List newsgroups: LIST_NG" << endl;
     cout << "Create a newsgroup: CREATE_NG <title>" << endl;
