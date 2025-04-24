@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include "json.hpp"
+using json = nlohmann::json;
 
 class Article
 {
@@ -26,6 +28,11 @@ public:
     std::string getBody() const;
     void setID(const int& newID);
 
+    // converting to/from json file (overloading function)
+    void to_Json(json& jFile, const Article& article);
+    void from_Json(const json& jFile, Article& article);
+
+
 private:
     std::string groupName;
     std::string title;
@@ -33,8 +40,6 @@ private:
     std::string date; // Format: year-month-day
     int idNbr;
     std::string body;
-
-    
 };
 
 #endif
