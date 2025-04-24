@@ -31,6 +31,8 @@ private:
 
     // Fast access?
     std::vector<Article> articles;
+
+    //Help functions
 };
 
 #endif
