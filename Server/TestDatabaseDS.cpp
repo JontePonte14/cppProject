@@ -52,10 +52,7 @@ int main(){
 
 
     cout << "List newsgroup: ";
-    for (const std::string& group : DS.listGroup()) {
-        cout << group << " ";
-    }
-    cout << endl;
+    cout << DS.listGroup() << endl;
 
     Article testGet;
     testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);

@@ -10,11 +10,34 @@ using json = nlohmann::json;
 
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
-    fs::create_directory(basePath);
+    
+    fs::path temp {"data"};
+    dataFilePath = root / temp;
+    std::cout << "dataFile is : " << fs::exists(dataFilePath) << std::endl;
+    if (!fs::exists(dataFilePath)) {
+        std::cout << "data file is gone" << std::endl;
+        // If the data file is gone. Then we have lost track of the 
+        // newsgroup info date. So we'll just clear everything out.
+        fs::remove_all(root);
+        fs::create_directory(basePath);
+
+        json jsonData;
+        jsonData["current_id"] = -1;
+
+        std::string filename = "data";
+        std::ofstream outFile(root);
+        if (!outFile) {
+            std::cerr << "Error couldn't open file" << root << std::endl;
+            return;
+        }
+
+        outFile << jsonData.dump(4);
+        outFile.close();
+    }
     return;
 }
 
-std::vector<std::string> DatabaseDS::listGroup(){
+std::string DatabaseDS::listGroup(){
     std::vector<std::string> newsGroups;
 
     // Måste lägga till så att ordningen är äldst grupp först
@@ -26,13 +49,13 @@ std::vector<std::string> DatabaseDS::listGroup(){
             newsGroups.push_back(newsGroup);
         }
     }
-    return newsGroups;
+    return newsGroups[0];
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
     fs::path newGroup = root / name;
 
-    if (fs::exists(newGroup)) {
+    if (fs::exists(newGroup) && (dataFilePath != newGroup)) {
         std::cerr << "Group exist already" << std::endl;
         return false;
     }
@@ -43,7 +66,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
 bool DatabaseDS::removeGroup(const std::string& name){
     fs::path groupName = root / name;
 
-    if (!fs::exists(groupName)){
+    if (!fs::exists(groupName) && (dataFilePath != groupName)){
         // Group doesn't exist, nothing was removed
         std::cerr << "Group doesn't exist, nothing was removed" << std::endl;
         return false;
@@ -59,7 +82,7 @@ std::vector<Article> DatabaseDS::listArticle(){
 bool DatabaseDS::makeArticle(Article& article){
     fs::path groupName = root / article.getGroupName();
 
-    if (!fs::exists(groupName)) {
+    if (!fs::exists(groupName) && groupName != dataFilePath) {
         std::cout << "Group doesn't exist, create one first" << std::endl;
         return false;
     }

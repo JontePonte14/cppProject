@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 #include <filesystem>
+using json = nlohmann::json;
+
 
 class DatabaseDS
 {
@@ -13,7 +15,7 @@ public:
     DatabaseDS(const std::filesystem::path& basePath);
     ~DatabaseDS() = default;
 
-    std::vector<std::string> listGroup();
+    std::string listGroup();
     bool makeGroup(const std::string& name);
     bool removeGroup(const std::string& name);
 
@@ -24,6 +26,8 @@ public:
 private:
     /* data */
     std::filesystem::path root;
+    std::filesystem::path dataFilePath;
+
 
     // Fast access?
     std::vector<Article> articles;

@@ -29,8 +29,8 @@ all: $(PROGS)
 #	./test_coding
 
 # Targets rely on implicit rules for compiling and linking
-TestArticle: TestArticle.o Article.o
-TestDatabaseDS: TestDatabaseDS.o DatabaseDS.o Article.o
+TestArticle: TestArticle.o article.o
+TestDatabaseDS: TestDatabaseDS.o databaseDS.o article.o
 
 
 # Phony targets
