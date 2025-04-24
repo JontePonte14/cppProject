@@ -73,7 +73,7 @@ bool DatabaseDS::makeArticle(Article& article){
     outFile << newArticleFile.dump(4);
     outFile.close();
 
-    return false;
+    return true;
 }
 
 bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
