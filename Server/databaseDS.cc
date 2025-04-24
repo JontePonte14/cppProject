@@ -20,7 +20,7 @@ std::string DatabaseDS::listGroup(){
     std::vector<std::string> newsGroups;
     std::string newsGroupSorted;
 
-    std::map<std::time_t, std::string> newsGroupsMap;
+    std::multimap<std::time_t, std::string> newsGroupsMap;
 
     for (auto const& dir_entry : fs::directory_iterator{root}) {
         if (dir_entry.is_directory()) {
@@ -38,7 +38,9 @@ std::string DatabaseDS::listGroup(){
                 ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
                 std::time_t timestamp = std::mktime(&tm);
 
-                newsGroupsMap[timestamp] = dir_entry.path().filename().string();
+                newsGroupsMap.insert({timestamp, dir_entry.path().filename().string()});
+            } else {
+                std::cerr << "Found unknown directory or missing .created file" << std::endl;
             }
         }
 
