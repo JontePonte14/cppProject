@@ -33,6 +33,9 @@ private:
     std::vector<Article> articles;
 
     //Help functions
+
+    bool groupExist(const std::string& name);
+
 };
 
 #endif

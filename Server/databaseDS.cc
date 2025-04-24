@@ -47,4 +47,15 @@ Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName
     return articles[0];
 }
 
+// help functions
+bool DatabaseDS::groupExist(const std::string& name) {
+    fs::path groupName = root / name;
+
+    if (!fs::exists(groupName) && groupName != dataFilePath) {
+        std::cout << "Group doesn't exist" << std::endl;
+        return false;
+    }
+    return true;
+}
+
 
