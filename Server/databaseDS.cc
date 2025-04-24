@@ -26,7 +26,12 @@ bool DatabaseDS::makeGroup(const std::string& name){
         return false;
     }
 
+    // creates new folder with a .created file
     fs::create_directory(newGroup);
+    std::ofstream createdFile(newGroup / ".created");
+    createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    createdFile.close();
+    
     return true;
 }
 
