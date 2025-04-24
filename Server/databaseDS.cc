@@ -31,7 +31,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
     std::ofstream createdFile(newGroup / ".created");
     createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     createdFile.close();
-    
+
     return true;
 }
 
@@ -50,6 +50,14 @@ std::vector<Article> DatabaseDS::listArticle(){
 }
 
 bool DatabaseDS::makeArticle(Article& article){
+    fs::path groupName = root / article.getGroupName();
+
+    if (!groupExist(groupName)){
+        return false;
+    }
+
+    article.setID(999);
+    json newArticleFile = article;
 
     return false;
 }

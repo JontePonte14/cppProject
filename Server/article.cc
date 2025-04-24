@@ -50,16 +50,16 @@ void Article::setID(const int& newID) {
     idNbr = newID;
 }
 
-void to_Json(json& jFile, const Article& article){
+void to_json(json& jFile, const Article& article){
     jFile["id"] = article.getID();
-    jFile["groupName"] = article.getGroupName();
+    jFile["groupname"] = article.getGroupName();
     jFile["title"] = article.getTitle();
     jFile["author"] = article.getAuthor();
     jFile["date"] = article.getDate();
     jFile["body"] = article.getBody();
 }
 
-void from_Json(const json& jFile, Article& article){
+void from_json(const json& jFile, Article& article){
     article = Article(
         jFile["groupname"],
         jFile["title"],

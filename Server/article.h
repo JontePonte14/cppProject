@@ -28,11 +28,6 @@ public:
     std::string getBody() const;
     void setID(const int& newID);
 
-    // converting to/from json file (overloading function)
-    void to_Json(json& jFile, const Article& article);
-    void from_Json(const json& jFile, Article& article);
-
-
 private:
     std::string groupName;
     std::string title;
@@ -41,5 +36,9 @@ private:
     int idNbr;
     std::string body;
 };
+
+    // converting to/from json file (overloading function)
+    void to_json(json& jFile, const Article& article);
+    void from_json(const json& jFile, Article& article);
 
 #endif
