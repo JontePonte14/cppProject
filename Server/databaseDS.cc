@@ -33,7 +33,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
 bool DatabaseDS::removeGroup(const std::string& name){
     fs::path groupName = root / name;
 
-    if (groupExist(groupName)) {
+    if (!groupExist(groupName)) {
         return false;
     }
     return fs::remove_all(groupName);
