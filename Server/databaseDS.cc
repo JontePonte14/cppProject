@@ -57,6 +57,7 @@ bool DatabaseDS::makeArticle(Article& article){
     }
 
     article.setID(999);
+    // Overloading function in article.h
     json newArticleFile = article;
 
     // Saves the file
@@ -76,18 +77,52 @@ bool DatabaseDS::makeArticle(Article& article){
 }
 
 bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
+    fs::path groupName = root / articleGroup;
 
-    return false;
+    if (!groupExist(groupName)) {
+        return false;
+    }
+
+    std::string filename = std::to_string(articleID) + "_" + articleName;
+    fs::path filePath = groupName / filename;
+    
+    if (!fs::exists(filePath)) {
+        std::cerr << "The article doesn't exist, Article wasn't removed" << std::endl;
+        return false;
+    }
+    // if return false so was the articleID or articleName wrong
+    return fs::remove(filePath);
 }
 
 Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName, int articleID){
-    return articles[0];
+    fs::path groupName = root / articleGroup;
+    Article article;
+
+    if (!groupExist(groupName)) {
+        return article;
+    }
+
+    std::string filename = std::to_string(articleID) + "_" + articleName;
+    fs::path filePath = groupName / filename;
+
+    json articleJson;
+    std::ifstream inFile(filePath);
+
+    if (!inFile) {
+        std::cerr << "File was not found" << std::endl;
+        return article;
+    }
+
+    inFile >> articleJson;
+
+    // Overloading function in article.
+    article = articleJson;
+    
+    return article;
 }
 
 // help functions
-bool DatabaseDS::groupExist(const std::string& name) {
-    fs::path groupName = root / name;
-
+bool DatabaseDS::groupExist(const fs::path& groupName) {
     if (!fs::exists(groupName) && groupName != dataFilePath) {
         std::cerr << "Error: Group doesn't exist" << std::endl;
         return false;
