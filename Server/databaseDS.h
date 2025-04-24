@@ -19,21 +19,15 @@ public:
     bool makeGroup(const std::string& name);
     bool removeGroup(const std::string& name);
 
-    std::vector<Article> listArticle();
+    std::vector<Article> listArticle(std::string groupName);
     bool makeArticle(Article& article);
     bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
     Article getArticle(std::string articleGroup, std::string articleName, int articleID);
 private:
     /* data */
     std::filesystem::path root;
-    std::filesystem::path dataFilePath;
-
-
-    // Fast access?
-    std::vector<Article> articles;
 
     //Help functions
-
     bool groupExist(const std::filesystem::path& groupName);
 };
 

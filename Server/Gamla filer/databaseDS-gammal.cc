@@ -8,6 +8,7 @@
 namespace fs=std::filesystem;
 using json = nlohmann::json;
 
+/*
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
     
@@ -163,3 +164,4 @@ Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName
 }
 
 
+*/

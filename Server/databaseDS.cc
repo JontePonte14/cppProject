@@ -57,7 +57,7 @@ std::string DatabaseDS::listGroup(){
 bool DatabaseDS::makeGroup(const std::string& name){
     fs::path newGroup = root / name;
 
-    if (groupExist(newGroup)){
+    if (fs::exists(newGroup)) {
         std::cerr << "Error: Group already exist" << std::endl;
         return false;
     }
@@ -80,9 +80,10 @@ bool DatabaseDS::removeGroup(const std::string& name){
     return fs::remove_all(groupName);
 }
 
-std::vector<Article> DatabaseDS::listArticle(){
+std::vector<Article> DatabaseDS::listArticle(std::string groupName){
     // Ordningen för skötas av interface tycker jag.
-    return articles;
+    std::vector<Article> allArticles;
+    return allArticles;
 }
 
 bool DatabaseDS::makeArticle(Article& article){
@@ -123,7 +124,7 @@ bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName
     fs::path filePath = groupName / filename;
     
     if (!fs::exists(filePath)) {
-        std::cerr << "The article doesn't exist, Article wasn't removed" << std::endl;
+        std::cerr << "The article doesn't exist, no article wasn't removed" << std::endl;
         return false;
     }
     // if return false so was the articleID or articleName wrong
@@ -159,7 +160,7 @@ Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName
 
 // help functions
 bool DatabaseDS::groupExist(const fs::path& groupName) {
-    if (!fs::exists(groupName) && groupName != dataFilePath) {
+    if (!fs::exists(groupName)) {
         std::cerr << "Error: Group doesn't exist" << std::endl;
         return false;
     }
