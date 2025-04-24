@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 #include <json.hpp>
+#include <map>
+#include <ctime>
 namespace fs=std::filesystem;
 using json = nlohmann::json;
 
@@ -15,7 +17,39 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
 }
 
 std::string DatabaseDS::listGroup(){
-    return "-1";
+    std::vector<std::string> newsGroups;
+    std::string newsGroupSorted;
+
+    std::map<std::time_t, std::string> newsGroupsMap;
+
+    for (auto const& dir_entry : fs::directory_iterator{root}) {
+        if (dir_entry.is_directory()) {
+            fs::path createdFilePath = dir_entry.path() / ".created";
+
+            if (fs::exists(createdFilePath)) {
+                // Getting the time stamp from the .created file
+                std::ifstream createdFile(createdFilePath);
+                std::string timeStamp;
+                std::getline(createdFile, timeStamp);
+
+                // convert times stamp to time_t
+                std::tm tm = {};
+                std::istringstream ss(timeStamp);
+                ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
+                std::time_t timestamp = std::mktime(&tm);
+
+                newsGroupsMap[timestamp] = dir_entry.path().filename().string();
+            }
+        }
+
+    }
+
+    // Appending the order oldest to newest to a string
+    for (const auto& [timestamp, group] : newsGroupsMap) {
+        newsGroupSorted = newsGroupSorted + group + " ";
+    }
+
+   return newsGroupSorted;
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
