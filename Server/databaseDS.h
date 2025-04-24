@@ -34,7 +34,7 @@ private:
 
     //Help functions
 
-    bool groupExist(const fs::path& groupName);
+    bool groupExist(const std::filesystem::path& groupName);
 };
 
 #endif
