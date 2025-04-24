@@ -19,13 +19,24 @@ std::string DatabaseDS::listGroup(){
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
+    fs::path newGroup = root / name;
 
-    return false;
+    if (groupExist(newGroup)){
+        std::cerr << "Error: Group already exist" << std::endl;
+        return false;
+    }
+
+    fs::create_directory(newGroup);
+    return true;
 }
 
 bool DatabaseDS::removeGroup(const std::string& name){
+    fs::path groupName = root / name;
 
-    return false;
+    if (groupExist(groupName)) {
+        return false;
+    }
+    return fs::remove_all(groupName);
 }
 
 std::vector<Article> DatabaseDS::listArticle(){
@@ -52,7 +63,7 @@ bool DatabaseDS::groupExist(const std::string& name) {
     fs::path groupName = root / name;
 
     if (!fs::exists(groupName) && groupName != dataFilePath) {
-        std::cout << "Group doesn't exist" << std::endl;
+        std::cerr << "Error: Group doesn't exist" << std::endl;
         return false;
     }
     return true;
