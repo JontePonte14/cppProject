@@ -15,8 +15,6 @@ using json = nlohmann::json;
 
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
-    //fs::create_directory(root);
-    //IDnbr = -1;
     if (fs::create_directory(root)) {
         // We create a new IDnbr
         IDnbr = 1;
@@ -25,7 +23,6 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     } else {
         // We load the old IDnbr
         loadIdNbr();
-        IDnbr = -1;
     }
     return;
 }
