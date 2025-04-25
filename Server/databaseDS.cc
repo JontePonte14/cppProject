@@ -15,7 +15,23 @@ using json = nlohmann::json;
 
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
-    fs::create_directory(root);
+    if (fs::create_directory(root)) {
+        // We create a new IDnbr
+        IDnbr = 1;
+
+        std::string fileName = "id_number.txt";
+
+        std::ofstream outFile(root/fileName);
+        if (!outFile) {
+            std::cerr << "There was a problem saving id_number.txt file" << std::endl;
+        }
+
+        outFile << IDnbr;
+        outFile.close();
+    } else {
+        // We load the IDnbr
+        loadIdNbr();
+    }
     return;
 }
 
@@ -130,6 +146,10 @@ bool DatabaseDS::makeArticle(Article& article){
         return false;
     }
 
+    int tempId = IDnbr;
+    idIncr();
+    saveIdNbr();
+
     article.setID(999);
     // Overloading function in article.h
     json newArticleFile = article;
@@ -195,6 +215,10 @@ Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName
     return article;
 }
 
+void DatabaseDS::idIncr(){
+    IDnbr++;
+}
+
 // help functions
 bool DatabaseDS::groupExist(const fs::path& groupName) {
     if (!fs::exists(groupName)) {
@@ -202,6 +226,22 @@ bool DatabaseDS::groupExist(const fs::path& groupName) {
         return false;
     }
     return true;
+}
+
+void DatabaseDS::saveIdNbr(){
+    std::string fileName = "id_number.txt";
+
+    std::ofstream outFile(root/fileName);
+    if (!outFile) {
+        std::cerr << "There was a problem saving id_number.txt file" << std::endl;
+    }
+
+    outFile << IDnbr;
+    outFile.close();
+}
+
+void DatabaseDS::loadIdNbr(){
+
 }
 
 

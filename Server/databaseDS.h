@@ -26,9 +26,14 @@ public:
 private:
     /* data */
     std::filesystem::path root;
+    static int IDnbr;
+    // increment id for each new article
+    void idIncr();
 
     //Help functions
     bool groupExist(const std::filesystem::path& groupName);
+    void saveIdNbr();
+    void loadIdNbr();
 };
 
 #endif
