@@ -66,7 +66,30 @@ int main(){
     for (const auto& [title, id] : sortedArticles) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }
+
+    cout << "----------" << endl;
+
+    cout << "Adding a third article" << endl;
+
+    Article article3(
+        "Technology",                            // groupName
+        "AI is very bad",                            // title
+        "Jenny von Bergen",                   // author
+        "2020-11-28",                            // date
+        1,                                       // idNbr
+        "AI is not so good people though, and I think it should be destroyed"
+    );
+
+
     cout << "The end" << endl;
+    cout << "make article3 " << DS.makeArticle(article3) << endl;
+
+    sortedArticles = DS.listArticle("Technology");
+    cout << "Iterating over articles in the group Technology (again): " << endl;
+    for (const auto& [title, id] : sortedArticles) {
+        cout << "Title: " << title << ", ID: " << id << endl;
+    }
+
     
 
 
