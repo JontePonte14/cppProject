@@ -7,6 +7,8 @@
 #include <json.hpp>
 #include <map>
 #include <ctime>
+#include <utility>
+
 namespace fs=std::filesystem;
 using json = nlohmann::json;
 
@@ -80,9 +82,17 @@ bool DatabaseDS::removeGroup(const std::string& name){
     return fs::remove_all(groupName);
 }
 
-std::vector<Article> DatabaseDS::listArticle(std::string groupName){
-    // Ordningen för skötas av interface tycker jag.
+std::vector<Article> DatabaseDS::listArticle(std::string& name){
     std::vector<Article> allArticles;
+
+    
+
+    fs::path groupName = root / name;
+    if (!groupExist(groupName)){
+        return allArticles;
+    }
+
+
     return allArticles;
 }
 

@@ -19,7 +19,7 @@ public:
     bool makeGroup(const std::string& name);
     bool removeGroup(const std::string& name);
 
-    std::vector<Article> listArticle(std::string groupName);
+    std::vector<Article> listArticle(std::string& name);
     bool makeArticle(Article& article);
     bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
     Article getArticle(std::string articleGroup, std::string articleName, int articleID);
