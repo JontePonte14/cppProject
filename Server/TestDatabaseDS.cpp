@@ -60,7 +60,7 @@ int main(){
 
     std::vector<std::pair<std::string, int>> sortedArticles;
     sortedArticles = DS.listArticle("Technology");
-    
+    cout << "Iterating over articles in the group Technology" << endl;
     for (const auto& [title, id] : sortedArticles) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }

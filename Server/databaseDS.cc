@@ -100,6 +100,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string nam
         fs::path filePath = file.path();
         if (filePath.extension() == ".json"){
             std::ifstream inFile(filePath);
+            std::cout << "Trying to open: " << filePath << std::endl;
             if (!inFile) {
                 std::cerr << "Couldn't open the file" << std::endl;
                 return sortedArticles;
