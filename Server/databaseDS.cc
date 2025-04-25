@@ -98,9 +98,10 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string nam
     for (auto& file : fs::directory_iterator(groupName)) {
         // Ignores .created file
         fs::path filePath = file.path();
+        std::cout << "Found file: " << filePath.filename() << ", extension: " << filePath.extension() << "\n";
         if (filePath.extension() == ".json"){
+            std::cout << "Trying to open: " << filePath << "\n";
             std::ifstream inFile(filePath);
-            std::cout << "Trying to open: " << filePath << std::endl;
             if (!inFile) {
                 std::cerr << "Couldn't open the file" << std::endl;
                 return sortedArticles;
@@ -136,7 +137,7 @@ bool DatabaseDS::makeArticle(Article& article){
     json newArticleFile = article;
 
     // Saves the file
-    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle();
+    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle() + ".json";
     fs::path filePath = groupName / filename;
     
     std::ofstream outFile(filePath);
