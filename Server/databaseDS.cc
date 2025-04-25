@@ -83,17 +83,33 @@ bool DatabaseDS::removeGroup(const std::string& name){
     return fs::remove_all(groupName);
 }
 
-std::vector<Article> DatabaseDS::listArticle(std::string& name){
-    std::vector<Article> articlesOutput;
+std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string& name){
+    std::vector<std::pair<std::string, int>> sortedArticles;
     // {<date, <title, id>>}    
     fs::path groupName = root / name;
     if (!groupExist(groupName)){
-        return articlesOutput;
+        return sortedArticles;
     }
+    // Gathering data to then sort it
     std::vector<std::pair<std::string, std::pair<std::string, int>>> articlesData;
 
+    for (auto& file : fs::directory_iterator(groupName)) {
+        // Ignores .created file
+        fs::path filePath = file.path();
+        if (filePath.extension() == ".json"){
+            std::ifstream inFile(filePath);
+            if (!inFile) {
+                std::cerr << "Couldn't open the file" << std::endl;
+                return sortedArticles;
+            }
+            json tempJson;
+            inFile >> tempJson;
+            Article tempArticle = tempJson;
+            articlesData.push_back({tempArticle.getDate(), {tempArticle.getTitle(), tempArticle.getID()}});
+        }
+    }
 
-    return articlesOutput;
+    return sortedArticles;
 }
 
 bool DatabaseDS::makeArticle(Article& article){
