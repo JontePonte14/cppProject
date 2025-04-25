@@ -83,7 +83,7 @@ bool DatabaseDS::removeGroup(const std::string& name){
     return fs::remove_all(groupName);
 }
 
-std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string& name){
+std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string name){
     std::vector<std::pair<std::string, int>> sortedArticles;
     // {<date, <title, id>>}    
     fs::path groupName = root / name;

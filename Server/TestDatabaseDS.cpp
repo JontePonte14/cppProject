@@ -58,6 +58,14 @@ int main(){
     Article testGet;
     testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
 
+    std::vector<std::pair<std::string, int>> sortedArticles;
+    sortedArticles = DS.listArticle("Technology");
+    
+    for (const auto& [title, id] : sortedArticles) {
+        cout << "Title: " << title << ", ID: " << id << endl;
+    }
+    
+
 
 
 
