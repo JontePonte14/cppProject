@@ -109,6 +109,11 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string& na
         }
     }
 
+
+    std::sort(articlesData.begin(), articlesData.end(), [](const auto& a, const auto& b) {
+        return a.first < b.first;
+    });
+
     return sortedArticles;
 }
 
