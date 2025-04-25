@@ -93,6 +93,8 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string& na
     // Gathering data to then sort it
     std::vector<std::pair<std::string, std::pair<std::string, int>>> articlesData;
 
+    // Borde kanske ändra titlar på artiklar så man bara hämta data från namnet,
+    // då slipper man öppna filer som kanske kan spara till performance?
     for (auto& file : fs::directory_iterator(groupName)) {
         // Ignores .created file
         fs::path filePath = file.path();
