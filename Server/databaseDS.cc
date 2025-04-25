@@ -116,6 +116,10 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string& na
         return a.first < b.first;
     });
 
+    for (const auto& [date, titleAndId] : articlesData) {
+        sortedArticles.push_back(titleAndId);
+    }
+
     return sortedArticles;
 }
 
