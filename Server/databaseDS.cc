@@ -8,6 +8,7 @@
 #include <map>
 #include <ctime>
 #include <utility>
+#include <algorithm>
 
 namespace fs=std::filesystem;
 using json = nlohmann::json;
@@ -83,17 +84,16 @@ bool DatabaseDS::removeGroup(const std::string& name){
 }
 
 std::vector<Article> DatabaseDS::listArticle(std::string& name){
-    std::vector<Article> allArticles;
-
-    
-
+    std::vector<Article> articlesOutput;
+    // {<date, <title, id>>}    
     fs::path groupName = root / name;
     if (!groupExist(groupName)){
-        return allArticles;
+        return articlesOutput;
     }
+    std::vector<std::pair<std::string, std::pair<std::string, int>>> articlesData;
 
 
-    return allArticles;
+    return articlesOutput;
 }
 
 bool DatabaseDS::makeArticle(Article& article){
