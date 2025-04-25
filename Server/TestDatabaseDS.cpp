@@ -45,7 +45,7 @@ int main(){
     );
 
     cout << "make article " << DS.makeArticle(article) << endl;
-    cout << "make article 2 " << DS.makeArticle(article2) << endl;
+    cout << "make article2 " << DS.makeArticle(article2) << endl;
 
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 
@@ -55,9 +55,11 @@ int main(){
     cout << "List newsgroup: ";
     cout << DS.listGroup() << endl;
 
+    cout << "Tesing to get unavailable file: ";
     Article testGet;
     testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
 
+    
     std::vector<std::pair<std::string, int>> sortedArticles;
     sortedArticles = DS.listArticle("Technology");
     cout << "Iterating over articles in the group Technology: " << endl;
