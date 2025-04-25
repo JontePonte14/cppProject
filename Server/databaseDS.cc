@@ -18,18 +18,10 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     if (fs::create_directory(root)) {
         // We create a new IDnbr
         IDnbr = 1;
+        saveIdNbr();
 
-        std::string fileName = "id_number.txt";
-
-        std::ofstream outFile(root/fileName);
-        if (!outFile) {
-            std::cerr << "There was a problem saving id_number.txt file" << std::endl;
-        }
-
-        outFile << IDnbr;
-        outFile.close();
     } else {
-        // We load the IDnbr
+        // We load the old IDnbr
         loadIdNbr();
     }
     return;
@@ -146,11 +138,9 @@ bool DatabaseDS::makeArticle(Article& article){
         return false;
     }
 
-    int tempId = IDnbr;
+    article.setID(IDnbr);
     idIncr();
     saveIdNbr();
-
-    article.setID(999);
     // Overloading function in article.h
     json newArticleFile = article;
 
@@ -241,7 +231,13 @@ void DatabaseDS::saveIdNbr(){
 }
 
 void DatabaseDS::loadIdNbr(){
+    std::string fileName = "id_number.txt";
+    std::ifstream inFile(root / fileName);
 
+    if (!inFile) {
+        std::cerr << fileName << " was not found" << std::endl;
+    }
+
+    inFile >> IDnbr;
 }
-
 
