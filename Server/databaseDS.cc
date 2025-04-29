@@ -13,6 +13,20 @@
 namespace fs=std::filesystem;
 using json = nlohmann::json;
 
+DatabaseDS::DatabaseDS(){
+    root = "Newsgroup";
+    if (fs::create_directory(root)) {
+        // We create a new IDnbr
+        IDnbr = 1;
+        saveIdNbr();
+
+    } else {
+        // We load the old IDnbr
+        loadIdNbr();
+    }
+    return;
+}
+
 DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
     if (fs::create_directory(root)) {

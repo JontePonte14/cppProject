@@ -12,6 +12,9 @@ using json = nlohmann::json;
 class DatabaseDS
 {
 public:
+    // Default contructur creates a root folder called "Newsgroup"
+    DatabaseDS();
+    // Custome constructur makes it possible to decide the name of the root folder
     DatabaseDS(const std::filesystem::path& basePath);
     ~DatabaseDS() = default;
 

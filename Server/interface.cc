@@ -2,6 +2,12 @@
 #include <string>
 #include <list>
 
+interface::interface(/* args */){
+    activeDB = 1;
+    db1 = DatabaseDS("Newsgroup");
+    db2 = DatabaseMS();
+}
+
 std::string interface::listGroup()
 {
     if(activeDB == 1)
@@ -17,11 +23,11 @@ std::string interface::listGroup()
     return std::string();
 }
 
-bool interface::makeGroup()
+bool interface::makeGroup(const std::string& name)
 {
     if(activeDB == 1)
     {
-        return db1.makeGroup();
+        return db1.makeGroup(name);
     }
     else
     {
@@ -30,11 +36,11 @@ bool interface::makeGroup()
     return false;
 }
 
-bool interface::removeGroup()
+bool interface::removeGroup(const std::string& name)
 {
     if(activeDB == 1)
     {
-        return db1.removeGroup();
+        return db1.removeGroup(name);
     }
     else
     {
@@ -43,50 +49,53 @@ bool interface::removeGroup()
     
 }
 
-std::string interface::listArticle(int groupID)
+std::vector<std::pair<std::string, int>> interface::listArticle(std::string name)
 {
     if(activeDB == 1)
     {
-        return db1.listGroup();
+        return db1.listArticle(name);
     }
     else
     {
-        return db2.listGroup();
+        //return db2.listGroup();
+
+        //temp
+        return db1.listArticle(name);
     }
     
 }
-{  
-    std::list<Article> articles;
-    if(activeDB == 1)
-    {
-        articles = db1.listArticle();
-    }
-    else
-    {
-        articles = db2.listArticle();
-    }
-    if(articles.size() > 0)
-    {
-        std::string result;
-        for(auto it = articles.begin(); it != articles.end(); ++it)
-        {
-            result += it->getTitle() + "\n";
-        }
-        return result;
-    }
-    else
-    {
-        return "No articles found";
-    }
+// {  
+//     std::list<Article> articles;
+//     if(activeDB == 1)
+//     {
+//         articles = db1.listArticle();
+//     }
+//     else
+//     {
+//         articles = db2.listArticle();
+//     }
+//     if(articles.size() > 0)
+//     {
+//         std::string result;
+//         for(auto it = articles.begin(); it != articles.end(); ++it)
+//         {
+//             result += it->getTitle() + "\n";
+//         }
+//         return result;
+//     }
+//     else
+//     {
+//         return "No articles found";
+//     }
 
    
-}
+// }
 
-bool interface::makeArticle(int groupID, int articleID)
+bool interface::makeArticle(Article& article)
 {
     if(activeDB == 1)
     {
-        return db1.makeArticle();
+        return db1.makeArticle(article);
     }
     else
     {
@@ -94,24 +103,12 @@ bool interface::makeArticle(int groupID, int articleID)
     }
     
 }
+
+bool interface::removeArticle(std::string articleGroup, std::string articleName, int articleID)
 {
     if(activeDB == 1)
     {
-        return db1.makeArticle();
-    }
-    else
-    {
-        return db2.makeArticle();
-    }
-
-
-}
-
-bool interface::removeArticle(int groupID, int articleID)
-{
-    if(activeDB == 1)
-    {
-        return db1.removeArticle();
+        return db1.removeArticle(articleGroup, articleName, articleID);
     }
     else
     {
@@ -120,11 +117,11 @@ bool interface::removeArticle(int groupID, int articleID)
     return false;
 }
 
-Article interface::getArticle()
+Article interface::getArticle(std::string articleGroup, std::string articleName, int articleID)
 {
     if(activeDB == 1)
     {
-        return db1.getArticle();
+        return db1.getArticle(articleGroup, articleName, articleID);
     }
     else
     {
@@ -144,17 +141,4 @@ int interface::switchDateBase()
         activeDB = 1;
     }
     return activeDB;
-}
-interface::interface(/* args */)
-{
-    activeDB = 1;
-}
-interface::~interface()
-{
-}
-// interface::interface(/* args */)
-// {
-// }
-// }
-//
-// interface::~interface()              
+}        
