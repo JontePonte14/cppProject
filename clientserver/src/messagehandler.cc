@@ -1,121 +1,145 @@
 #include "messagehandler.h"
-#include "connection.h"
 #include "connectionclosedexception.h"
+#include "connection.h"
 #include "protocol.h"
-#include <iostream>
 
 class ConnectionClosedException;
 
 MessageHandler::MessageHandler()
     : connection()
 { 
-    std::cout << "Message handler initialzied" << std::endl;
 }
 
 MessageHandler::MessageHandler(const std::shared_ptr<Connection>& connection)
     : connection(connection)
 { }
 
-void MessageHandler::sendCode(const Protocol protocol)
+auto MessageHandler::sendProtocol(const Protocol protocol) noexcept -> bool
 {
-    sendByte(static_cast<byte>(protocol));
+    return sendByte(to_code(protocol));
 }
 
-void MessageHandler::sendInt(int value)
+auto MessageHandler::sendInt(const uint32_t value) noexcept -> bool
 {
-    sendByte((value >> 24) & 0xFF);
-    sendByte((value >> 16) & 0xFF);
-    sendByte((value >> 8) & 0xFF);
-    sendByte(value & 0xFF);
+    return
+        sendByte(static_cast<byte>(value >> 24)) &&
+        sendByte(static_cast<byte>(value >> 16)) &&
+        sendByte(static_cast<byte>(value >> 8)) &&
+        sendByte(static_cast<byte>(value));
 }
 
-void MessageHandler::sendIntParameter(int param)
+auto MessageHandler::sendIntParameter(const uint32_t param) noexcept -> bool
 {
-    sendCode(Protocol::PAR_NUM);
-    sendInt(param);
+    return sendProtocol(Protocol::PAR_NUM) && sendInt(param);
 }
 
-void MessageHandler::sendStringParameter(const string& param)
+auto MessageHandler::sendStringParameter(const string& param) noexcept -> bool
 {
-    sendCode(Protocol::PAR_STRING);
-    sendInt(param.length());
+    return sendProtocol(Protocol::PAR_STRING) && sendInt(param.length()) ? [&]() {
+        for (byte c : param) {
+            if(!sendByte(c)) {
+                return false;
+            }
+        }
 
-    for (byte c : param) {
-        sendByte(c);
-    }
+        return true;
+
+    }() : false;
 }
 
-auto MessageHandler::receiveCode() -> byte
+auto MessageHandler::receiveProtocol() noexcept -> Protocol
 {
-    byte code = receiveByte();
+    const auto code = receiveByte();
 
-    return code;
+    return code ? from_code(*code) : Protocol::UNDEFINED;
 }
 
-auto MessageHandler::receiveInt() -> int
+auto MessageHandler::receiveInt() noexcept -> std::optional<uint32_t>
 {
-    const int b1 = receiveByte();
-    const int b2 = receiveByte();
-    const int b3 = receiveByte();
-    const int b4 = receiveByte();
+    uint32_t value { 0 };
+    std::optional<byte> b;
 
-    return b1 << 24 | b2 << 16 | b3 << 8 | b4;
-}
+    for(char i = 24; i >= 0; i -= 8) {
+        b = receiveByte();
 
-auto MessageHandler::receiveIntParameter() -> int
-{
-    int code = receiveCode();
-
-    if (code != static_cast<byte>(Protocol::PAR_NUM)) {
-        throw ConnectionClosedException(); // TEMP
-    }
-
-    return receiveInt();
-}
-
-auto MessageHandler::receiveStringParameter() -> string
-{
-    int code = receiveCode();
-
-    if (code != static_cast<byte>(Protocol::PAR_STRING)) {
-        throw ConnectionClosedException(); // TEMP
+        if (b) {
+            value |= static_cast<uint32_t>(*b) << i;
+        } else {
+            return std::nullopt;
+        }
     }
 
-    int n = receiveInt();
-
-    if (n < 1) {
-        throw ConnectionClosedException(); // TEMP
-    }
-
-    string param;
-
-    param.reserve(n);
-
-    for (int i = 0; i < n; ++i) {
-        param += receiveByte();
-    }
-
-    return param;
+    return value;
 }
 
-void MessageHandler::sendByte(byte value)
+auto MessageHandler::receiveIntParameter() noexcept -> std::optional<uint32_t>
 {
-    try {
-        connection->write(value);
-    } catch (const ConnectionClosedException& e) {
-        // TEMP
+    const auto code = receiveProtocol();
+
+    return (code == Protocol::PAR_NUM) ? receiveInt() : std::nullopt;
+}
+
+auto MessageHandler::receiveStringParameter() noexcept -> std::optional<std::string>
+{
+    const auto code = receiveProtocol();
+
+    if (code == Protocol::PAR_STRING) {
+        auto n = receiveInt();
+
+        if (n && *n >= 1) {
+            string param;
+            std::optional<byte> b;
+
+            param.reserve(*n);
+
+            for (uint32_t i = 0; i < n; ++i) {
+                b = receiveByte();
+                
+                if (!b) {
+                    return std::nullopt;
+                }
+
+                param += *b;
+            }
+
+            return param;
+        }
     }
+
+    return std::nullopt;
 }
 
-auto MessageHandler::receiveByte() -> byte
+auto MessageHandler::sendByte(const byte value, const byte tries) noexcept -> bool
 {
-    return connection->read();
+    return connection->isConnected() ? [&]() {
+        for (byte i = 0; i < tries; ++i) {
+            try {
+                connection->write(value);
+                return true;
+            } catch (const ConnectionClosedException& e) {
+                // IMPLEMENT LOGGING IF TIME ALLOWS
+            }
+        }
+        return false;
+    }() : false;
 }
 
-void MessageHandler::setConnection(const std::shared_ptr<Connection>& connection)
+auto MessageHandler::receiveByte(const byte tries) noexcept -> std::optional<byte>
 {
-#ifdef NDEBUG
-    std::cout << "message handler connection is set" << std::endl;
-#endif
+    if (connection->isConnected()) {
+        for(byte i = 0; i < tries; ++i) {
+            try {
+                return std::optional<byte>{connection->read()};
+            } catch (const ConnectionClosedException& error) {
+                // IMPLEMENT LOGGING IF TIME ALLOWS
+            }
+        }
+    }
+
+    return std::nullopt;
+}
+
+void MessageHandler::setConnection(const std::shared_ptr<Connection>& connection) noexcept
+{
     this->connection = connection;
 }

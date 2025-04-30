@@ -5,33 +5,27 @@
 #include <string>
 #include "messagehandler.h"
 
-enum class Protocol;
-
-class CommandHandler final {
-
-    using string = std::string;
-    friend class DatabaseServer;
+class CommandHandler : public MessageHandler {
 
     public:
         CommandHandler();
-        ~CommandHandler() = default;
+        CommandHandler(const std::shared_ptr<Connection>& connection);
+        virtual ~CommandHandler() = default;
 
-        auto listGroups() -> std::vector<string>;
-        auto createGroup(const string&) -> int;
-        auto deleteGroup(const int) -> int;
+        virtual void listGroups() = 0;
+        virtual void createGroup() = 0;
+        virtual void deleteGroup() = 0;
 
-        auto listArticles(const int) -> std::vector<string>;
-        auto createArticle(const int, const string&, const string&) -> int;
-        auto deleteArticle(const int, const int) -> int;
-        auto getArticle(const int, const int) -> std::vector<string>;
-
-        
-    private:
-        MessageHandler messageHandler;
-
-        void checkCode(const string&, const Protocol, const int);
-        void checkCondition(const bool, const string&, const string&);
-        void setConnection(const std::shared_ptr<Connection>&);
+        virtual void listArticles() = 0;
+        virtual void createArticle() = 0;
+        virtual void deleteArticle() = 0;
+        virtual void getArticle() = 0;
+    
+    /*
+    protected:
+        void checkCode(const Protocol received, const Protocol expected, const string& method);
+        void checkCondition(const bool condition, const string& method, const string& message);
+    */
 };
 
 #endif
