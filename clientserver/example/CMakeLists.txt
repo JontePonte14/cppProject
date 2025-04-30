@@ -29,5 +29,6 @@ endmacro()
 
 add_program(myserver myserver.cc)
 add_program(myclient myclient.cc)
+add_program(test test.cc)
 
 install(TARGETS myserver myclient)
