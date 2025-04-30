@@ -6,4 +6,6 @@ target_sources(clientserver
         messagehandler.cc
         commandhandler.cc
         databaseserver.cc
+        client_commandhandler.cc
+        client_commanddecoder.cc
 )

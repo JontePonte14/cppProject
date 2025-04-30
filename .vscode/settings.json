@@ -1,5 +1,10 @@
 {
     "files.associations": {
+<<<<<<< HEAD
+=======
+        "filesystem": "cpp",
+        "any": "cpp",
+>>>>>>> main
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -7,6 +12,10 @@
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
+<<<<<<< HEAD
+=======
+        "codecvt": "cpp",
+>>>>>>> main
         "compare": "cpp",
         "concepts": "cpp",
         "csignal": "cpp",
@@ -16,9 +25,19 @@
         "cstdio": "cpp",
         "cstdlib": "cpp",
         "cstring": "cpp",
+<<<<<<< HEAD
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
+=======
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+>>>>>>> main
         "string": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
@@ -31,12 +50,22 @@
         "numeric": "cpp",
         "optional": "cpp",
         "random": "cpp",
+<<<<<<< HEAD
+=======
+        "ratio": "cpp",
+>>>>>>> main
         "string_view": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
+<<<<<<< HEAD
         "initializer_list": "cpp",
+=======
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+>>>>>>> main
         "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
@@ -44,6 +73,7 @@
         "new": "cpp",
         "numbers": "cpp",
         "ostream": "cpp",
+<<<<<<< HEAD
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
@@ -55,6 +85,15 @@
         "iomanip": "cpp",
         "span": "cpp",
         "sstream": "cpp",
+=======
+        "ranges": "cpp",
+        "span": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "typeinfo": "cpp",
+        "valarray": "cpp",
+>>>>>>> main
         "variant": "cpp"
     }
 }
