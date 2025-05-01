@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o"
+  "CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o.d"
+  "CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o"
+  "CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o.d"
   "CMakeFiles/clientserver.dir/src/commandhandler.cc.o"
   "CMakeFiles/clientserver.dir/src/commandhandler.cc.o.d"
   "CMakeFiles/clientserver.dir/src/connection.cc.o"
@@ -9,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/clientserver.dir/src/messagehandler.cc.o.d"
   "CMakeFiles/clientserver.dir/src/server.cc.o"
   "CMakeFiles/clientserver.dir/src/server.cc.o.d"
+  "CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o"
+  "CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o.d"
   "libclientserver.a"
   "libclientserver.pdb"
 )

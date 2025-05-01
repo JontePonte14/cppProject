@@ -8,7 +8,7 @@
 
 class Client_commanddecoder {
 public:
-    Client_commanddecoder(const Connection& conn);
+    Client_commanddecoder(const std::shared_ptr<Connection>& conn);
 
     void com_decode(std::istream& input);
 

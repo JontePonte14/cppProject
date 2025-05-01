@@ -1,9 +1,7 @@
-example/CMakeFiles/myclient.dir/myclient.cc.o: \
- /root/EDAF50/cppProject/clientserver/example/myclient.cc \
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: \
+ /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc \
  /usr/include/stdc-predef.h \
  /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /root/EDAF50/cppProject/clientserver/include/client_commanddecoder.h \
  /root/EDAF50/cppProject/clientserver/include/client_commandhandler.h \
  /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
@@ -193,5 +191,5 @@ example/CMakeFiles/myclient.dir/myclient.cc.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h
+ /root/EDAF50/cppProject/clientserver/include/protocol.h \
+ /usr/include/c++/13/array /usr/include/c++/13/compare

@@ -1,8 +1,6 @@
-example/CMakeFiles/myclient.dir/myclient.cc.o: \
- /root/EDAF50/cppProject/clientserver/example/myclient.cc \
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o: \
+ /root/EDAF50/cppProject/clientserver/src/client_commanddecoder.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
  /root/EDAF50/cppProject/clientserver/include/client_commanddecoder.h \
  /root/EDAF50/cppProject/clientserver/include/client_commandhandler.h \
  /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
@@ -194,4 +192,10 @@ example/CMakeFiles/myclient.dir/myclient.cc.o: \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
  /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h
+ /root/EDAF50/cppProject/clientserver/include/client_commandhandler.h \
+ /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/algorithmfwd.h \
+ /usr/include/c++/13/bits/stl_heap.h \
+ /usr/include/c++/13/bits/uniform_int_dist.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h

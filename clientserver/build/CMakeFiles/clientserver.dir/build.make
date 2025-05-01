@@ -125,10 +125,24 @@ CMakeFiles/clientserver.dir/src/commandhandler.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clientserver.dir/src/commandhandler.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/EDAF50/cppProject/clientserver/src/commandhandler.cc -o CMakeFiles/clientserver.dir/src/commandhandler.cc.s
 
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: CMakeFiles/clientserver.dir/flags.make
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: CMakeFiles/clientserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o -MF CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o.d -o CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o -c /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc
+
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/clientserver.dir/src/servercommandhandler.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc > CMakeFiles/clientserver.dir/src/servercommandhandler.cc.i
+
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clientserver.dir/src/servercommandhandler.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc -o CMakeFiles/clientserver.dir/src/servercommandhandler.cc.s
+
 CMakeFiles/clientserver.dir/src/databaseserver.cc.o: CMakeFiles/clientserver.dir/flags.make
 CMakeFiles/clientserver.dir/src/databaseserver.cc.o: /root/EDAF50/cppProject/clientserver/src/databaseserver.cc
 CMakeFiles/clientserver.dir/src/databaseserver.cc.o: CMakeFiles/clientserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/clientserver.dir/src/databaseserver.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/clientserver.dir/src/databaseserver.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clientserver.dir/src/databaseserver.cc.o -MF CMakeFiles/clientserver.dir/src/databaseserver.cc.o.d -o CMakeFiles/clientserver.dir/src/databaseserver.cc.o -c /root/EDAF50/cppProject/clientserver/src/databaseserver.cc
 
 CMakeFiles/clientserver.dir/src/databaseserver.cc.i: cmake_force
@@ -139,13 +153,44 @@ CMakeFiles/clientserver.dir/src/databaseserver.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clientserver.dir/src/databaseserver.cc.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/EDAF50/cppProject/clientserver/src/databaseserver.cc -o CMakeFiles/clientserver.dir/src/databaseserver.cc.s
 
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: CMakeFiles/clientserver.dir/flags.make
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: CMakeFiles/clientserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o -MF CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o.d -o CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o -c /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc
+
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/clientserver.dir/src/client_commandhandler.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc > CMakeFiles/clientserver.dir/src/client_commandhandler.cc.i
+
+CMakeFiles/clientserver.dir/src/client_commandhandler.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clientserver.dir/src/client_commandhandler.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc -o CMakeFiles/clientserver.dir/src/client_commandhandler.cc.s
+
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o: CMakeFiles/clientserver.dir/flags.make
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o: /root/EDAF50/cppProject/clientserver/src/client_commanddecoder.cc
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o: CMakeFiles/clientserver.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o -MF CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o.d -o CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o -c /root/EDAF50/cppProject/clientserver/src/client_commanddecoder.cc
+
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/EDAF50/cppProject/clientserver/src/client_commanddecoder.cc > CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.i
+
+CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/EDAF50/cppProject/clientserver/src/client_commanddecoder.cc -o CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.s
+
 # Object files for target clientserver
 clientserver_OBJECTS = \
 "CMakeFiles/clientserver.dir/src/connection.cc.o" \
 "CMakeFiles/clientserver.dir/src/server.cc.o" \
 "CMakeFiles/clientserver.dir/src/messagehandler.cc.o" \
 "CMakeFiles/clientserver.dir/src/commandhandler.cc.o" \
-"CMakeFiles/clientserver.dir/src/databaseserver.cc.o"
+"CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o" \
+"CMakeFiles/clientserver.dir/src/databaseserver.cc.o" \
+"CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o" \
+"CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o"
 
 # External object files for target clientserver
 clientserver_EXTERNAL_OBJECTS =
@@ -154,10 +199,13 @@ libclientserver.a: CMakeFiles/clientserver.dir/src/connection.cc.o
 libclientserver.a: CMakeFiles/clientserver.dir/src/server.cc.o
 libclientserver.a: CMakeFiles/clientserver.dir/src/messagehandler.cc.o
 libclientserver.a: CMakeFiles/clientserver.dir/src/commandhandler.cc.o
+libclientserver.a: CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o
 libclientserver.a: CMakeFiles/clientserver.dir/src/databaseserver.cc.o
+libclientserver.a: CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o
+libclientserver.a: CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o
 libclientserver.a: CMakeFiles/clientserver.dir/build.make
 libclientserver.a: CMakeFiles/clientserver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libclientserver.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/EDAF50/cppProject/clientserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libclientserver.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/clientserver.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/clientserver.dir/link.txt --verbose=$(VERBOSE)
 

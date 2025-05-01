@@ -13,7 +13,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-Client_commanddecoder::Client_commanddecoder(const Connection& conn) : comhand(conn) { //replace with messagehandler
+Client_commanddecoder::Client_commanddecoder(const std::shared_ptr<Connection>& conn) : comhand(conn) { //replace with messagehandler
 
 }
 

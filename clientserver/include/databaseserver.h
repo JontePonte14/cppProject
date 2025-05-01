@@ -3,17 +3,21 @@
 
 #include "server.h"
 #include "database.h"
-#include "commandhandler.h"
+#include "servercommandhandler.h"
 
 class DatabaseServer final : public Server {
 
     public:
-        explicit DatabaseServer(int port);
+        explicit DatabaseServer(const int port, const bool run = false);
         ~DatabaseServer() = default;
 
+        void start();
+
     private:
-        CommandHandler commandHandler;
+        ServerCommandHandler handler;
         Database database;
+
+        void serveConnection();
 };
 
 #endif

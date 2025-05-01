@@ -131,9 +131,9 @@ constexpr std::array<std::pair<Protocol, std::string_view>, 24> protocol_to_stri
         return "UNDEFINED";
 }
 
-[[nodiscard]] constexpr auto from_string(const std::string_view string) noexcept -> Protocol {
+[[nodiscard]] constexpr auto from_string(const std::string_view sv) noexcept -> Protocol {
         for (const auto& entry : protocol_to_string) {
-                if(entry.second == string) {
+                if(entry.second == sv) {
                         return entry.first;
                 }
         }

@@ -1,6 +1,7 @@
-CMakeFiles/clientserver.dir/src/commandhandler.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/commandhandler.cc \
+CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: \
+ /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc \
  /usr/include/stdc-predef.h \
+ /root/EDAF50/cppProject/clientserver/include/servercommandhandler.h \
  /root/EDAF50/cppProject/clientserver/include/commandhandler.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -170,7 +171,7 @@ CMakeFiles/clientserver.dir/src/commandhandler.cc.o: \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/stdexcept \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
  /root/EDAF50/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/array /usr/include/c++/13/compare \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \

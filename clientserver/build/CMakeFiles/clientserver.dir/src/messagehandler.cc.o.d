@@ -160,10 +160,12 @@ CMakeFiles/clientserver.dir/src/messagehandler.cc.o: \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator_args.h \
- /usr/include/c++/13/optional \
+ /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/stdexcept \
  /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /usr/include/c++/13/stdexcept \
  /root/EDAF50/cppProject/clientserver/include/connection.h \
  /root/EDAF50/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/array /usr/include/c++/13/compare

@@ -54,59 +54,67 @@ auto MessageHandler::receiveProtocol() noexcept -> Protocol
     return code ? from_code(*code) : Protocol::UNDEFINED;
 }
 
-auto MessageHandler::receiveInt() noexcept -> std::optional<uint32_t>
+auto MessageHandler::receiveInt() noexcept -> Expected<uint32_t, Error>
 {
     uint32_t value { 0 };
-    std::optional<byte> b;
+    Expected<byte, Error> b;
 
     for(char i = 24; i >= 0; i -= 8) {
-        b = receiveByte();
+        const auto b = receiveByte();
 
         if (b) {
             value |= static_cast<uint32_t>(*b) << i;
         } else {
-            return std::nullopt;
+            return b.error();
         }
     }
 
     return value;
 }
 
-auto MessageHandler::receiveIntParameter() noexcept -> std::optional<uint32_t>
+auto MessageHandler::receiveIntParameter() noexcept -> Expected<uint32_t, Error>
 {
     const auto code = receiveProtocol();
 
-    return (code == Protocol::PAR_NUM) ? receiveInt() : std::nullopt;
+    return (code == Protocol::PAR_NUM) ? receiveInt() : Error::ProtocolViolation;
 }
 
-auto MessageHandler::receiveStringParameter() noexcept -> std::optional<std::string>
+auto MessageHandler::receiveStringParameter() noexcept -> Expected<std::string, Error>
 {
     const auto code = receiveProtocol();
 
-    if (code == Protocol::PAR_STRING) {
-        auto n = receiveInt();
-
-        if (n && *n >= 1) {
-            string param;
-            std::optional<byte> b;
-
-            param.reserve(*n);
-
-            for (uint32_t i = 0; i < n; ++i) {
-                b = receiveByte();
-                
-                if (!b) {
-                    return std::nullopt;
-                }
-
-                param += *b;
-            }
-
-            return param;
-        }
+    if (code != Protocol::PAR_STRING) {
+        return Error::ProtocolViolation;
     }
 
-    return std::nullopt;
+    const auto params = receiveInt();
+
+    if (!params) {
+        return params.error();
+    }
+
+    const auto n = *params;
+
+    if (n < 1) {
+        return Error::InvalidArguments;
+    }
+    
+    string param;
+    Expected<byte, Error> b;
+
+    param.reserve(n);
+
+    for (uint32_t i = 0; i < n; ++i) {
+        b = receiveByte();
+        
+        if (!b) {
+            return b.error();
+        }
+
+        param += *b;
+    }
+
+    return param;
 }
 
 auto MessageHandler::sendByte(const byte value, const byte tries) noexcept -> bool
@@ -124,19 +132,21 @@ auto MessageHandler::sendByte(const byte value, const byte tries) noexcept -> bo
     }() : false;
 }
 
-auto MessageHandler::receiveByte(const byte tries) noexcept -> std::optional<byte>
+auto MessageHandler::receiveByte(const byte tries) noexcept -> Expected<byte, Error>
 {
     if (connection->isConnected()) {
         for(byte i = 0; i < tries; ++i) {
             try {
-                return std::optional<byte>{connection->read()};
+                return connection->read();
             } catch (const ConnectionClosedException& error) {
                 // IMPLEMENT LOGGING IF TIME ALLOWS
             }
         }
-    }
 
-    return std::nullopt;
+        return Error::FailedTransfer;
+    } else { 
+        return Error::ConnectionClosed;
+    }
 }
 
 void MessageHandler::setConnection(const std::shared_ptr<Connection>& connection) noexcept

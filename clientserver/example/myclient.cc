@@ -2,7 +2,7 @@
 #include "connection.h"
 #include "connectionclosedexception.h"
 #include "client_commanddecoder.h"
-
+#include "messagehandler.h"
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
@@ -40,7 +40,7 @@ string readString(const Connection& conn)
 /* Creates a client for the given args, if possible.
  * Otherwise exits with error code.
  */
-Connection init(int argc, char* argv[])
+std::shared_ptr<Connection> init(int argc, char* argv[])
 {
         if (argc != 3) {
                 cerr << "Usage: myclient host-name port-number" << endl;
@@ -55,8 +55,8 @@ Connection init(int argc, char* argv[])
                 exit(2);
         }
 
-        Connection conn(argv[1], port);
-        if (!conn.isConnected()) {
+        auto conn = std::make_shared<Connection>(argv[1], port);
+        if (!conn->isConnected()) {
                 cerr << "Connection attempt failed" << endl;
                 exit(3);
         }
@@ -84,7 +84,7 @@ Connection init(int argc, char* argv[])
         return 0;
 } */
 
-int app(const Connection& conn)
+int app(const std::shared_ptr<Connection>& conn)
 {
         cout << "Connected to server, To see commands type help_com ";
         string com;
@@ -107,6 +107,6 @@ int app(const Connection& conn)
 
 int main(int argc, char* argv[])
 {
-        Connection conn = init(argc, argv);
+        auto conn = init(argc, argv);
         return app(conn);
 }

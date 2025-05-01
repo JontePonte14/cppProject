@@ -213,6 +213,54 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+src/client_commanddecoder.o: src/client_commanddecoder.cc.o
+.PHONY : src/client_commanddecoder.o
+
+# target to build an object file
+src/client_commanddecoder.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o
+.PHONY : src/client_commanddecoder.cc.o
+
+src/client_commanddecoder.i: src/client_commanddecoder.cc.i
+.PHONY : src/client_commanddecoder.i
+
+# target to preprocess a source file
+src/client_commanddecoder.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.i
+.PHONY : src/client_commanddecoder.cc.i
+
+src/client_commanddecoder.s: src/client_commanddecoder.cc.s
+.PHONY : src/client_commanddecoder.s
+
+# target to generate assembly for a file
+src/client_commanddecoder.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.s
+.PHONY : src/client_commanddecoder.cc.s
+
+src/client_commandhandler.o: src/client_commandhandler.cc.o
+.PHONY : src/client_commandhandler.o
+
+# target to build an object file
+src/client_commandhandler.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o
+.PHONY : src/client_commandhandler.cc.o
+
+src/client_commandhandler.i: src/client_commandhandler.cc.i
+.PHONY : src/client_commandhandler.i
+
+# target to preprocess a source file
+src/client_commandhandler.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.i
+.PHONY : src/client_commandhandler.cc.i
+
+src/client_commandhandler.s: src/client_commandhandler.cc.s
+.PHONY : src/client_commandhandler.s
+
+# target to generate assembly for a file
+src/client_commandhandler.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.s
+.PHONY : src/client_commandhandler.cc.s
+
 src/commandhandler.o: src/commandhandler.cc.o
 .PHONY : src/commandhandler.o
 
@@ -333,6 +381,30 @@ src/server.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/server.cc.s
 .PHONY : src/server.cc.s
 
+src/servercommandhandler.o: src/servercommandhandler.cc.o
+.PHONY : src/servercommandhandler.o
+
+# target to build an object file
+src/servercommandhandler.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o
+.PHONY : src/servercommandhandler.cc.o
+
+src/servercommandhandler.i: src/servercommandhandler.cc.i
+.PHONY : src/servercommandhandler.i
+
+# target to preprocess a source file
+src/servercommandhandler.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/servercommandhandler.cc.i
+.PHONY : src/servercommandhandler.cc.i
+
+src/servercommandhandler.s: src/servercommandhandler.cc.s
+.PHONY : src/servercommandhandler.s
+
+# target to generate assembly for a file
+src/servercommandhandler.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/servercommandhandler.cc.s
+.PHONY : src/servercommandhandler.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -349,6 +421,12 @@ help:
 	@echo "... myclient"
 	@echo "... myserver"
 	@echo "... test"
+	@echo "... src/client_commanddecoder.o"
+	@echo "... src/client_commanddecoder.i"
+	@echo "... src/client_commanddecoder.s"
+	@echo "... src/client_commandhandler.o"
+	@echo "... src/client_commandhandler.i"
+	@echo "... src/client_commandhandler.s"
 	@echo "... src/commandhandler.o"
 	@echo "... src/commandhandler.i"
 	@echo "... src/commandhandler.s"
@@ -364,6 +442,9 @@ help:
 	@echo "... src/server.o"
 	@echo "... src/server.i"
 	@echo "... src/server.s"
+	@echo "... src/servercommandhandler.o"
+	@echo "... src/servercommandhandler.i"
+	@echo "... src/servercommandhandler.s"
 .PHONY : help
 
 
