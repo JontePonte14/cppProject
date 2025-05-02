@@ -11,7 +11,6 @@ class Article
 public:
     Article() = default;
     Article(
-        const std::string g,
         const std::string t, 
         const std::string a, 
         const std::string d, // Format: year-month-day

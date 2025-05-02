@@ -41,7 +41,7 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     return;
 }
 
-std::string DatabaseDS::listGroup(){
+std::vector<std::string> DatabaseDS::listGroup(){
     std::vector<std::string> newsGroups;
     std::string newsGroupSorted;
 

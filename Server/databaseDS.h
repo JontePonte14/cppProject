@@ -18,9 +18,9 @@ public:
     DatabaseDS(const std::filesystem::path& basePath);
     ~DatabaseDS() = default;
 
-    std::string listGroup();
+    std::vector<std::string> listGroup();
     bool makeGroup(const std::string& name);
-    bool removeGroup(const std::string& name);
+    bool removeGroup(int groupID);
 
     std::vector<std::pair<std::string, int>> listArticle(int groupID);
     bool makeArticle(Article& article);

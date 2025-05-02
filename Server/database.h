@@ -16,14 +16,14 @@ public:
     // Custom constructur makes it possible to decide the name of the root folder
 
 
-    std::string listGroup();
-    bool makeGroup(const std::string& name);
-    bool removeGroup(const std::string& name);
+    virtual std::vector<std::string> listGroup();
+    virtual bool makeGroup(const std::string& name);
+    virtual bool removeGroup(int groupID);
 
-    std::vector<std::pair<std::string, int>> listArticle(int groupID);
-    bool makeArticle(Article& article);
-    bool removeArticle(int groupID, int articleID);
-    Article getArticle(int groupID, int articleID);
+    virtual std::vector<std::pair<std::string, int>> listArticle(int groupID);
+    virtual bool makeArticle(int groupID, Article article);
+    virtual bool removeArticle(int groupID, int articleID);
+    virtual Article getArticle(int groupID, int articleID);
     
 private:
     /* data */
