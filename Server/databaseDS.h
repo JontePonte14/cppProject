@@ -24,8 +24,11 @@ public:
 
     std::vector<std::pair<std::string, int>> listArticle(std::string name);
     bool makeArticle(Article& article);
-    bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
-    Article getArticle(std::string articleGroup, std::string articleName, int articleID);
+    bool removeArticle(int groupID, int articleID);
+    Article getArticle(int groupID, int articleID);
+        
+
+
 private:
     /* data */
     std::filesystem::path root;
