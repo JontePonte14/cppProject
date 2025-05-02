@@ -43,7 +43,7 @@ void Client_commanddecoder::com_decode(std::istream& input){
             HELP_COM();
         }
         else if(command == "list_ng"){
-            reply = comhand.LIST_NG();
+            LIST_NG();
             cout << "List of news groups ";
         }
         else if(command == "create_ng"){
@@ -120,8 +120,9 @@ void Client_commanddecoder::GET_ART(std::string& groupIndex, std::string& articl
     cout << "Reply from server: " << endl;
     //reply = comhand.GET_ART(parameters);
 }
+
 void Client_commanddecoder::printReply(const std::vector<std::string>& vec) const{
-    cout << "Reply from server: ";
+    //cout << "Reply from server: ";
     for (string i: vec) {
         std::cout << i << endl;
     }

@@ -8,9 +8,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
-Client_commandhandler::Client_commandhandler(const std::shared_ptr<Connection>& conn)
-    : conn(conn) {
+using std::cout;
+using std::endl;
+Client_commandhandler::Client_commandhandler(const std::shared_ptr<Connection>& conn) : mh(conn) {
 }
 
 std::vector<std::string> Client_commandhandler::LIST_NG(){
@@ -19,6 +19,7 @@ std::vector<std::string> Client_commandhandler::LIST_NG(){
     mh.sendProtocol(Protocol::COM_END);
     Protocol code = mh.receiveProtocol();
     checkCode(Protocol::ANS_LIST_NG, code);
+    cout << to_string(code) << endl;
 
 /*     std::optional<uint32_t> nbrGroups = mh.receiveIntParameter();
 

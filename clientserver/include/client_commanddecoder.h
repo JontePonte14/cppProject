@@ -1,5 +1,6 @@
 #ifndef CLIENTCOMMANDDECODER_H
 #define CLIENTCOMMANDDECODER_H
+
 #include "client_commandhandler.h"
 #include "connection.h"
 #include <iostream>
@@ -35,6 +36,7 @@ private:
     std::optional<int> string_to_int (const std::string& p) const;
 
     std::vector<std::string> reply;
+
     Client_commandhandler comhand;
 };
 
