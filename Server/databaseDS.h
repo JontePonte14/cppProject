@@ -22,7 +22,7 @@ public:
     bool makeGroup(const std::string& name);
     bool removeGroup(const std::string& name);
 
-    std::vector<std::pair<std::string, int>> listArticle(std::string name);
+    std::vector<std::pair<std::string, int>> listArticle(int groupID);
     bool makeArticle(Article& article);
     bool removeArticle(int groupID, int articleID);
     Article getArticle(int groupID, int articleID);

@@ -9,47 +9,18 @@
 
 std::map<int, std::vector<Article>> gIDtoArticles;
 std::map<std::string,int> groupID;
-std::string DatabaseMS::listGroup()
-{
-    return std::string();
-}
+std::string listGroup();
+bool makeGroup(const std::string& name);
+bool removeGroup(const std::string& name);
 
-bool DatabaseMS::makeGroup()
-{
-    return false;
-}
-
-bool DatabaseMS::removeGroup()
-{
-    return false;
-}
-
-std::list<Article> DatabaseMS::listArticle()
-{  
-
-    return std::list<Article>();
-}
-
-bool DatabaseMS::makeArticle()
-{
-    return false;
-}
-
-bool DatabaseMS::removeArticle()
-{
-    return false;
-}
-
-Article DatabaseMS::getArticle()
-{
-    return Article();
-}
+std::vector<std::pair<std::string, int>> listArticle(int groupID);
+bool makeArticle(Article& article);
+bool removeArticle(int groupID, int articleID);
+Article getArticle(int groupID, int articleID);
 DatabaseMS::DatabaseMS(/* args */)
 {
 }
 DatabaseMS::~DatabaseMS()
 {
 }
-// Compare this snippet from Server/DatabaseDS.h:
-// #include "Article.h"
-// #include <string>  
+
