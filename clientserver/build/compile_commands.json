@@ -48,6 +48,30 @@
   "output": "CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o"
 },
 {
+  "directory": "/root/EDAF50/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/clientserver.dir/src/database.cc.o -c /root/EDAF50/cppProject/clientserver/src/database.cc",
+  "file": "/root/EDAF50/cppProject/clientserver/src/database.cc",
+  "output": "CMakeFiles/clientserver.dir/src/database.cc.o"
+},
+{
+  "directory": "/root/EDAF50/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/clientserver.dir/src/databaseDS.cc.o -c /root/EDAF50/cppProject/clientserver/src/databaseDS.cc",
+  "file": "/root/EDAF50/cppProject/clientserver/src/databaseDS.cc",
+  "output": "CMakeFiles/clientserver.dir/src/databaseDS.cc.o"
+},
+{
+  "directory": "/root/EDAF50/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/clientserver.dir/src/databaseMS.cc.o -c /root/EDAF50/cppProject/clientserver/src/databaseMS.cc",
+  "file": "/root/EDAF50/cppProject/clientserver/src/databaseMS.cc",
+  "output": "CMakeFiles/clientserver.dir/src/databaseMS.cc.o"
+},
+{
+  "directory": "/root/EDAF50/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/clientserver.dir/src/article.cc.o -c /root/EDAF50/cppProject/clientserver/src/article.cc",
+  "file": "/root/EDAF50/cppProject/clientserver/src/article.cc",
+  "output": "CMakeFiles/clientserver.dir/src/article.cc.o"
+},
+{
   "directory": "/root/EDAF50/cppProject/clientserver/build/example",
   "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/myserver.dir/myserver.cc.o -c /root/EDAF50/cppProject/clientserver/example/myserver.cc",
   "file": "/root/EDAF50/cppProject/clientserver/example/myserver.cc",

@@ -4,7 +4,7 @@
 #include "protocol.h"
 
 DatabaseServer::DatabaseServer(const int port, const bool run)
-    : Server(port), database()
+    : Server(port), database(std::make_shared<Database>()), handler(database)
 {
     std::cout << "Database server initialized with port " << port << std::endl;
 
@@ -30,9 +30,7 @@ void DatabaseServer::serveConnection() {
     auto connection = waitForActivity();
 
     if(connection) {
-        try {
-            handler.processRequest(connection);
-        } catch (ConnectionClosedException& error) {
+        if (handler.processRequest(connection) != Status::Success) {
             deregisterConnection(connection);
             std::cout << "Client closed connection" << std::endl;
         }

@@ -3,79 +3,128 @@
 #include "protocol.h"
 #include <iostream>
 
-ServerCommandHandler::ServerCommandHandler() 
-    : CommandHandler() {
+ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Database>& database) 
+    : CommandHandler(), database(database) {
 }
 
-ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Connection>& connection)
-    : CommandHandler(connection) {
+ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Database>& database, const std::shared_ptr<Connection>& connection)
+    : CommandHandler(connection), database(database) {
 }
 
-void ServerCommandHandler::processRequest() {
+auto ServerCommandHandler::processRequest() noexcept -> Status {
     Protocol protocol = receiveProtocol();
 
     std::cout << "Server received an " << to_string(protocol) << " protocol" << std::endl;
+
     switch (protocol) {
         case Protocol::COM_LIST_NG:
-            listGroups();
+            return listGroups();
             break;
         case Protocol::COM_CREATE_NG:
-            createGroup();
+            return createGroup();
             break;
         case Protocol::COM_DELETE_NG:
-            deleteGroup();
+            return deleteGroup();
             break;
         case Protocol::COM_LIST_ART:
-            listArticles();
+            return listArticles();
             break;
         case Protocol::COM_CREATE_ART:
             createArticle();
             break;
         case Protocol::COM_DELETE_ART:
-            deleteArticle();
+            return deleteArticle();
             break;
         case Protocol::COM_GET_ART:
-            getArticle();
+            return getArticle();
             break;
         default:
-            throw ConnectionClosedException();
+            return Status::ProtocolViolation;
     }
 }
 
-void ServerCommandHandler::processRequest(const std::shared_ptr<Connection>& connection) {
+auto ServerCommandHandler::processRequest(const std::shared_ptr<Connection>& connection) noexcept -> Status {
     setConnection(connection);
-    processRequest();
+    return processRequest();
 }
 
-void ServerCommandHandler::listGroups() {
+auto ServerCommandHandler::listGroups() -> Status {
     auto protocol = verifyProtocol(Protocol::COM_END);
+
+    if (!protocol) {
+        return protocol.error();
+    }
+
+    if (sendProtocol(Protocol::ANS_LIST_NG)) {
+        const auto groups = database->listGroup();
+
+        if (!sendInt(groups.size())) {
+            return Status::FailedTransfer;
+        }
+
+        for (const auto& group : groups) {
+            /*if (sendStringParameter(group)) {
+                return Status::ConnectionClosed;
+            }*/
+        }
+
+        if (!sendProtocol(Protocol::ANS_END)) {
+            return Status::FailedTransfer;
+        }
+
+        return Status::Success;
+    }
+
+    else {
+        return Status::ConnectionClosed;
+    }
 }
 
-void ServerCommandHandler::createGroup() {
+auto ServerCommandHandler::createGroup() -> Status {
+    const auto string_p = receiveStringParameter();
+
+    if (!string_p) {
+        return string_p.error();
+    }
+
+    auto protocol = verifyProtocol(Protocol::COM_END);
+
+    if (!protocol) {
+        return protocol.error();
+    }
+
+    if (!database->makeGroup(*string_p)) {
+        return Status::InvalidArguments; // TEMP
+    }
+    
+}
+
+auto ServerCommandHandler::deleteGroup() -> Status {
 
 }
 
-void ServerCommandHandler::deleteGroup() {
+auto ServerCommandHandler::listArticles() -> Status {
 
 }
 
-void ServerCommandHandler::listArticles() {
+auto ServerCommandHandler::createArticle() -> Status {
 
 }
 
-void ServerCommandHandler::createArticle() {
+auto ServerCommandHandler::deleteArticle() -> Status {
 
 }
 
-void ServerCommandHandler::deleteArticle() {
+auto ServerCommandHandler::getArticle() -> Status {
 
 }
 
-void ServerCommandHandler::getArticle() {
-
+auto ServerCommandHandler::sendProtocol(const Protocol protocol) noexcept -> bool {
+    std::cout << "Served sent a " << to_string(protocol) << " protocol" << std::endl;
+    return MessageHandler::sendProtocol(protocol);
 }
 
-auto ServerCommandHandler::verifyProtocol(const Protocol expected) -> Expected<Protocol, Error>
+auto ServerCommandHandler::verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>
 {
     Protocol protocol = receiveProtocol();
     std::cout << "Server received an " << to_string(protocol) << " protocol, expected " << to_string(expected) << std::endl;
@@ -84,5 +133,5 @@ auto ServerCommandHandler::verifyProtocol(const Protocol expected) -> Expected<P
         return protocol;
     }
 
-    else return Error::ProtocolViolation;
+    else return Status::ProtocolViolation;
 }

@@ -17,6 +17,9 @@ std::vector<std::string> Client_commandhandler::LIST_NG(std::istream& paramerter
 }
 
 std::vector<std::string> Client_commandhandler::CREATE_NG(std::istream& paramerters){
+    conn.sendProtocol(Protocol::COM_CREATE_NG);
+    conn.sendStringParameter("TEST");
+    
     return {"null"};
 }
 

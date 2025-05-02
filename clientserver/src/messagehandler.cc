@@ -54,10 +54,10 @@ auto MessageHandler::receiveProtocol() noexcept -> Protocol
     return code ? from_code(*code) : Protocol::UNDEFINED;
 }
 
-auto MessageHandler::receiveInt() noexcept -> Expected<uint32_t, Error>
+auto MessageHandler::receiveInt() noexcept -> Expected<uint32_t, Status>
 {
     uint32_t value { 0 };
-    Expected<byte, Error> b;
+    Expected<byte, Status> b;
 
     for(char i = 24; i >= 0; i -= 8) {
         const auto b = receiveByte();
@@ -72,19 +72,19 @@ auto MessageHandler::receiveInt() noexcept -> Expected<uint32_t, Error>
     return value;
 }
 
-auto MessageHandler::receiveIntParameter() noexcept -> Expected<uint32_t, Error>
+auto MessageHandler::receiveIntParameter() noexcept -> Expected<uint32_t, Status>
 {
     const auto code = receiveProtocol();
 
-    return (code == Protocol::PAR_NUM) ? receiveInt() : Error::ProtocolViolation;
+    return (code == Protocol::PAR_NUM) ? receiveInt() : Status::ProtocolViolation;
 }
 
-auto MessageHandler::receiveStringParameter() noexcept -> Expected<std::string, Error>
+auto MessageHandler::receiveStringParameter() noexcept -> Expected<std::string, Status>
 {
     const auto code = receiveProtocol();
 
     if (code != Protocol::PAR_STRING) {
-        return Error::ProtocolViolation;
+        return Status::ProtocolViolation;
     }
 
     const auto params = receiveInt();
@@ -96,11 +96,11 @@ auto MessageHandler::receiveStringParameter() noexcept -> Expected<std::string, 
     const auto n = *params;
 
     if (n < 1) {
-        return Error::InvalidArguments;
+        return Status::InvalidArguments;
     }
     
     string param;
-    Expected<byte, Error> b;
+    Expected<byte, Status> b;
 
     param.reserve(n);
 
@@ -132,7 +132,7 @@ auto MessageHandler::sendByte(const byte value, const byte tries) noexcept -> bo
     }() : false;
 }
 
-auto MessageHandler::receiveByte(const byte tries) noexcept -> Expected<byte, Error>
+auto MessageHandler::receiveByte(const byte tries) noexcept -> Expected<byte, Status>
 {
     if (connection->isConnected()) {
         for(byte i = 0; i < tries; ++i) {
@@ -143,9 +143,9 @@ auto MessageHandler::receiveByte(const byte tries) noexcept -> Expected<byte, Er
             }
         }
 
-        return Error::FailedTransfer;
+        return Status::FailedTransfer;
     } else { 
-        return Error::ConnectionClosed;
+        return Status::ConnectionClosed;
     }
 }
 

@@ -4,6 +4,7 @@
 #include "server.h"
 #include "database.h"
 #include "servercommandhandler.h"
+#include "database.h"
 
 class DatabaseServer final : public Server {
 
@@ -14,8 +15,8 @@ class DatabaseServer final : public Server {
         void start();
 
     private:
+        std::shared_ptr<Database> database;
         ServerCommandHandler handler;
-        Database database;
 
         void serveConnection();
 };

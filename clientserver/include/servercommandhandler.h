@@ -2,28 +2,33 @@
 #define SERVER_COMMAND_HANDLER_H
 
 #include "commandhandler.h"
+#include "database.h"
+#include <memory>
 
 class ServerCommandHandler : public CommandHandler {
 
     public:
-        ServerCommandHandler();
-        ServerCommandHandler(const std::shared_ptr<Connection>& connection);
+        ServerCommandHandler(const std::shared_ptr<Database>& database);
+        ServerCommandHandler(const std::shared_ptr<Database>& database, const std::shared_ptr<Connection>& connection);
         virtual ~ServerCommandHandler() = default;
 
-        void processRequest();
-        void processRequest(const std::shared_ptr<Connection>& connection);
+        [[nodiscard]] auto processRequest() noexcept -> Status;
+        [[nodiscard]] auto processRequest(const std::shared_ptr<Connection>& connection) noexcept -> Status;
 
-        void listGroups() override;
-        void createGroup() override;
-        void deleteGroup() override;
+        auto listGroups() -> Status override;
+        auto createGroup() -> Status override;
+        auto deleteGroup() -> Status override;
 
-        void listArticles() override;
-        void createArticle() override;
-        void deleteArticle() override;
-        void getArticle() override;
+        auto listArticles() -> Status override;
+        auto createArticle() -> Status override;
+        auto deleteArticle() -> Status override;
+        auto getArticle() -> Status override;
 
     private:
-        auto verifyProtocol(const Protocol expected) -> Expected<Protocol, Error>;
+        std::shared_ptr<Database> database;
+
+        auto sendProtocol(const Protocol protocol) noexcept -> bool override;
+        [[nodiscard]] auto verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>;
 };
 
 #endif

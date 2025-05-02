@@ -213,6 +213,30 @@ test/fast:
 	$(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
 .PHONY : test/fast
 
+src/article.o: src/article.cc.o
+.PHONY : src/article.o
+
+# target to build an object file
+src/article.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/article.cc.o
+.PHONY : src/article.cc.o
+
+src/article.i: src/article.cc.i
+.PHONY : src/article.i
+
+# target to preprocess a source file
+src/article.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/article.cc.i
+.PHONY : src/article.cc.i
+
+src/article.s: src/article.cc.s
+.PHONY : src/article.s
+
+# target to generate assembly for a file
+src/article.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/article.cc.s
+.PHONY : src/article.cc.s
+
 src/client_commanddecoder.o: src/client_commanddecoder.cc.o
 .PHONY : src/client_commanddecoder.o
 
@@ -308,6 +332,78 @@ src/connection.s: src/connection.cc.s
 src/connection.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/connection.cc.s
 .PHONY : src/connection.cc.s
+
+src/database.o: src/database.cc.o
+.PHONY : src/database.o
+
+# target to build an object file
+src/database.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/database.cc.o
+.PHONY : src/database.cc.o
+
+src/database.i: src/database.cc.i
+.PHONY : src/database.i
+
+# target to preprocess a source file
+src/database.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/database.cc.i
+.PHONY : src/database.cc.i
+
+src/database.s: src/database.cc.s
+.PHONY : src/database.s
+
+# target to generate assembly for a file
+src/database.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/database.cc.s
+.PHONY : src/database.cc.s
+
+src/databaseDS.o: src/databaseDS.cc.o
+.PHONY : src/databaseDS.o
+
+# target to build an object file
+src/databaseDS.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseDS.cc.o
+.PHONY : src/databaseDS.cc.o
+
+src/databaseDS.i: src/databaseDS.cc.i
+.PHONY : src/databaseDS.i
+
+# target to preprocess a source file
+src/databaseDS.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseDS.cc.i
+.PHONY : src/databaseDS.cc.i
+
+src/databaseDS.s: src/databaseDS.cc.s
+.PHONY : src/databaseDS.s
+
+# target to generate assembly for a file
+src/databaseDS.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseDS.cc.s
+.PHONY : src/databaseDS.cc.s
+
+src/databaseMS.o: src/databaseMS.cc.o
+.PHONY : src/databaseMS.o
+
+# target to build an object file
+src/databaseMS.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseMS.cc.o
+.PHONY : src/databaseMS.cc.o
+
+src/databaseMS.i: src/databaseMS.cc.i
+.PHONY : src/databaseMS.i
+
+# target to preprocess a source file
+src/databaseMS.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseMS.cc.i
+.PHONY : src/databaseMS.cc.i
+
+src/databaseMS.s: src/databaseMS.cc.s
+.PHONY : src/databaseMS.s
+
+# target to generate assembly for a file
+src/databaseMS.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/databaseMS.cc.s
+.PHONY : src/databaseMS.cc.s
 
 src/databaseserver.o: src/databaseserver.cc.o
 .PHONY : src/databaseserver.o
@@ -421,6 +517,9 @@ help:
 	@echo "... myclient"
 	@echo "... myserver"
 	@echo "... test"
+	@echo "... src/article.o"
+	@echo "... src/article.i"
+	@echo "... src/article.s"
 	@echo "... src/client_commanddecoder.o"
 	@echo "... src/client_commanddecoder.i"
 	@echo "... src/client_commanddecoder.s"
@@ -433,6 +532,15 @@ help:
 	@echo "... src/connection.o"
 	@echo "... src/connection.i"
 	@echo "... src/connection.s"
+	@echo "... src/database.o"
+	@echo "... src/database.i"
+	@echo "... src/database.s"
+	@echo "... src/databaseDS.o"
+	@echo "... src/databaseDS.i"
+	@echo "... src/databaseDS.s"
+	@echo "... src/databaseMS.o"
+	@echo "... src/databaseMS.i"
+	@echo "... src/databaseMS.s"
 	@echo "... src/databaseserver.o"
 	@echo "... src/databaseserver.i"
 	@echo "... src/databaseserver.s"

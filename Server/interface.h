@@ -6,7 +6,7 @@
 #include <string>
 #include <list>
 
-class interface
+class Database
 {
 private:
     /* data */
@@ -18,8 +18,8 @@ private:
 
 public:
 
-    interface ();
-    ~interface() = default;
+    Database ();
+    ~Database() = default;
     
     std::string listGroup();
     bool makeGroup(const std::string& name);
@@ -32,7 +32,7 @@ public:
 
     int switchDateBase();
 
-    interface(/* args */);
-    ~interface();
+    Database(/* args */);
+    ~Database();
 };
 #endif
