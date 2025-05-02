@@ -1,50 +1,62 @@
 [
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/connection.cc.o -c /root/EDAF50/cppProject/clientserver/src/connection.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/src/connection.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/connection.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/connection.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/connection.cc",
   "output": "CMakeFiles/clientserver.dir/src/connection.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/server.cc.o -c /root/EDAF50/cppProject/clientserver/src/server.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/src/server.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/server.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/server.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/server.cc",
   "output": "CMakeFiles/clientserver.dir/src/server.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/messagehandler.cc.o -c /root/EDAF50/cppProject/clientserver/src/messagehandler.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/src/messagehandler.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/messagehandler.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/messagehandler.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/messagehandler.cc",
   "output": "CMakeFiles/clientserver.dir/src/messagehandler.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/commandhandler.cc.o -c /root/EDAF50/cppProject/clientserver/src/commandhandler.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/src/commandhandler.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/commandhandler.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/commandhandler.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/commandhandler.cc",
   "output": "CMakeFiles/clientserver.dir/src/commandhandler.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/databaseserver.cc.o -c /root/EDAF50/cppProject/clientserver/src/databaseserver.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/src/databaseserver.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/databaseserver.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/databaseserver.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/databaseserver.cc",
   "output": "CMakeFiles/clientserver.dir/src/databaseserver.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build/example",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/myserver.dir/myserver.cc.o -c /root/EDAF50/cppProject/clientserver/example/myserver.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/example/myserver.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/client_commandhandler.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/client_commandhandler.cc",
+  "output": "CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o"
+},
+{
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/src/client_commanddecoder.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/src/client_commanddecoder.cc",
+  "output": "CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o"
+},
+{
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build/example",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/myserver.dir/myserver.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/example/myserver.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/example/myserver.cc",
   "output": "example/CMakeFiles/myserver.dir/myserver.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build/example",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/myclient.dir/myclient.cc.o -c /root/EDAF50/cppProject/clientserver/example/myclient.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/example/myclient.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build/example",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/myclient.dir/myclient.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/example/myclient.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/example/myclient.cc",
   "output": "example/CMakeFiles/myclient.dir/myclient.cc.o"
 },
 {
-  "directory": "/root/EDAF50/cppProject/clientserver/build/example",
-  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/test.dir/test.cc.o -c /root/EDAF50/cppProject/clientserver/example/test.cc",
-  "file": "/root/EDAF50/cppProject/clientserver/example/test.cc",
+  "directory": "/home/ture/Documents/C++/cppProject/clientserver/build/example",
+  "command": "/usr/bin/c++  -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11 -o CMakeFiles/test.dir/test.cc.o -c /home/ture/Documents/C++/cppProject/clientserver/example/test.cc",
+  "file": "/home/ture/Documents/C++/cppProject/clientserver/example/test.cc",
   "output": "example/CMakeFiles/test.dir/test.cc.o"
 }
 ]

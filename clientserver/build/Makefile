@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/EDAF50/cppProject/clientserver
+CMAKE_SOURCE_DIR = /home/ture/Documents/C++/cppProject/clientserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/EDAF50/cppProject/clientserver/build
+CMAKE_BINARY_DIR = /home/ture/Documents/C++/cppProject/clientserver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles /root/EDAF50/cppProject/clientserver/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles /home/ture/Documents/C++/cppProject/clientserver/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -212,6 +212,54 @@ test: cmake_check_build_system
 test/fast:
 	$(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
 .PHONY : test/fast
+
+src/client_commanddecoder.o: src/client_commanddecoder.cc.o
+.PHONY : src/client_commanddecoder.o
+
+# target to build an object file
+src/client_commanddecoder.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o
+.PHONY : src/client_commanddecoder.cc.o
+
+src/client_commanddecoder.i: src/client_commanddecoder.cc.i
+.PHONY : src/client_commanddecoder.i
+
+# target to preprocess a source file
+src/client_commanddecoder.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.i
+.PHONY : src/client_commanddecoder.cc.i
+
+src/client_commanddecoder.s: src/client_commanddecoder.cc.s
+.PHONY : src/client_commanddecoder.s
+
+# target to generate assembly for a file
+src/client_commanddecoder.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.s
+.PHONY : src/client_commanddecoder.cc.s
+
+src/client_commandhandler.o: src/client_commandhandler.cc.o
+.PHONY : src/client_commandhandler.o
+
+# target to build an object file
+src/client_commandhandler.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o
+.PHONY : src/client_commandhandler.cc.o
+
+src/client_commandhandler.i: src/client_commandhandler.cc.i
+.PHONY : src/client_commandhandler.i
+
+# target to preprocess a source file
+src/client_commandhandler.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.i
+.PHONY : src/client_commandhandler.cc.i
+
+src/client_commandhandler.s: src/client_commandhandler.cc.s
+.PHONY : src/client_commandhandler.s
+
+# target to generate assembly for a file
+src/client_commandhandler.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/client_commandhandler.cc.s
+.PHONY : src/client_commandhandler.cc.s
 
 src/commandhandler.o: src/commandhandler.cc.o
 .PHONY : src/commandhandler.o
@@ -349,6 +397,12 @@ help:
 	@echo "... myclient"
 	@echo "... myserver"
 	@echo "... test"
+	@echo "... src/client_commanddecoder.o"
+	@echo "... src/client_commanddecoder.i"
+	@echo "... src/client_commanddecoder.s"
+	@echo "... src/client_commandhandler.o"
+	@echo "... src/client_commandhandler.i"
+	@echo "... src/client_commandhandler.s"
 	@echo "... src/commandhandler.o"
 	@echo "... src/commandhandler.i"
 	@echo "... src/commandhandler.s"

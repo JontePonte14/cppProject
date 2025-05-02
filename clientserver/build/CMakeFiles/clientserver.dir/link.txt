@@ -1,2 +1,2 @@
-/usr/bin/ar qc libclientserver.a CMakeFiles/clientserver.dir/src/connection.cc.o CMakeFiles/clientserver.dir/src/server.cc.o CMakeFiles/clientserver.dir/src/messagehandler.cc.o CMakeFiles/clientserver.dir/src/commandhandler.cc.o CMakeFiles/clientserver.dir/src/databaseserver.cc.o
+/usr/bin/ar qc libclientserver.a CMakeFiles/clientserver.dir/src/connection.cc.o CMakeFiles/clientserver.dir/src/server.cc.o CMakeFiles/clientserver.dir/src/messagehandler.cc.o CMakeFiles/clientserver.dir/src/commandhandler.cc.o CMakeFiles/clientserver.dir/src/databaseserver.cc.o CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o CMakeFiles/clientserver.dir/src/client_commanddecoder.cc.o
 /usr/bin/ranlib libclientserver.a

@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src
+CXX_INCLUDES = -I/home/ture/Documents/C++/cppProject/clientserver/include -I/home/ture/Documents/C++/cppProject/clientserver/src -I/home/ture/Documents/C++/cppProject/clientserver/build/src
 
-CXX_FLAGS = -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11
+CXX_FLAGS = -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -std=gnu++11
 

@@ -1,8 +1,8 @@
 CMakeFiles/clientserver.dir/src/server.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/server.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/server.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/server.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/server.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -121,7 +121,7 @@ CMakeFiles/clientserver.dir/src/server.cc.o: \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/range_access.h \
  /usr/include/c++/13/bits/vector.tcc \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \

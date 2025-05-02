@@ -2,6 +2,7 @@
 #include "connection.h"
 #include "connectionclosedexception.h"
 #include "client_commanddecoder.h"
+#include "messagehandler.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -89,6 +90,9 @@ int app(const Connection& conn)
         cout << "Connected to server, To see commands type help_com ";
         string com;
         Client_commanddecoder comdec(conn);
+        //todo: add messegehandler
+        //MessageHandler meshand(conn); 
+        
         while (true) {
                 cout << "Type a command: " << endl;
                 try {

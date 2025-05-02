@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/EDAF50/cppProject/clientserver
+CMAKE_SOURCE_DIR = /home/ture/Documents/C++/cppProject/clientserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/EDAF50/cppProject/clientserver/build
+CMAKE_BINARY_DIR = /home/ture/Documents/C++/cppProject/clientserver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles /root/EDAF50/cppProject/clientserver/build/example//CMakeFiles/progress.marks
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles 0
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles /home/ture/Documents/C++/cppProject/clientserver/build/example//CMakeFiles/progress.marks
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/clean
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,22 +148,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/preinstall
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/preinstall
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 example/CMakeFiles/myserver.dir/rule:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/myserver.dir/rule
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/myserver.dir/rule
 .PHONY : example/CMakeFiles/myserver.dir/rule
 
 # Convenience name for target.
@@ -172,12 +172,12 @@ myserver: example/CMakeFiles/myserver.dir/rule
 
 # fast build rule for target.
 myserver/fast:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/build
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/build
 .PHONY : myserver/fast
 
 # Convenience name for target.
 example/CMakeFiles/myclient.dir/rule:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/myclient.dir/rule
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/myclient.dir/rule
 .PHONY : example/CMakeFiles/myclient.dir/rule
 
 # Convenience name for target.
@@ -186,12 +186,12 @@ myclient: example/CMakeFiles/myclient.dir/rule
 
 # fast build rule for target.
 myclient/fast:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/build
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/build
 .PHONY : myclient/fast
 
 # Convenience name for target.
 example/CMakeFiles/test.dir/rule:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/test.dir/rule
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example/CMakeFiles/test.dir/rule
 .PHONY : example/CMakeFiles/test.dir/rule
 
 # Convenience name for target.
@@ -200,7 +200,7 @@ test: example/CMakeFiles/test.dir/rule
 
 # fast build rule for target.
 test/fast:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/build
 .PHONY : test/fast
 
 myclient.o: myclient.cc.o
@@ -208,7 +208,7 @@ myclient.o: myclient.cc.o
 
 # target to build an object file
 myclient.cc.o:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.o
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.o
 .PHONY : myclient.cc.o
 
 myclient.i: myclient.cc.i
@@ -216,7 +216,7 @@ myclient.i: myclient.cc.i
 
 # target to preprocess a source file
 myclient.cc.i:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.i
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.i
 .PHONY : myclient.cc.i
 
 myclient.s: myclient.cc.s
@@ -224,7 +224,7 @@ myclient.s: myclient.cc.s
 
 # target to generate assembly for a file
 myclient.cc.s:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.s
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myclient.dir/build.make example/CMakeFiles/myclient.dir/myclient.cc.s
 .PHONY : myclient.cc.s
 
 myserver.o: myserver.cc.o
@@ -232,7 +232,7 @@ myserver.o: myserver.cc.o
 
 # target to build an object file
 myserver.cc.o:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.o
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.o
 .PHONY : myserver.cc.o
 
 myserver.i: myserver.cc.i
@@ -240,7 +240,7 @@ myserver.i: myserver.cc.i
 
 # target to preprocess a source file
 myserver.cc.i:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.i
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.i
 .PHONY : myserver.cc.i
 
 myserver.s: myserver.cc.s
@@ -248,7 +248,7 @@ myserver.s: myserver.cc.s
 
 # target to generate assembly for a file
 myserver.cc.s:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.s
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/myserver.dir/build.make example/CMakeFiles/myserver.dir/myserver.cc.s
 .PHONY : myserver.cc.s
 
 test.o: test.cc.o
@@ -256,7 +256,7 @@ test.o: test.cc.o
 
 # target to build an object file
 test.cc.o:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.o
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.o
 .PHONY : test.cc.o
 
 test.i: test.cc.i
@@ -264,7 +264,7 @@ test.i: test.cc.i
 
 # target to preprocess a source file
 test.cc.i:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.i
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.i
 .PHONY : test.cc.i
 
 test.s: test.cc.s
@@ -272,7 +272,7 @@ test.s: test.cc.s
 
 # target to generate assembly for a file
 test.cc.s:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.s
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f example/CMakeFiles/test.dir/build.make example/CMakeFiles/test.dir/test.cc.s
 .PHONY : test.cc.s
 
 # Help Target
@@ -310,6 +310,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
