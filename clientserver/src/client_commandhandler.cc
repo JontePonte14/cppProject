@@ -20,14 +20,14 @@ std::vector<std::string> Client_commandhandler::LIST_NG(){
     Protocol code = mh.receiveProtocol();
     checkCode(Protocol::ANS_LIST_NG, code);
 
-    std::optional<uint32_t> nbrGroups = mh.receiveIntParameter();
+/*     std::optional<uint32_t> nbrGroups = mh.receiveIntParameter();
 
     conn.sendProtocol(Protocol::COM_LIST_NG);
-    conn.sendProtocol(Protocol::COM_END);
+    conn.sendProtocol(Protocol::COM_END); */
     return {"ID", "Name"};
 }
 
-std::vector<std::string> Client_commandhandler::CREATE_NG(std::istream& paramerters){
+std::vector<std::string> Client_commandhandler::CREATE_NG(std::string title){
     conn.sendProtocol(Protocol::COM_CREATE_NG);
     conn.sendStringParameter("TEST");
     

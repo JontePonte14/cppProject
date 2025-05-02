@@ -27,8 +27,8 @@ public:
 private:
     MessageHandler mh;
     void checkCode(Protocol epectedCode, Protocol code) const; 
-    private:
-        MessageHandler conn;
+    
+    MessageHandler conn;
 };
 
 #endif

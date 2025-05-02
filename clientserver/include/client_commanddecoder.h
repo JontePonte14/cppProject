@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <optional>
 
 class Client_commanddecoder {
 public:

@@ -1,7 +1,7 @@
 #include "client_commanddecoder.h"
 #include "client_commandhandler.h"
 #include "connection.h"
-
+#include <optional>
 #include <iostream>
 #include <string>
 #include <algorithm>
