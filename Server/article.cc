@@ -7,14 +7,13 @@ Article::Article(
     const std::string g,
     const std::string t, 
     const std::string a, 
-    const std::string d, // Format: year-month-day
-    int id, 
+    const std::string d, // Format: year-month-day 
     const std::string b){
         groupName = g;
         title = t;
         author = a;
         date = d;
-        idNbr = id;
+        idNbr = -1;
         body = b;
     }
 
@@ -65,7 +64,8 @@ void from_json(const json& jFile, Article& article){
         jFile["title"],
         jFile["author"],
         jFile["date"],
-        jFile["id"],
         jFile["body"]
+
     );
+    article.setID(jFile["id"]);
 }

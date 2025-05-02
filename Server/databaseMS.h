@@ -2,30 +2,10 @@
 #include "article.h"
 #include <string>
 #include <list>
-class DatabaseMS
+#include "database.h"
+class DatabaseMS : public Database
 {
-private:
-    /* data */
-    std::string dbPath;
-        
-public:
-    std::string listGroup();
-    bool makeGroup();
-    bool removeGroup();
-
-    std::list<Article> listArticle();
-    bool makeArticle();
-    bool removeArticle();
-    Article getArticle();
-
-    DatabaseMS(/* args */);
-    ~DatabaseMS();
+ public:
+ 
 };
 
-DatabaseMS::DatabaseMS(/* args */)
-{
-}
-
-DatabaseMS::~DatabaseMS()
-{
-}

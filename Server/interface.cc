@@ -2,13 +2,13 @@
 #include <string>
 #include <list>
 
-Database::Database(/* args */){
+Interface::Interface(/* args */){
     activeDB = 1;
     db1 = DatabaseDS("Newsgroup");
     db2 = DatabaseMS();
 }
 
-std::string Database::listGroup()
+std::string Interface::listGroup()
 {
     if(activeDB == 1)
     {
@@ -23,7 +23,7 @@ std::string Database::listGroup()
     return std::string();
 }
 
-bool Database::makeGroup(const std::string& name)
+bool Interface::makeGroup(const std::string& name)
 {
     if(activeDB == 1)
     {
@@ -36,7 +36,7 @@ bool Database::makeGroup(const std::string& name)
     return false;
 }
 
-bool Database::removeGroup(const std::string& name)
+bool Interface::removeGroup(const std::string& name)
 {
     if(activeDB == 1)
     {
@@ -49,7 +49,7 @@ bool Database::removeGroup(const std::string& name)
     
 }
 
-std::vector<std::pair<std::string, int>> Database::listArticle(std::string name)
+std::vector<std::pair<std::string, int>> Interface::listArticle(std::string name)
 {
     if(activeDB == 1)
     {
@@ -91,7 +91,7 @@ std::vector<std::pair<std::string, int>> Database::listArticle(std::string name)
    
 // }
 
-bool Database::makeArticle(Article& article)
+bool Interface::makeArticle(Article& article)
 {
     if(activeDB == 1)
     {
@@ -104,7 +104,7 @@ bool Database::makeArticle(Article& article)
     
 }
 
-bool Database::removeArticle(std::string articleGroup, std::string articleName, int articleID)
+bool Interface::removeArticle(std::string articleGroup, std::string articleName, int articleID)
 {
     if(activeDB == 1)
     {
@@ -117,7 +117,7 @@ bool Database::removeArticle(std::string articleGroup, std::string articleName, 
     return false;
 }
 
-Article Database::getArticle(std::string articleGroup, std::string articleName, int articleID)
+Article Interface::getArticle(std::string articleGroup, std::string articleName, int articleID)
 {
     if(activeDB == 1)
     {
@@ -130,7 +130,7 @@ Article Database::getArticle(std::string articleGroup, std::string articleName, 
     
     return Article();
 }
-int Database::switchDateBase()
+int Interface::switchDateBase()
 {
     if(activeDB == 1)
     {

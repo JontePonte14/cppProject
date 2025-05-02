@@ -15,7 +15,6 @@ public:
         const std::string t, 
         const std::string a, 
         const std::string d, // Format: year-month-day
-        int id, 
         const std::string b);
     ~Article() = default;
 

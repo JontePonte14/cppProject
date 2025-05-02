@@ -6,7 +6,7 @@
 #include <string>
 #include <list>
 
-class Database
+class Interface
 {
 private:
     /* data */
@@ -17,22 +17,27 @@ private:
     int activeDB;
 
 public:
-
-    Database ();
-    ~Database() = default;
     
     std::string listGroup();
-    bool makeGroup(const std::string& name);
-    bool removeGroup(const std::string& name);
+    bool makeGroup(std::string groupName);
+    bool removeGroup(int groupID);
 
-    std::vector<std::pair<std::string, int>> listArticle(std::string name);
-    bool makeArticle(Article& article);
-    bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
-    Article getArticle(std::string articleGroup, std::string articleName, int articleID);
+    std::string listArticle(int groupID);
+    bool makeArticle(int groupNBR,std::string artivleTitle, std::string articleAuthor, std::string text);
+    bool removeArticle(int groupID, int articleID);
+    Article getArticle(int groupID, int articleID);
 
     int switchDateBase();
 
-    Database(/* args */);
-    ~Database();
+    Interface(/* args */);
+    ~Interface();
 };
+
+Interface::Interface(/* args */)
+{
+}
+
+Interface::~Interface()
+{
+}
 #endif
