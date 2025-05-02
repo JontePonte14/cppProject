@@ -1,5 +1,4 @@
 #include "databaseserver.h"
-#include <iostream>
 
 int main() {
 	/*
@@ -20,9 +19,7 @@ int main() {
 	std::cout << "Size string*: " << sizeof(std::string*) << std::endl;
 	*/
 
-	std::cout << sizeof(DatabaseServer) << std::endl;
+	DatabaseServer server(10, true);
 
-	DatabaseServer server(10);
-	
 	return 0;
 }

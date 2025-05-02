@@ -1,1 +1,1 @@
-/usr/bin/c++ -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch CMakeFiles/test.dir/test.cc.o -o test  ../libclientserver.a 
+/usr/bin/c++ -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow CMakeFiles/test.dir/test.cc.o -o test  ../libclientserver.a 

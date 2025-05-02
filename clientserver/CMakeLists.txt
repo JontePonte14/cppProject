@@ -8,11 +8,11 @@ project(news-skeleton
 )
 
 # Enforce C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Compiler and linker options
-set(COMPILER_FLAGS_COMMON "-Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch" CACHE STRING "Common compiler flags for all builds")
+set(COMPILER_FLAGS_COMMON "-Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow" CACHE STRING "Common compiler flags for all builds")
 #set(COMPILER_FLAGS_COMMON "-Wall -Wextra -pedantic -Wshadow -Wpointer-arith -Wcast-align -Wno-switch" CACHE STRING "Common compiler flags for all builds")
 
 set(C_FLAGS_COMMON   "${COMPILER_FLAGS_COMMON}" CACHE STRING "C compiler flags for all builds")

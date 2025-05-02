@@ -12,14 +12,14 @@ class CommandHandler : public MessageHandler {
         CommandHandler(const std::shared_ptr<Connection>& connection);
         virtual ~CommandHandler() = default;
 
-        virtual void listGroups() = 0;
-        virtual void createGroup() = 0;
-        virtual void deleteGroup() = 0;
+        virtual auto listGroups() -> Status = 0;
+        virtual auto createGroup() -> Status = 0;
+        virtual auto deleteGroup() -> Status = 0;
 
-        virtual void listArticles() = 0;
-        virtual void createArticle() = 0;
-        virtual void deleteArticle() = 0;
-        virtual void getArticle() = 0;
+        virtual auto listArticles() -> Status = 0;
+        virtual auto createArticle() -> Status = 0;
+        virtual auto deleteArticle() -> Status = 0;
+        virtual auto getArticle() -> Status = 0;
     
     /*
     protected:

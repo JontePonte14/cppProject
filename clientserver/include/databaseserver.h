@@ -3,17 +3,22 @@
 
 #include "server.h"
 #include "database.h"
-#include "commandhandler.h"
+#include "servercommandhandler.h"
+#include "database.h"
 
 class DatabaseServer final : public Server {
 
     public:
-        explicit DatabaseServer(int port);
+        explicit DatabaseServer(const int port, const bool run = false);
         ~DatabaseServer() = default;
 
+        void start();
+
     private:
-        CommandHandler commandHandler;
-        Database database;
+        std::shared_ptr<Database> database;
+        ServerCommandHandler handler;
+
+        void serveConnection();
 };
 
 #endif

@@ -1,7 +1,6 @@
 #ifndef CLIENT_COMMANDHANDLER_H
 #define CLIENT_COMMANDHANDLER_H
-#include "connection.h" 
-#include "messagehandler.h"
+#include "messagehandler.h" 
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -10,8 +9,7 @@
 
 class Client_commandhandler {
 public:
-    //todo: change to messagehandler
-    Client_commandhandler(const Connection& conn); //replcace with message handler
+    Client_commandhandler(const std::shared_ptr<Connection>& conn); //replcace with message handler
 
     std::vector<std::string> LIST_NG();
 
@@ -29,6 +27,8 @@ public:
 private:
     MessageHandler mh;
     void checkCode(Protocol epectedCode, Protocol code) const; 
+    private:
+        MessageHandler conn;
 };
 
 #endif
