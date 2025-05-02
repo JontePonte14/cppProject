@@ -17,7 +17,7 @@ DatabaseDS::DatabaseDS(){
     root = "Newsgroup";
     if (fs::create_directory(root)) {
         // We create a new IDnbr
-        IDnbr = 1;
+        groupIDnbr = 1;
         saveIdNbr();
 
     } else {
@@ -31,7 +31,7 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     root = basePath;
     if (fs::create_directory(root)) {
         // We create a new IDnbr
-        IDnbr = 1;
+        groupIDnbr = 1;
         saveIdNbr();
 
     } else {
@@ -42,106 +42,19 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
 }
 
 std::string DatabaseDS::listGroup(){
-    std::vector<std::string> newsGroups;
-    std::string newsGroupSorted;
-
-    std::multimap<std::time_t, std::string> newsGroupsMap;
-
-    for (auto const& dir_entry : fs::directory_iterator{root}) {
-        if (dir_entry.is_directory()) {
-            fs::path createdFilePath = dir_entry.path() / ".created";
-
-            if (fs::exists(createdFilePath)) {
-                // Getting the time stamp from the .created file
-                std::ifstream createdFile(createdFilePath);
-                std::string timeStamp;
-                std::getline(createdFile, timeStamp);
-
-                // convert times stamp to time_t
-                std::tm tm = {};
-                std::istringstream ss(timeStamp);
-                ss >> std::get_time(&tm, "%Y-%m-%dT%H:%M:%S");
-                std::time_t timestamp = std::mktime(&tm);
-
-                newsGroupsMap.insert({timestamp, dir_entry.path().filename().string()});
-            } else {
-                std::cerr << "Found unknown directory or missing .created file" << std::endl;
-            }
-        }
-
-    }
-
-    // Appending the order oldest to newest to a string
-    for (const auto& [timestamp, group] : newsGroupsMap) {
-        newsGroupSorted = newsGroupSorted + group + " ";
-    }
-
-   return newsGroupSorted;
+    return "-1";
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
-    fs::path newGroup = root / name;
-
-    if (fs::exists(newGroup)) {
-        std::cerr << "Error: Group already exist" << std::endl;
-        return false;
-    }
-
-    // creates new folder with a .created file
-    fs::create_directory(newGroup);
-    std::ofstream createdFile(newGroup / ".created");
-    createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    createdFile.close();
-
-    return true;
+    return false;
 }
 
 bool DatabaseDS::removeGroup(const std::string& name){
-    fs::path groupName = root / name;
-
-    if (!groupExist(groupName)) {
-        return false;
-    }
-    return fs::remove_all(groupName);
+    return false;
 }
 
-std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(std::string name){
+std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
     std::vector<std::pair<std::string, int>> sortedArticles;
-    // {<date, <title, id>>}    
-    fs::path groupName = root / name;
-    if (!groupExist(groupName)){
-        return sortedArticles;
-    }
-    // Gathering data to then sort it
-    std::vector<std::pair<std::string, std::pair<std::string, int>>> articlesData;
-
-    // Borde kanske ändra titlar på artiklar så man bara hämta data från namnet,
-    // då slipper man öppna filer som kanske kan spara till performance?
-    for (auto& file : fs::directory_iterator(groupName)) {
-        // Ignores .created file
-        fs::path filePath = file.path();
-        if (filePath.extension() == ".json"){
-            std::ifstream inFile(filePath);
-            if (!inFile) {
-                std::cerr << "Couldn't open the file" << std::endl;
-                continue;
-            }
-            json tempJson;
-            inFile >> tempJson;
-            Article tempArticle = tempJson;
-            articlesData.push_back({tempArticle.getDate(), {tempArticle.getTitle(), tempArticle.getID()}});
-        }
-    }
-
-
-    std::sort(articlesData.begin(), articlesData.end(), [](const auto& a, const auto& b) {
-        return a.first < b.first;
-    });
-
-    for (const auto& [date, titleAndId] : articlesData) {
-        sortedArticles.push_back(titleAndId);
-    }
-
     return sortedArticles;
 }
 
@@ -152,7 +65,7 @@ bool DatabaseDS::makeArticle(Article& article){
         return false;
     }
 
-    article.setID(IDnbr);
+    article.setID(groupIDnbr);
     idIncr();
     saveIdNbr();
     // Overloading function in article.h
@@ -174,56 +87,21 @@ bool DatabaseDS::makeArticle(Article& article){
     return true;
 }
 
-bool DatabaseDS::removeArticle(std::string articleGroup, std::string articleName, int articleID){
-    fs::path groupName = root / articleGroup;
-
-    if (!groupExist(groupName)) {
-        return false;
-    }
-
-    std::string filename = std::to_string(articleID) + "_" + articleName;
-    fs::path filePath = groupName / filename;
-    
-    if (!fs::exists(filePath)) {
-        std::cerr << "The article doesn't exist, no article wasn't removed" << std::endl;
-        return false;
-    }
-    // if return false so was the articleID or articleName wrong
-    return fs::remove(filePath);
+bool DatabaseDS::removeArticle(int groupID, int articleID){
+    return false;
 }
 
-Article DatabaseDS::getArticle(std::string articleGroup, std::string articleName, int articleID){
-    fs::path groupName = root / articleGroup;
+Article DatabaseDS::getArticle(int groupID, int articleID){
     Article article;
 
-    if (!groupExist(groupName)) {
-        return article;
-    }
-
-    std::string filename = std::to_string(articleID) + "_" + articleName;
-    fs::path filePath = groupName / filename;
-
-    json articleJson;
-    std::ifstream inFile(filePath);
-
-    if (!inFile) {
-        std::cerr << "File was not found" << std::endl;
-        return article;
-    }
-
-    inFile >> articleJson;
-
-    // Overloading function in article.
-    article = articleJson;
-    
     return article;
 }
 
 void DatabaseDS::idIncr(){
-    IDnbr++;
+    groupIDnbr++;
 }
 
-int DatabaseDS::IDnbr = -1;  // Initial value (will be overridden by loading)
+int DatabaseDS::groupIDnbr = -1;  // Initial value (will be overridden by loading)
 
 
 // help functions
@@ -236,25 +114,25 @@ bool DatabaseDS::groupExist(const fs::path& groupName) {
 }
 
 void DatabaseDS::saveIdNbr(){
-    std::string fileName = "id_number.txt";
+    std::string fileName = "groupId_number.txt";
 
     std::ofstream outFile(root/fileName);
     if (!outFile) {
-        std::cerr << "There was a problem saving id_number.txt file" << std::endl;
+        std::cerr << "There was a problem saving groupId_number.txt file" << std::endl;
     }
 
-    outFile << IDnbr;
+    outFile << groupIDnbr;
     outFile.close();
 }
 
 void DatabaseDS::loadIdNbr(){
-    std::string fileName = "id_number.txt";
+    std::string fileName = "groupId_number.txt";
     std::ifstream inFile(root / fileName);
 
     if (!inFile) {
         std::cerr << fileName << " was not found" << std::endl;
     }
 
-    inFile >> IDnbr;
+    inFile >> groupIDnbr;
 }
 

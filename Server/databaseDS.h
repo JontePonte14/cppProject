@@ -32,7 +32,7 @@ public:
 private:
     /* data */
     std::filesystem::path root;
-    static int IDnbr;
+    static int groupIDnbr;
     // increment id for each new article
     void idIncr();
 
