@@ -13,7 +13,7 @@ private:
     /* data */
     Database * db;    
     DatabaseMS db1;
-    // DatabaseDS db2;
+    DatabaseDS db2;
     int activeDB;
 
 public:
