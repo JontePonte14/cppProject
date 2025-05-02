@@ -96,7 +96,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
     return true;
 }
 
-bool DatabaseDS::removeGroup(const std::string& name){
+bool DatabaseDS::removeGroup(std::string name){
     fs::path groupName = root / name;
 
     if (!groupExist(groupName)) {

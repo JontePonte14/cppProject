@@ -8,16 +8,22 @@
 
 
 
-std::vector<std::vector<Article>> groupArticleList;
-std::vector<std::string> groupName;
+std::map<int, std::vector<Article>> groupIDArticleList;
+std::vector< std::pair<int, std::string>> groupIDName;
 
 // std::map<int, std::vector<Article>> gIDtoArticles;
 // std::map<std::string,int> groupID;
 size_t groupID = 0;
 size_t articleID = 0;
-std::string listGroup(){
-    return "" ;
+std::vector<std::string> listGroup(){
+
+    std::sort(  groupIDName.begin(), groupIDName.end(), [](const auto& a, const auto& b) {
+        return groupIDArticleList[a.first].getDate() <groupIDArticleList[b.first].getDate(); });
+    
+
+    return ;
 }
+
 bool makeGroup(std::string name){
     if(std::find(groupName.begin(), groupName.end(), name) != groupName.end()){
         return false;
@@ -35,6 +41,7 @@ std::vector<std::pair<std::string, int>> DatabaseMS::listArticle(int groupID){
 }
 
 bool makeArticle(int groupID, Article article){
+
     return false;
 }
 bool removeArticle(int groupID, int articleID){
