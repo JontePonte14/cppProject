@@ -2,7 +2,9 @@
 #include <string>
 #include <list>
 #include <ctime>
-#include <format> 
+
+
+
 Interface::Interface(/* args */){
     activeDB = 1;
     db = & db1;
@@ -24,41 +26,19 @@ bool Interface::makeGroup(std::string groupName)
 
 bool Interface::removeGroup(int groupID)
 {
-    db->removeGroup(groupID);
+    return db->removeGroup(groupID);
     
 }
 
 std::string Interface::listArticle(int groupID){
     std::vector<std::pair<std::string, int>> list = db1.listArticle(groupID);
-
+    std::vector<std::string> sortedNames;
+    for (const auto& pair : list) {
+        sortedNames.push_back(pair.first + " " + std::to_string(pair.second));
+    }
     return "";
 }
-// {  
-//     std::list<Article> articles;
-//     if(activeDB == 1)
-//     {
-//         articles = db1.listArticle();
-//     }
-//     else
-//     {
-//         articles = db2.listArticle();
-//     }
-//     if(articles.size() > 0)
-//     {
-//         std::string result;
-//         for(auto it = articles.begin(); it != articles.end(); ++it)
-//         {
-//             result += it->getTitle() + "\n";
-//         }
-//         return result;
-//     }
-//     else
-//     {
-//         return "No articles found";
-//     }
 
-   
-// }
 
 bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text)
 {
@@ -77,13 +57,13 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
 bool Interface::removeArticle(int groupID, int articleID)
 {
    
-    return false;
+    return db->removeArticle(groupID, articleID);;
 }
 
 Article Interface::getArticle(int groupID, int articleID)
 {
 
-    return Article();
+    return db->getArticle(groupID, articleID);
 }
 int Interface::switchDateBase()
 {

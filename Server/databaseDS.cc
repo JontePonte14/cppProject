@@ -40,7 +40,7 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     }
     return;
 }
-
+//relizewd incosistance if we retrun a vector of pairs with the list article we should probobaly return the same for listgroup, and add the groupID to the list in interface
 std::vector<std::string> DatabaseDS::listGroup(){
     std::vector<std::string> newsGroups;
     std::string newsGroupSorted;
