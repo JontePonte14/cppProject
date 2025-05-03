@@ -1,16 +1,16 @@
 #include "databaseMS.h"
 #include "database.h"
-#include <map>
+#include "article.h" 
+#include <unordered_map>
 #include <string>
 #include <vector>
-#include "article.h"
-#include <algorithm> 
 #include <iostream>
+
 
 
 using namespace std;
 
-map<int, vector<pair<Article, int>>> articleMap;
+// unordered_map<int, vector<pair<Article, int>>> articleMap;
 
 
 // vector< pair<string, int>> groupIDName;
@@ -21,26 +21,19 @@ size_t groupID = 1;
 size_t articleID = 1;
 
 
-struct ArticleComparator {
-    bool operator()(const std::pair<int, Article>& lhs, const std::pair<int, Article>& rhs) const {
-        return lhs.second.getDate() < rhs.second.getDate();  // Compare by date
-    }
-};
+
 
 struct Group{
     string name;
     string date;
-    map<int, Article, ArticleComparator> articles;
+    unordered_map<int, Article> articles;
+    Group() : name(""), date(""), articles() {}
     Group(const string& groupName, const string& groupDate)
     : name(groupName), date(groupDate) {}
 };
-struct GroupComparator {
-    bool operator()(const std::pair<int, Group>& lhs, const std::pair<int, Group>& rhs) const {
-        return lhs.second.date < rhs.second.date;  // Compare by group date
-    }
-};
+
 // groupID to name and articles, atricles by ID , coparitor ensuring they are sorted by date (thoght right now its not possible to add at at date diffrent than the currnet one) 
-map<int, Group, GroupComparator> memory;
+unordered_map<int, Group> memory;
 
 
 
@@ -61,12 +54,15 @@ vector<pair<string, int>> listGroup(){
     // sort(  groupIDName.begin(), groupIDName.end(), [](const auto& a, const auto& b) {
     //     return groupIDArticleList[a.second].getDate() <groupIDArticleList[b.second].getDate(); });
     vector<pair<string, int>> groups;
+
     for (const auto& group : memory) {
-        groups.push_back(make_pair(group.second.name, group.first)); // pair<name, groupID>
+        groups.emplace_back(group.second.name, group.first); // pair<name, groupID>
     }
-    //inte i kronologisk ordnign än utan troligen alabetisk? 
-    //är det värt att ha en grupp struct som innehåller både namn map med artiklar och date så kan den vara sorterad på date?
-    //boorde vara löst nu?? 
+
+    std::sort(groups.begin(), groups.end(), [](const auto& a, const auto& b) {
+        return memory.at(a.second).date < memory.at(b.second).date;
+    });
+
     return groups;
 }
 
@@ -96,18 +92,23 @@ bool removeGroup(int groupID){
 }
 
 vector<pair<string, int>> listArticle(int groupID){
-    vector<pair<string, int>> articles;
-    for (const auto& article : memory[groupID].articles) { // should be in order as map is sorted by date
-        articles.push_back(make_pair(article.second.getTitle(), article.first)); // pair<title, articleID>
+    if (memory.find(groupID) == memory.end())  {
+        std::cerr << "Group ID " << groupID << " not found.\n";
+        return {};
     }
-    return articles;
+    vector<pair<string, int>> result;
+    std::unordered_map<int, Article>& articles =memory[groupID].articles;
+    for (const auto& article : articles) { 
+        result.emplace_back(article.second.getTitle(), article.first); // pair<title, articleID>
+    }
+    std::sort(result.begin(), result.end(), [&articles](const auto& a, const auto& b) {
+        return articles.at(a.second).getDate() < articles.at(b.second).getDate();
+    });
+    return result;
 }
 
 bool makeArticle(int groupID, Article article){
 
-    
-    
-    //lite extra kommentarer då jag gissar den kan bli lite förvirrande 
 
     article.setID(articleID);
     memory[groupID].articles[articleID] = article;
@@ -148,10 +149,4 @@ Article getArticle(int groupID, int articleID){
     return memory[groupID].articles[articleID]; //returning the article
 
 };
-DatabaseMS::DatabaseMS(/* args */)
-{
-}
-DatabaseMS::~DatabaseMS()
-{
-}
 
