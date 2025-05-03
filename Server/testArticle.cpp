@@ -1,4 +1,4 @@
-#include "Article.h"
+#include "article.h"
 #include <string>
 #include <iostream>
 using std::cout;
