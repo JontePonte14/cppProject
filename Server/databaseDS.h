@@ -33,11 +33,12 @@ private:
     /* data */
     std::filesystem::path root;
     static int groupIDnbr;
+    static int groupIDnbrMax;
     // increment id for each new article
     void idIncr();
 
     //Help functions
-    bool groupExist(const std::filesystem::path& groupName);
+    bool groupExists(const std::filesystem::path& groupName);
     void saveIdNbr();
     void loadIdNbr();
 };

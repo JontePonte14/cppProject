@@ -18,6 +18,7 @@ DatabaseDS::DatabaseDS(){
     if (fs::create_directory(root)) {
         // We create a new IDnbr
         groupIDnbr = 1;
+        groupIDnbrMax = 1;
         saveIdNbr();
 
     } else {
@@ -32,6 +33,7 @@ DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
     if (fs::create_directory(root)) {
         // We create a new IDnbr
         groupIDnbr = 1;
+        groupIDnbrMax = 1;
         saveIdNbr();
 
     } else {
@@ -61,7 +63,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
 bool DatabaseDS::makeArticle(Article& article){
     fs::path groupName = root / article.getGroupName();
 
-    if (!groupExist(groupName)){
+    if (!fileExists(groupName)){
         return false;
     }
 
@@ -72,7 +74,7 @@ bool DatabaseDS::makeArticle(Article& article){
     json newArticleFile = article;
 
     // Saves the file
-    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle() + ".json";
+    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle() + article.getDate() + "_" + ".json";
     fs::path filePath = groupName / filename;
     
     std::ofstream outFile(filePath);
@@ -102,11 +104,12 @@ void DatabaseDS::idIncr(){
 }
 
 int DatabaseDS::groupIDnbr = -1;  // Initial value (will be overridden by loading)
+int DatabaseDS::groupIDnbrMax = -1; // Initial value
 
 
 // help functions
-bool DatabaseDS::groupExist(const fs::path& groupName) {
-    if (!fs::exists(groupName)) {
+bool DatabaseDS::groupExists(const fs::path& fileName) {
+    if (!fs::exists(fileName)) {
         std::cerr << "Error: Group doesn't exist" << std::endl;
         return false;
     }
