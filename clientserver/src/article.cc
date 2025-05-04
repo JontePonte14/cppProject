@@ -6,11 +6,9 @@ using json = nlohmann::json;
 Article::Article(
     const std::string t, 
     const std::string a, 
-    const std::string d, // Format: year-month-day 
     const std::string b){
         title = t;
         author = a;
-        date = d;
         idNbr = -1;
         body = b;
     }
@@ -19,20 +17,12 @@ Article Article::getArticle() const {
     return *this;
 }    
 
-std::string Article::getGroupName() const {
-    return groupName;
-}
-
 std::string Article::getTitle() const {
     return title;
 }
 
 std::string Article::getAuthor() const {
     return author;
-}
-
-std::string Article::getDate() const {
-    return date;
 }
 
 int Article::getID() const {
@@ -49,10 +39,8 @@ void Article::setID(const int& newID) {
 
 void to_json(json& jFile, const Article& article){
     jFile["id"] = article.getID();
-    jFile["groupname"] = article.getGroupName();
     jFile["title"] = article.getTitle();
     jFile["author"] = article.getAuthor();
-    jFile["date"] = article.getDate();
     jFile["body"] = article.getBody();
 }
 
@@ -60,7 +48,6 @@ void from_json(const json& jFile, Article& article){
     article = Article(
         jFile["title"],
         jFile["author"],
-        jFile["date"],
         jFile["body"]
 
     );

@@ -1,3 +1,6 @@
+#ifndef DATABASE_DS_H
+#define DATABASE_DS_H
+
 #include "json.hpp"
 #include "article.h"
 #include "database.h"
@@ -50,3 +53,4 @@ private:
     // loads the current articleID in the given news group folder
     int loadArticleIdNbr(const std::string& groupFolderName);
 };
+#endif // DATABASE_MS_H

@@ -87,7 +87,7 @@ bool  DatabaseMS::makeGroup(const std::string& name){
 bool  DatabaseMS::removeGroup(int groupID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
-        std::cerr << "Group ID" << groupID << "not found.\n";
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
         return false;
     }
     memory.erase(groupIt); 
@@ -97,7 +97,7 @@ bool  DatabaseMS::removeGroup(int groupID){
 
 vector<pair<string, int>> DatabaseMS::listArticle(int groupID){
     if (memory.find(groupID) == memory.end())  {
-        std::cerr << "Group ID " << groupID << " not found.\n";
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
         return {};
     }
     vector<pair<string, int>> result;
@@ -115,7 +115,7 @@ vector<pair<string, int>> DatabaseMS::listArticle(int groupID){
 
 bool  DatabaseMS::makeArticle(int groupID, Article article){
     if (memory.find(groupID) == memory.end())  {
-        std::cerr << "Group ID " << groupID << " not found.\n";
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
         return false;
     }
 
@@ -128,14 +128,14 @@ bool  DatabaseMS::makeArticle(int groupID, Article article){
 bool  DatabaseMS::removeArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
-        std::cerr << "Group ID "<< groupID <<" not found.\n";
+        std::cerr << "Group with ID: "<< groupID <<" not found.\n";
         return false;
     }
 
     auto& articles = groupIt->second.articles; // map<int, Article>
     auto articleIt = articles.find(articleID); // pointer looking for the articleID
     if (articleIt == groupIt->second.articles.end()) {
-        std::cerr << "Article ID " <<articleID << " not found in group.\n";
+        std::cerr << "Article with ID: " <<articleID << " not found in group with ID : "<< groupID <<".\n";
         return false;
     }
     articles.erase(articleIt); //ersaing with the iterator using the pointer

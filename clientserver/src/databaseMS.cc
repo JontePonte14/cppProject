@@ -37,6 +37,8 @@ map<int, Group> memory;
 
 vector<pair<int, Group>> mem;
 
+
+
 template <typename T>
 bool containsFirst(const vector<pair<int , T >>& vec, const T& key) {
     return any_of(vec.begin(), vec.end(), [&](const pair<int, T>& pair) {
@@ -49,7 +51,7 @@ bool containsSecond(const std::vector<std::pair<int, T>>& vec, int id) {
         return pair.second == id;
     });
 }
-vector<pair<string, int>> listGroup(){
+vector<pair<string, int>> DatabaseMS::listGroup(){
     //making sureits sorted by date
     // sort(  groupIDName.begin(), groupIDName.end(), [](const auto& a, const auto& b) {
     //     return groupIDArticleList[a.second].getDate() <groupIDArticleList[b.second].getDate(); });
@@ -69,24 +71,23 @@ vector<pair<string, int>> listGroup(){
     return groups;
 }
 
-bool makeGroup(const string & name){
+bool  DatabaseMS::makeGroup(const std::string& name){
     for (const auto& group : memory) {
         if (group.second.name == name) { // Compare the pairs first element (group name)
             cerr << "Group already exists" << endl;
             return false; 
         }
     }
-    string date = "2023-10-01"; // Placeholder for the date, should be set to the current date i guess?
+    // string date = "2023-10-01"; // Placeholder for the date, should be set to the current date i guess?
     memory[groupID] = Group(name);
-
     groupID++;
     return true;
 }
 
-bool removeGroup(int groupID){
+bool  DatabaseMS::removeGroup(int groupID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
-        std::cerr << "Group ID" << groupID << "not found.\n";
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
         return false;
     }
     memory.erase(groupIt); 
@@ -94,9 +95,9 @@ bool removeGroup(int groupID){
     return true;
 }
 
-vector<pair<string, int>> listArticle(int groupID){
+vector<pair<string, int>> DatabaseMS::listArticle(int groupID){
     if (memory.find(groupID) == memory.end())  {
-        std::cerr << "Group ID " << groupID << " not found.\n";
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
         return {};
     }
     vector<pair<string, int>> result;
@@ -112,10 +113,10 @@ vector<pair<string, int>> listArticle(int groupID){
     return result;
 }
 
-bool makeArticle(int groupID, Article article){
+bool  DatabaseMS::makeArticle(int groupID, Article article){
     if (memory.find(groupID) == memory.end())  {
-        std::cerr << "Group ID " << groupID << " not found.\n";
-        return  false;
+        std::cerr << "Group with ID: " << groupID << " not found.\n";
+        return false;
     }
 
     article.setID(articleID);
@@ -124,17 +125,17 @@ bool makeArticle(int groupID, Article article){
     articleID++;
     return true;
 }
-bool removeArticle(int groupID, int articleID){
+bool  DatabaseMS::removeArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
-        std::cerr << "Group ID "<< groupID <<" not found.\n";
+        std::cerr << "Group with ID: "<< groupID <<" not found.\n";
         return false;
     }
 
     auto& articles = groupIt->second.articles; // map<int, Article>
     auto articleIt = articles.find(articleID); // pointer looking for the articleID
     if (articleIt == groupIt->second.articles.end()) {
-        std::cerr << "Article ID " <<articleID << " not found in group.\n";
+        std::cerr << "Article with ID: " <<articleID << " not found in group with ID : "<< groupID <<".\n";
         return false;
     }
     articles.erase(articleIt); //ersaing with the iterator using the pointer
@@ -142,7 +143,7 @@ bool removeArticle(int groupID, int articleID){
 
 
 }
-Article getArticle(int groupID, int articleID){
+Article  DatabaseMS::getArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         throw runtime_error("Article not found");
