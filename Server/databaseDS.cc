@@ -91,6 +91,27 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
         return {};
     }
 
+    int tempIdNbr;
+
+    for (auto const& file_entry : fs::directory_iterator(groupFolder)){
+        fs::path filePath = file_entry.path();
+        if (filePath.extension() == ".json") {
+            std::string stemName = filePath.stem().string();
+            auto underscorePos = stemName.rfind("_");
+            // Splitting the string, stemname, to create a pair
+            std::string articleTitle = stemName.substr(0, underscorePos);
+            std::string stringArticleID = stemName.substr(underscorePos+1);
+            std::from_chars(stringArticleID.data(), stringArticleID.data() + stringArticleID.size(), tempIdNbr);
+            sortedArticles.emplace_back(articleTitle, stringArticleID);
+        }
+
+    }
+
+    // Sorting group
+    std::sort(sortedArticles.begin(), sortedArticles.end(), [](const auto &a, const auto &b) {
+        return a.second < b.second;
+    });
+
     return sortedArticles;
 }
 
