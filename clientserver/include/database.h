@@ -1,35 +1,38 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef DATABASE_H
+#define DATABASE_H
+
+
 #include "article.h"
-#include "databaseMS.h"
-#include "databaseDS.h"
 #include <string>
 #include <list>
 
+
 class Database
 {
+    
+public:
+    // Default contructur creates a root folder called "Newsgroup"
+    Database();
+    // Custom constructur makes it possible to decide the name of the root folder
+
+
+    virtual std::vector<std::string> listGroup();
+    virtual bool makeGroup(const std::string& name);
+    virtual bool removeGroup(int groupID);
+
+    virtual std::vector<std::pair<std::string, int>> listArticle(int groupID);
+    virtual bool makeArticle(int groupID, Article article);
+    virtual bool removeArticle(int groupID, int articleID);
+    virtual Article getArticle(int groupID, int articleID);
+    
 private:
     /* data */
-    DatabaseDS db1;
-    DatabaseMS db2;
-    
 
-    int activeDB;
+    static int IDnbr;
+    // increment id for each new article
+    void idIncr();
 
-public:
-
-    Database ();
-    ~Database() = default;
-    
-    std::string listGroup();
-    bool makeGroup(const std::string& name);
-    bool removeGroup(const std::string& name);
-
-    std::vector<std::pair<std::string, int>> listArticle(std::string name);
-    bool makeArticle(Article& article);
-    bool removeArticle(std::string articleGroup, std::string articleName, int articleID);
-    Article getArticle(std::string articleGroup, std::string articleName, int articleID);
-
-    int switchDateBase();
+    //Help functions
 };
+
 #endif

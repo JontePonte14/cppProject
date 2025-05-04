@@ -2,22 +2,17 @@
 #include "article.h"
 #include <string>
 #include <list>
-class DatabaseMS
+#include "database.h"
+class DatabaseMS : public Database
 {
-private:
-    /* data */
-    std::string dbPath;
-        
 public:
-    std::string listGroup();
-    bool makeGroup();
-    bool removeGroup();
-
-    std::list<Article> listArticle();
-    bool makeArticle();
-    bool removeArticle();
-    Article getArticle();
-
-    DatabaseMS(/* args */);
-    ~DatabaseMS();
+ 
+    std::vector<std::string> listGroup() override;
+    bool makeGroup(const std::string& name)override;
+    bool removeGroup(int groupID)override;
+    std::vector<std::pair<std::string, int>> listArticle(int groupID) override;
+    bool makeArticle( int group, Article article) override;
+    bool removeArticle(int groupID, int articleID) override;
+    Article getArticle(int groupID, int articleID) override;
 };
+
