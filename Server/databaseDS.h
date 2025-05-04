@@ -39,7 +39,7 @@ private:
     //Check to see if a group already exists.
     bool groupNameExists(const std::string& name);
     // Finds group with the id and return the full name of the folder as a string
-    // Returns "0" if no group was found (as a string)
+    // Returns "" (empty string) if no group was found
     std::string findGroupWithID(const int& groupID);
 
     void saveGroupIdNbr();

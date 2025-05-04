@@ -15,11 +15,11 @@ int main(){
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
-    /*
-    //cout << DS.removeGroup("Sweden") << endl;
-    //cout << DS.removeGroup("Sweden") << endl;
+    cout << DS.removeGroup(1) << endl;
+    cout << DS.removeGroup(3) << endl;
     cout << DS.makeGroup("Technology") << endl;
 
+    /*
     Article article(
         "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title

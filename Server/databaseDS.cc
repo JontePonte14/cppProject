@@ -55,7 +55,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
 
 bool DatabaseDS::removeGroup(int groupID){
     std::string folderName = findGroupWithID(groupID);
-    if (folderName == "0") {
+    if (folderName == "") {
         std::cerr << "No group was found" << std::endl;
         return false;
     }
@@ -120,7 +120,7 @@ std::string DatabaseDS::findGroupWithID(const int& groupID){
             std::string folderName = entry.path().filename().string();
             auto underscorePos = folderName.rfind("_");
             if ((underscorePos != std::string::npos)){
-                std::string folderGroupID = folderName.substr(underscorePos);
+                std::string folderGroupID = folderName.substr(underscorePos+1);
                 if (folderGroupID == std::to_string(groupID)){
                     return folderName; // Found group ID
                 }
@@ -128,7 +128,7 @@ std::string DatabaseDS::findGroupWithID(const int& groupID){
         }
 
     }
-    return "0"; // Did not find a group with the same name
+    return ""; // Did not find a group with the same name
 }
 
 void DatabaseDS::saveGroupIdNbr(){
