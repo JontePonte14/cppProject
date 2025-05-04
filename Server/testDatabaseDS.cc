@@ -24,20 +24,18 @@ int main(){
     
     cout << "-----------------" << endl;
     cout << "TEST 3: listGroup()" << endl;
-
     std::vector<std::pair<std::string, int>> allGroups;
     allGroups = DS.listGroup();
     for (const auto& [id, groupname] : allGroups) {
         cout << "ID: " << id << ", Groupname: " << groupname << endl;
     }
+
+    cout << "-----------------" << endl;
+    cout << "TEST 4: makeArticle()" << endl;
     
-    /*
     Article article(
-        "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title
         "Jonathan von Bergen",                   // author
-        "2025-04-08",                            // date
-        101,                                     // idNbr
         "In a groundbreaking announcement today, researchers at the Global AI Institute revealed a new artificial intelligence model that surpasses previous benchmarks in both reasoning and creativity. "
         "Dubbed 'Aurora', the model demonstrates a remarkable ability to understand context, generate human-like dialogue, and even compose original music and poetry. Experts say this represents a major leap forward, "
         "not just in terms of computational power, but in the sophistication of the underlying architecture, which integrates multimodal learning and reinforcement strategies.\n\n"
@@ -46,6 +44,10 @@ int main(){
         "Reactions from the global tech community have been mixed—some celebrating the possibilities for innovation, while others express concern over misuse and the potential displacement of creative professions. "
         "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
     );
+
+    cout << DS.makeArticle(3, article);
+
+    /*
 
     Article article2(
         "Technology",                            // groupName

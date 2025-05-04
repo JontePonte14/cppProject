@@ -95,6 +95,31 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
 }
 
 bool DatabaseDS::makeArticle(int group, Article article){
+    std::string groupFolder = findGroupWithID(group);
+
+    if (groupFolder == "") {
+        std::cerr << "No group was found";
+        return false;
+    }
+    
+    int articleID = loadArticleIdNbr(groupFolder);
+    article.setID(articleID);
+    // Overloading function in article.h
+    json newArticleFile = article;
+
+    // Saves the file
+    std::string filename =  article.getTitle() + "_" + std::to_string(articleID) + ".json";
+    fs::path filePath = root / groupFolder / filename;
+    
+    std::ofstream outFile(filePath);
+    if (!outFile) {
+        std::cerr << "Error couldn't open file" << filePath << std::endl;
+        return false;
+    }
+
+    outFile << newArticleFile.dump(4);
+    outFile.close();
+
     return false;
 }
 
