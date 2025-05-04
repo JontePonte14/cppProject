@@ -88,6 +88,8 @@ auto ServerCommandHandler::createGroup() -> Status {
     ASSIGN_OR_RETURN(string_p, receiveStringParameter());
     RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
 
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_CREATE_NG));
+    
     if (database->makeGroup(string_p)) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
     } else {
