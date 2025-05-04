@@ -11,19 +11,27 @@ namespace fs=std::filesystem;
 
 int main(){
     DatabaseDS DS;
+    cout << "TEST 1: makegroup()" << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
+    cout << "-----------------" << endl;
+    cout << "TEST 2: removegroup()" << endl;
     cout << DS.removeGroup(1) << endl;
     cout << DS.removeGroup(3) << endl;
     cout << DS.makeGroup("Technology") << endl;
     
-    /*
+    cout << "-----------------" << endl;
+    cout << "TEST 3: listGroup()" << endl;
 
-    cout << "List newsgroup: ";
-    cout << DS.listGroup() << endl;
+    std::vector<std::pair<std::string, int>> allGroups;
+    allGroups = DS.listGroup();
+    for (const auto& [id, groupname] : allGroups) {
+        cout << "ID: " << id << ", Groupname: " << groupname << endl;
+    }
     
+    /*
     Article article(
         "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title
