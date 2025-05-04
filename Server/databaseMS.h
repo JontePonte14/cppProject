@@ -1,4 +1,6 @@
 
+#ifndef DATABASE_MS_H
+#define DATABASE_MS_H
 #include "article.h"
 #include <string>
 #include <list>
@@ -15,4 +17,4 @@ public:
     bool removeArticle(int groupID, int articleID) override;
     Article getArticle(int groupID, int articleID) override;
 };
-
+#endif 

@@ -34,7 +34,7 @@ string printList(const vector<string>& vec) {
 int main() {
 
 
-    Interface interface(1);
+    Interface interface(1); // 1 for memory, 2 for disk, or default constructor for user input
 
     //almost the same as the one in databaseMS
     cout << "TEST 1 : Adding groups \n \n ";

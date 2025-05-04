@@ -1,3 +1,6 @@
+#ifndef DATABASE_DS_H
+#define DATABASE_DS_H
+
 #include "json.hpp"
 #include "article.h"
 #include "database.h"
@@ -48,3 +51,4 @@ private:
     void saveArticleIdNbr(const std::filesystem::path& groupFolder);
     void loadArticleIdNbr(const std::filesystem::path& groupFolder);
 };
+#endif // DATABASE_MS_H
