@@ -27,17 +27,17 @@ private:
 
     void CREATE_NG(std::istream& is);
 
-    void DELETE_NG(std::string& groupIndexStr);
+    void DELETE_NG(std::istream& is);
 
-    void LIST_ART(std::string& groupIndex);
+    void LIST_ART(std::istream& is);
 
-    void CREATE_ART(std::string& groupIndex, const std::string& title, const std::string& author, const std::string& text);
+    void CREATE_ART(std::istream& is);
 
-    void DELETE_ART(std::string& groupIndex, std::string& articleIndex);
+    void DELETE_ART(std::istream& is);
+
+    void GET_ART(std::istream& is);
 
     void HELP_COM() const;
-
-    void GET_ART(std::string& groupIndex, std::string& articleIndex);
 
     void printReply(const std::vector<std::string>& vec) const;
 

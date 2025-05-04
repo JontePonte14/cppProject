@@ -39,7 +39,7 @@ void Client_commanddecoder::com_decode(std::istream& is){
     }
 
     else if(command == "list_ng"){
-        cout << "List of news groups " << endl;
+        //cout << "List of news groups " << endl;
         LIST_NG();
 
     }
@@ -49,47 +49,25 @@ void Client_commanddecoder::com_decode(std::istream& is){
         CREATE_NG(is);
     }
 
-    /* else if(command == "delete_ng"){
-        if (userInputs.size() == 2)
-        {
-            DELETE_NG(userInputs[1]);
-        }
-        else
-        {
-            cout << "Input the correct number of parameters, type help_com for command list" << endl;
-        }
-        cout << "Newsgroup succesfully deleted " << endl;
+    else if(command == "delete_ng"){
+        cout << "Type the name of the newsgroup you want to delete: " << endl;
+        DELETE_NG(is);
     }
 
     else if(command == "list_art"){
-        if (userInputs.size()<= 2)
-        {
-            LIST_ART(userInputs[1]);
-        }
-        else
-        {
-            cout << "Input the correct number of parameters, type help_com for command list" << endl;
-        }
-        cout << "List of articles in newsgroup ";
+        //cout << "List of articles in newsgroup ";
+        LIST_ART(is);
     }
 
     else if(command == "create_art"){
-        if (userInputs.size() == 5)
-        {
-            CREATE_ART(userInputs[1],userInputs[2],userInputs[3],userInputs[4]);
-        }
-        else
-        {
-            cout << "Input the correct number of parameters, type help_com for command list" << endl;
-        }
-        cout << "Article succesfully created ";
-    } */
+        //cout << "Article succesfully created ";
+    } 
 
     else if(command == "delete_art"){
-        cout << "Article succesfully deleted ";
+        //cout << "Article succesfully deleted ";
     }
     else if(command == "get_art"){
-        cout << "Article: ";
+        //cout << "Article: ";
     }
     else if (command == "exit")
     {
@@ -98,8 +76,6 @@ void Client_commanddecoder::com_decode(std::istream& is){
     else {
         cout << "FAIL! no such command exists, type help_com for command list" << endl;
     }
-        
-    
 }
 void Client_commanddecoder::LIST_NG() {
     reply = comhand.LIST_NG();
@@ -122,7 +98,6 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
         }
         return;
     }
-    CREATE_NG(is);
     reply = comhand.CREATE_NG(*title);
     if (!reply)
     {
@@ -133,47 +108,50 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
 
 }
 
-void Client_commanddecoder::DELETE_NG(std::string& groupIndexStr) {
-    /* auto maybyIndex = string_to_int(groupIndexStr);
-    if (!maybyIndex)
+void Client_commanddecoder::DELETE_NG(std::istream& is) {
+    auto Id = readInputId(is);
+    if (!Id)
     {
+        printInputError(Id.error());
+        if (Id.error() == InputStatus::EmptyInput)
+        {
+            DELETE_NG(is);
+        }
         return;
     }
-    int groupIndex = *maybyIndex;
-    if (groupIndex <= 0)
+    reply = comhand.DELETE_NG(*Id);
+    if (!reply)
     {
-        cout << "groupIndex needs to be a positive number" << endl;
-        return; 
+        printConnectionError(reply.error());
+        return;
     }
-    
-    cout << "Reply from server: " << endl;
-    reply = comhand.DELETE_NG(groupIndex); */
+    printReply(*reply);
 }
 
-void Client_commanddecoder::LIST_ART(std::string& groupIndex) {
+void Client_commanddecoder::LIST_ART(std::istream& is) {
     
 
     cout << "Reply from server: " << endl;
     //reply = comhand.LIST_ART(parameters);
 }
 
-void Client_commanddecoder::CREATE_ART(std::string& groupIndex, const std::string& title, const std::string& author, const std::string& text) {
+void Client_commanddecoder::CREATE_ART(std::istream& is) {
     cout << "Reply from server: " << endl;
     //reply = comhand.CREATE_ART(parameters);
 }
 
-void Client_commanddecoder::DELETE_ART(std::string& groupIndex, std::string& articleIndex) {
+void Client_commanddecoder::DELETE_ART(std::istream& is) {
     cout << "Reply from server: " << endl;
     //reply = comhand.DELETE_ART(parameters);
 }
 
-void Client_commanddecoder::GET_ART(std::string& groupIndex, std::string& articleIndex) {
+void Client_commanddecoder::GET_ART(std::istream& is) {
     cout << "Reply from server: " << endl;
     //reply = comhand.GET_ART(parameters);
 }
 
 void Client_commanddecoder::printReply(const std::vector<std::string>& vec) const{
-    cout << "Reply from server: ";
+    cout << "Reply from server: " << endl;
     for (string i: vec) {
         std::cout << i << endl;
     }   
@@ -183,7 +161,7 @@ Expected<int, InputStatus> Client_commanddecoder::stringToInt(const std::string&
     try {
         return std::stoi(p);  // might throw
     } catch (const std::invalid_argument&) {
-        //cout << "Index needs to be a number! " << endl;
+        //cout << "Id needs to be a number! " << endl;
         return InputStatus::IdNotNumber;
     } catch (const std::out_of_range&) {
         //cout << "try a smaller number " << endl;
@@ -279,7 +257,7 @@ void Client_commanddecoder::printInputError(const InputStatus& error) const{
         cout << "Exeting" << endl;
         break;
     case InputStatus::IdLessZero:
-        cout << "Please input index bigger than zero" << endl;
+        cout << "Please input Id bigger than zero" << endl;
         break;
     case InputStatus::IdTooBig:
         cout << "Try inputing smaller number" << endl;
