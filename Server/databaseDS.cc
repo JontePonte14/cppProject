@@ -183,7 +183,7 @@ std::string DatabaseDS::findGroupWithID(const int& groupID){
     return ""; // Did not find a group with the same name
 }
 
-std::string DatabaseDS::findArticleName(const int& groupID, const int& articleID){
+fs::path DatabaseDS::findArticleName(const int& groupID, const int& articleID){
     std::string groupName = findGroupWithID(groupID);
 
     if (groupName == "") {
@@ -202,7 +202,7 @@ std::string DatabaseDS::findArticleName(const int& groupID, const int& articleID
                 std::string tempArticleID = fileName.substr(underscorePos+1, 1);
 
                 if (tempArticleID == std::to_string(articleID)) {
-                    return fileName;
+                    return root / groupName / fileName;
                 }
 
             }
