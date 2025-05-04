@@ -10,19 +10,19 @@ int Interface::getAtiveDB()
     return activeDB;
 }
 
-Interface::Interface(int activeDB)
+Interface::Interface(int activeDB) //send in the stating database
 {
     this->activeDB = activeDB;
     if(activeDB == 1)
     {
-        db = &db1;
+        db = &db1; //MS
     }
     else
     {
-        db = &db2;
+        db = &db2;//DS
     }
 }
-Interface::Interface(){
+Interface::Interface(){ //default constructor, user input
     activeDB = 1;
     db = & db1;
     int input;
