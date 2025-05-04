@@ -98,7 +98,7 @@ bool DatabaseDS::makeArticle(int group, Article article){
     std::string groupFolder = findGroupWithID(group);
 
     if (groupFolder == "") {
-        std::cerr << "No group was found";
+        std::cerr << "No group was found: ";
         return false;
     }
     
@@ -120,7 +120,8 @@ bool DatabaseDS::makeArticle(int group, Article article){
     outFile << newArticleFile.dump(4);
     outFile.close();
 
-    return false;
+    saveArticleIdNbr(groupFolder, articleID + 1);
+    return true;
 }
 
 bool DatabaseDS::removeArticle(int groupID, int articleID){

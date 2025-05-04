@@ -19,7 +19,7 @@ int main(){
     cout << "-----------------" << endl;
     cout << "TEST 2: removegroup()" << endl;
     cout << DS.removeGroup(1) << endl;
-    cout << DS.removeGroup(3) << endl;
+    cout << DS.removeGroup(6) << " = 0" << endl;
     cout << DS.makeGroup("Technology") << endl;
     
     cout << "-----------------" << endl;
@@ -45,7 +45,9 @@ int main(){
         "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
     );
 
-    cout << DS.makeArticle(3, article);
+    cout << DS.makeArticle(3, article) << " = 1 " << endl;
+    cout << DS.makeArticle(999, article) << " = 0" << endl;
+
 
     /*
 
