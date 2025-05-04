@@ -33,8 +33,6 @@ std::vector<std::string> listGroup(){
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
-    //fs::path groupName = root / name;
-
     if (groupNameExists(name)) {
         std::cerr << "Group already exist" << std::endl;
         return false;
@@ -43,10 +41,11 @@ bool DatabaseDS::makeGroup(const std::string& name){
     std::string groupName = name + "_" + std::to_string(groupIDnbr);
     idIncr();
     saveGroupIdNbr();
-
+    fs::path fullPathToGroup = root / groupName;
+    
     // creates new folder with a .created file
-    fs::create_directory(groupName);
-    std::ofstream createdFile(groupName / ".created");
+    fs::create_directory(fullPathToGroup);
+    std::ofstream createdFile(fullPathToGroup / ".created");
     createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     createdFile.close();
 
