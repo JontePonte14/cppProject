@@ -8,16 +8,24 @@
 #include <vector>
 #include <optional>
 
+enum class InputStatus {
+    EmptyInput,
+    Exit,
+    IdLessZero,
+    IdTooBig,
+    IdNotNumber,
+};
+
 class Client_commanddecoder {
 public:
     Client_commanddecoder(const std::shared_ptr<Connection>& conn);
 
-    void com_decode(std::istream& input);
+    void com_decode(std::istream& is);
 
 private:
     void LIST_NG();
 
-    void CREATE_NG(const std::string& title);
+    void CREATE_NG(std::istream& is);
 
     void DELETE_NG(std::string& groupIndexStr);
 
@@ -27,15 +35,23 @@ private:
 
     void DELETE_ART(std::string& groupIndex, std::string& articleIndex);
 
+    void HELP_COM() const;
+
     void GET_ART(std::string& groupIndex, std::string& articleIndex);
 
     void printReply(const std::vector<std::string>& vec) const;
 
-    void HELP_COM() const;
+    void printConnectionError(const Status& error) const;
 
-    std::optional<int> string_to_int (const std::string& p) const;
+    void printInputError(const InputStatus& error) const;
+    
+    Expected<std::string, InputStatus>  readInputString(std::istream& is) const;
 
-    std::vector<std::string> reply;
+    Expected<int, InputStatus> readInputId(std::istream& is) const;
+
+    Expected<int, InputStatus> stringToInt (const std::string& p) const;
+
+    Expected<std::vector<std::string>, Status> reply;
 
     Client_commandhandler comhand;
 };
