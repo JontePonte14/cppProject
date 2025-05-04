@@ -44,6 +44,9 @@ private:
     // Finds group with the id and return the full name of the folder as a string
     // Returns "" (empty string) if no group was found
     std::string findGroupWithID(const int& groupID);
+    // Checks if an article exist within a group given its groupID and articleID
+    // Returns "" (empty string) if it couldn't be found
+    std::string findArticleName(const int& groupID, const int& articleID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();

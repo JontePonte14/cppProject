@@ -183,6 +183,36 @@ std::string DatabaseDS::findGroupWithID(const int& groupID){
     return ""; // Did not find a group with the same name
 }
 
+std::string DatabaseDS::findArticleName(const int& groupID, const int& articleID){
+    std::string groupName = findGroupWithID(groupID);
+
+    if (groupName == "") {
+        std::cerr << "Coulnd't find group" << std::endl;
+        return "";
+    }
+
+    fs::path folderPath = root / groupName;
+
+    for (const auto& entry : fs::directory_iterator(folderPath)){
+        fs::path filePath = entry.path();
+        if (filePath.extension() == ".json") {
+            std::string fileName = entry.path().filename().string();
+            auto underscorePos = fileName.rfind("_");
+            if ((underscorePos != std::string::npos)) {
+                std::string tempArticleID = fileName.substr(underscorePos+1, 1);
+
+                if (tempArticleID == std::to_string(articleID)) {
+                    return fileName;
+                }
+
+            }
+
+        }
+    }
+    std::cerr << "Didn't find the article in the given group" << std::endl;
+    return "";
+}
+
 void DatabaseDS::saveGroupIdNbr(){
     std::string fileName = "groupId_number.txt";
 
