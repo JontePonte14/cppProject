@@ -35,9 +35,12 @@ private:
     void idIncr();
 
     //Help functions
+
     //Check to see if a group already exists.
     bool groupNameExists(const std::string& name);
-    bool findGroupWithID(const int& groupID);
+    // Finds group with the id and return the full name of the folder as a string
+    // Returns "0" if no group was found (as a string)
+    std::string findGroupWithID(const int& groupID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();
