@@ -18,11 +18,11 @@ private:
 
 public:
     
-    std::vector<std::string> & listGroup();
+    std::vector<std::string> listGroup();
     bool makeGroup(std::string groupName);
     bool removeGroup(int groupID);
 
-    std::vector<std::string> &  listArticle(int groupID);
+    std::vector<std::string> listArticle(int groupID);
     bool makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text);
     bool removeArticle(int groupID, int articleID);
     Article getArticle(int groupID, int articleID);
@@ -30,13 +30,10 @@ public:
     int switchDateBase();
 
     Interface(/* args */);
-    ~Interface();
     Interface(int activeDB);
+    ~Interface() = default;
 };
 
 
 
-Interface::~Interface()
-{
-}
 #endif

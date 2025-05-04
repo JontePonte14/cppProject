@@ -35,7 +35,7 @@ testDatabaseDS: testDatabaseDS.o databaseDS.o article.o
 
 testDatabaseMS: testDatabaseMS.o databaseMS.o article.o
 
-testInterface: testInterface.o article.o databaseDS.o databaseMS.o
+testInterface: testInterface.o article.o databaseDS.o databaseMS.o interface.o
 # Phony targets
 .PHONY: all test clean distclean
 

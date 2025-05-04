@@ -47,7 +47,7 @@ Interface::Interface(){
   
 }
 
-std::vector<std::string> & Interface::listGroup()
+std::vector<std::string> Interface::listGroup()
 {
    
     std::vector<std::pair<std::string, int>> list =  db->listGroup();
@@ -62,7 +62,7 @@ bool Interface::makeGroup(std::string groupName){ return db->makeGroup(groupName
 
 bool Interface::removeGroup(int groupID){    return db->removeGroup(groupID);}
 
-std::vector<std::string> &  Interface::listArticle(int groupID){
+std::vector<std::string>   Interface::listArticle(int groupID){
     std::vector<std::pair<std::string, int>> list = db1.listArticle(groupID);
     std::vector<std::string> sortedNames;
     for (const auto& pair : list) {

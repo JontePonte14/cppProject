@@ -26,40 +26,40 @@ Article article2(
 
 string printList(const vector<string>& vec) {
     string result;
-    for (const auto& string: vec) {
-        result += string + "\n";
+    for (const auto& s: vec) {
+        result += "[" + s + "]\n";
     }
     return result;
 }
 int main() {
 
 
-    Interface interface(1); // 1 for memory, 2 for disk, or default constructor for user input
+    Interface interface = Interface(); // 1 for memory, 2 for disk, or default constructor for user input
 
     //almost the same as the one in databaseMS
-    cout << "TEST 1 : Adding groups \n \n ";
+    cout << "TEST 1 : Adding groups \n \n";
     cout << "Adding group1 : " << interface.makeGroup("group1") << endl;
     cout << "Adding group1 again : " << interface.makeGroup("group1") << endl;
     cout << "Adding group2 : " << interface.makeGroup("group2") << endl;
     cout << "List groups : \n" <<printList( interface.listGroup()) << endl;
     
     //removing groups
-    cout << "TEST 2 : Removing groups \n \n ";
+    cout << "TEST 2 : Removing groups \n \n";
     cout <<"removing group with ID 1 : " << interface.removeGroup(1) << endl;
     cout <<"removing group with ID 3 : " << interface.removeGroup(3) << endl;
     cout << "List groups : \n" <<printList( interface.listGroup()) << endl;
     
     //adding articles to groups
     
-    cout << "TEST 3 : Adding Articles \n \n ";
+    cout << "TEST 3 : Adding Articles \n \n";
     cout << "Adding group3 : " << interface.makeGroup("group3") << endl;
     
    
-    cout << "List Article in group ID 1 : \n"<< printList( interface.listArticle(1)) << endl;
+    cout << "List Article in group ID 1 (doesnt exist): \n"<< printList( interface.listArticle(1)) << endl;
     cout << "List Article in group ID 2 : \n"<< printList( interface.listArticle(2)) << endl;
     
-    cout << "make article : " << interface.makeArticle(2, article1.getTitle(), article1.getAuthor(), article1.getBody()) << endl;
-    cout << "make article2 : " << interface.makeArticle(2, article2.getTitle(), article2.getAuthor(), article2.getBody()) << endl;
+    cout << "Make article : " << interface.makeArticle(2, article1.getTitle(), article1.getAuthor(), article1.getBody()) << endl;
+    cout << "Make article2 : " << interface.makeArticle(2, article2.getTitle(), article2.getAuthor(), article2.getBody()) << endl;
     cout << "List Articule in group ID 2 : \n"<< printList( interface.listArticle(2)) << endl;
     cout << "List Articule in group ID 3 : \n"<< printList( interface.listArticle(3)) << endl;
     
@@ -70,17 +70,17 @@ int main() {
     
     //remaking old group, gets new ID
     
-    cout << "TEST 4 : Remaking group \n \n ";
+    cout << "TEST 4 : Remaking group \n \n";
     cout << "Make group1 : " << interface.makeGroup("group1") << endl;
     cout << "List groups : \n" <<printList( interface.listGroup()) << endl;
     
-    cout << "TEST 5 : Multiplke copys \n \n ";
+    cout << "TEST 5 : Multiple copys \n \n";
     cout << "Make article : " << interface.makeArticle(3, article1.getTitle(), article1.getAuthor(), article1.getBody()) << endl;
     cout << "Make article : " << interface.makeArticle(3, article1.getTitle(), article1.getAuthor(), article1.getBody()) << endl;
     cout << "Make article : " << interface.makeArticle(3, article1.getTitle(), article1.getAuthor(), article1.getBody()) << endl;
     cout << "List Article in group ID 3 : \n"<< printList( interface.listArticle(3)) << endl;
 
-    cout << "TEST 5 : Get Articles \n \n ";
+    cout << "TEST 5 : Get Articles \n \n";
     try{
         cout<< "Getting article with ID 2 : " << interface.getArticle(2, 2).getTitle() << endl;
     } catch (const std::exception& e) {
@@ -95,6 +95,3 @@ int main() {
     // Use functions from databaseMS and interface here
     return 0;
 }
-#include "article.h"
-#include <string>
-#include <iostream>
