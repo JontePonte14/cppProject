@@ -69,7 +69,7 @@ vector<pair<string, int>> listGroup(){
     return groups;
 }
 
-bool makeGroup(string name){
+bool makeGroup(const string & name){
     for (const auto& group : memory) {
         if (group.second.name == name) { // Compare the pairs first element (group name)
             cerr << "Group already exists" << endl;
@@ -113,13 +113,16 @@ vector<pair<string, int>> listArticle(int groupID){
 }
 
 bool makeArticle(int groupID, Article article){
-
+    if (memory.find(groupID) == memory.end())  {
+        std::cerr << "Group ID " << groupID << " not found.\n";
+        return  false;
+    }
 
     article.setID(articleID);
     memory[groupID].articles[articleID] = article;
     // articleMap[groupID].push_back(make_pair(article, articleID));
     articleID++;
-    return false;
+    return true;
 }
 bool removeArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID

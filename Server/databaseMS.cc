@@ -1,7 +1,7 @@
 #include "databaseMS.h"
 #include "database.h"
 #include "article.h" 
-#include <unordered_map>
+#include <map>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -25,15 +25,17 @@ size_t articleID = 1;
 
 struct Group{
     string name;
-    string date;
-    unordered_map<int, Article> articles;
-    Group() : name(""), date(""), articles() {}
-    Group(const string& groupName, const string& groupDate)
-    : name(groupName), date(groupDate) {}
+
+    map<int, Article> articles;
+    Group() : name(""), articles() {}
+    Group(const string& groupName)
+    : name(groupName) {}
 };
 
 // groupID to name and articles, atricles by ID , coparitor ensuring they are sorted by date (thoght right now its not possible to add at at date diffrent than the currnet one) 
-unordered_map<int, Group> memory;
+map<int, Group> memory;
+
+vector<pair<int, Group>> mem;
 
 
 
@@ -49,7 +51,7 @@ bool containsSecond(const std::vector<std::pair<int, T>>& vec, int id) {
         return pair.second == id;
     });
 }
-vector<pair<string, int>> listGroup(){
+vector<pair<string, int>> DatabaseMS::listGroup(){
     //making sureits sorted by date
     // sort(  groupIDName.begin(), groupIDName.end(), [](const auto& a, const auto& b) {
     //     return groupIDArticleList[a.second].getDate() <groupIDArticleList[b.second].getDate(); });
@@ -58,29 +60,31 @@ vector<pair<string, int>> listGroup(){
     for (const auto& group : memory) {
         groups.emplace_back(group.second.name, group.first); // pair<name, groupID>
     }
+    //map is sorted by key, and key is groupID, wich is increasing by time so the order is already correct
 
-    std::sort(groups.begin(), groups.end(), [](const auto& a, const auto& b) {
-        return memory.at(a.second).date < memory.at(b.second).date;
-    });
+
+
+    // std::sort(groups.begin(), groups.end(), [](const auto& a, const auto& b) {
+    //     return memory.at(a.second).date < memory.at(b.second).date;
+    // });
 
     return groups;
 }
 
-bool makeGroup(string name){
+bool  DatabaseMS::makeGroup(const std::string& name){
     for (const auto& group : memory) {
         if (group.second.name == name) { // Compare the pairs first element (group name)
             cerr << "Group already exists" << endl;
             return false; 
         }
     }
-    string date = "2023-10-01"; // Placeholder for the date, should be set to the current date i guess?
-    memory[groupID] = Group(name, date);
-
+    // string date = "2023-10-01"; // Placeholder for the date, should be set to the current date i guess?
+    memory[groupID] = Group(name);
     groupID++;
     return true;
 }
 
-bool removeGroup(int groupID){
+bool  DatabaseMS::removeGroup(int groupID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         std::cerr << "Group ID" << groupID << "not found.\n";
@@ -91,32 +95,37 @@ bool removeGroup(int groupID){
     return true;
 }
 
-vector<pair<string, int>> listArticle(int groupID){
+vector<pair<string, int>> DatabaseMS::listArticle(int groupID){
     if (memory.find(groupID) == memory.end())  {
         std::cerr << "Group ID " << groupID << " not found.\n";
         return {};
     }
     vector<pair<string, int>> result;
-    std::unordered_map<int, Article>& articles =memory[groupID].articles;
+    std::map<int, Article>& articles =memory[groupID].articles;
     for (const auto& article : articles) { 
         result.emplace_back(article.second.getTitle(), article.first); // pair<title, articleID>
     }
-    std::sort(result.begin(), result.end(), [&articles](const auto& a, const auto& b) {
-        return articles.at(a.second).getDate() < articles.at(b.second).getDate();
-    });
+    //map is sorted by key, and key is groupID, wich is increasing by time so the order is already correct
+    
+    // std::sort(result.begin(), result.end(), [&articles](const auto& a, const auto& b) {
+    //     return articles.at(a.second).getDate() < articles.at(b.second).getDate();
+    // });
     return result;
 }
 
-bool makeArticle(int groupID, Article article){
-
+bool  DatabaseMS::makeArticle(int groupID, Article article){
+    if (memory.find(groupID) == memory.end())  {
+        std::cerr << "Group ID " << groupID << " not found.\n";
+        return false;
+    }
 
     article.setID(articleID);
     memory[groupID].articles[articleID] = article;
     // articleMap[groupID].push_back(make_pair(article, articleID));
     articleID++;
-    return false;
+    return true;
 }
-bool removeArticle(int groupID, int articleID){
+bool  DatabaseMS::removeArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         std::cerr << "Group ID "<< groupID <<" not found.\n";
@@ -134,7 +143,7 @@ bool removeArticle(int groupID, int articleID){
 
 
 }
-Article getArticle(int groupID, int articleID){
+Article  DatabaseMS::getArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         throw runtime_error("Article not found");

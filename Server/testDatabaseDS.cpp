@@ -18,7 +18,7 @@ int main(){
     cout << DS.removeGroup(1) << endl;
     cout << DS.removeGroup(3) << endl;
     cout << DS.makeGroup("Technology") << endl;
-
+    
     /*
     Article article(
         "Technology",                            // groupName

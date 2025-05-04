@@ -30,13 +30,13 @@ bool Interface::removeGroup(int groupID)
     
 }
 
-std::string Interface::listArticle(int groupID){
+std::vector<std::string> &  Interface::listArticle(int groupID){
     std::vector<std::pair<std::string, int>> list = db1.listArticle(groupID);
     std::vector<std::string> sortedNames;
     for (const auto& pair : list) {
         sortedNames.push_back(pair.first + " " + std::to_string(pair.second));
     }
-    return "";
+    return sortedNames;
 }
 
 
@@ -46,7 +46,7 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
     std::tm* now = std::localtime(&t);
     std::string date =  std::to_string(now->tm_year + 1900) + "-" + std::to_string(now->tm_mon + 1) + "-" + std::to_string(now->tm_mday);
    
-    Article article = Article(articleTitle, date, articleAuthor, text);
+    Article article = Article(articleTitle, articleAuthor, text);
   
     return db1.makeArticle(groupNBR, article);
 
