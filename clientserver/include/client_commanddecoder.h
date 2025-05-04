@@ -39,7 +39,7 @@ private:
 
     void HELP_COM() const;
 
-    void printReply(const std::vector<std::string>& vec) const;
+    void printReply(const Expected<std::vector<std::string>, Status>& vec) const;
 
     void printConnectionError(const Status& error) const;
 
@@ -51,7 +51,7 @@ private:
 
     Expected<int, InputStatus> stringToInt (const std::string& p) const;
 
-    std::vector<std::string> reply;
+    //Expected<std::vector<std::string>, Status> reply;
 
     Client_commandhandler comhand;
 };

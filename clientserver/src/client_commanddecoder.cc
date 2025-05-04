@@ -25,7 +25,10 @@ void Client_commanddecoder::com_decode(std::istream& is){
     //std::vector<std::string> userInputs = readInputsStream(input); //Look at messege protocol for inputs
     std::string command;
     is >> command;
-    //std::string command = userInputs[0];
+    if (is.peek() == '\n') { //remove whitespace so we can register empty input
+        is.ignore(1);
+    } 
+
     std::transform(command.begin(), command.end(), command.begin(),
     [](unsigned char c){ return std::tolower(c); });
 
@@ -46,7 +49,7 @@ void Client_commanddecoder::com_decode(std::istream& is){
 
     else if(command == "create_ng"){
         cout << "Type the name of the newsgroup you want to create: " << endl;
-        //CREATE_NG(is);
+        CREATE_NG(is);
     }
 
     else if(command == "delete_ng"){
@@ -78,11 +81,12 @@ void Client_commanddecoder::com_decode(std::istream& is){
     }
 }
 void Client_commanddecoder::LIST_NG() {
-    reply = comhand.LIST_NG();
+    auto reply = comhand.LIST_NG();
     printReply(reply);
 }
 
-/* void Client_commanddecoder::CREATE_NG(std::istream& is) {
+void Client_commanddecoder::CREATE_NG(std::istream& is) {
+    //Inputs
     auto title = readInputString(is);
     if (!title)
     {
@@ -93,15 +97,11 @@ void Client_commanddecoder::LIST_NG() {
         }
         return;
     }
-    reply = comhand.CREATE_NG(*title);
-    if (!reply)
-    {
-        printConnectionError(reply.error());
-        return;
-    }
-    printReply(*reply);
+    //Outputs
+    auto reply = comhand.CREATE_NG(*title);
+    printReply(reply);
 
-} */
+}
 
 /* void Client_commanddecoder::DELETE_NG(std::istream& is) {
     auto Id = readInputId(is);
@@ -145,33 +145,40 @@ void Client_commanddecoder::GET_ART(std::istream& is) {
     //reply = comhand.GET_ART(parameters);
 }
 
-void Client_commanddecoder::printReply(const std::vector<std::string>& vec) const{
-    if (!vec.empty())
+void Client_commanddecoder::printReply(const Expected<std::vector<std::string>, Status>& reply) const{
+    if (!reply)
     {
+        if (reply.error()) //errors are printed in client_commandhandler
+        {
+            return;
+        }
+    }
+    else
+    {
+        std::vector<std::string> vec = *reply;
         cout << "Reply from server: " << endl;
         for (string i: vec) {
             std::cout << i << endl;
-        }   
+        } 
     }
 }
 
 Expected<int, InputStatus> Client_commanddecoder::stringToInt(const std::string& p) const{
     try {
-        return std::stoi(p);  // might throw
+        return std::stoi(p);
+
     } catch (const std::invalid_argument&) {
-        //cout << "Id needs to be a number! " << endl;
         return InputStatus::IdNotNumber;
+
     } catch (const std::out_of_range&) {
-        //cout << "try a smaller number " << endl;
         return InputStatus::IdTooBig;
     }
-    
     
 }
 
 Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::istream& is) const {
     std::string str;
-    is >> str;
+    std::getline(is, str);
     if (str.empty())
     {
         return InputStatus::EmptyInput;
@@ -249,7 +256,7 @@ void Client_commanddecoder::printInputError(const InputStatus& error) const{
     switch (error)
     {
     case InputStatus::EmptyInput:
-        cout << "Error Empty Input" << endl;
+        cout << "Error Empty Input, Type again" << endl;
         break;
     case InputStatus::Exit:
         cout << "Exeting" << endl;
