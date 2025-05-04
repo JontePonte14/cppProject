@@ -27,7 +27,6 @@ class ServerCommandHandler : public CommandHandler {
     private:
         std::shared_ptr<Database> database;
 
-        auto sendProtocol(const Protocol protocol) noexcept -> bool override;
         [[nodiscard]] auto verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>;
 };
 

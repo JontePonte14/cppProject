@@ -3,6 +3,25 @@
 #include "protocol.h"
 #include <iostream>
 
+// Macros for now, maybe change to lambdas later
+
+#define RETURN_IF_FAILED(expr)              \
+    do {                                    \
+        Status _status = (expr);            \
+        if (_status != Status::Success)     \
+            return _status;                 \
+    } while (0)
+   
+#define RETURN_IF_ERROR(expr) \
+    { auto _s = (expr); if (!_s) return _s.error(); }
+
+#define ASSIGN_OR_RETURN(var, expr)                                  \
+    auto _result_##__LINE__ = (expr);                                \
+    if (!_result_##__LINE__)                                         \
+        return _result_##__LINE__.error();                           \
+    decltype(auto) var = std::move(*_result_##__LINE__);
+
+
 ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Database>& database) 
     : CommandHandler(), database(database) {
 }
@@ -13,8 +32,6 @@ ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Database>& data
 
 auto ServerCommandHandler::processRequest() noexcept -> Status {
     Protocol protocol = receiveProtocol();
-
-    std::cout << "Server received an " << to_string(protocol) << " protocol" << std::endl;
 
     switch (protocol) {
         case Protocol::COM_LIST_NG:
@@ -49,62 +66,61 @@ auto ServerCommandHandler::processRequest(const std::shared_ptr<Connection>& con
 }
 
 auto ServerCommandHandler::listGroups() -> Status {
-    auto protocol = verifyProtocol(Protocol::COM_END);
+    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_LIST_NG));
 
-    if (!protocol) {
-        return protocol.error();
+    const auto groups = { "GroupA", "GroupB", "GroupC" };
+    uint id = 0;
+
+    RETURN_IF_FAILED(sendIntParameter(groups.size(), "# of groups"));
+
+    for (const auto& group : groups) {
+        RETURN_IF_FAILED(sendIntParameter(id++, "ID"));
+        RETURN_IF_FAILED(sendStringParameter(group, "Name"));
     }
 
-    if (sendProtocol(Protocol::ANS_LIST_NG)) {
-        const auto groups = database->listGroup();
-
-        if (!sendInt(groups.size())) {
-            return Status::FailedTransfer;
-        }
-
-        for (const auto& group : groups) {
-            /*if (sendStringParameter(group)) {
-                return Status::ConnectionClosed;
-            }*/
-        }
-
-        if (!sendProtocol(Protocol::ANS_END)) {
-            return Status::FailedTransfer;
-        }
-
-        return Status::Success;
-    }
-
-    else {
-        return Status::ConnectionClosed;
-    }
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
+    
+    return Status::Success;
 }
 
 auto ServerCommandHandler::createGroup() -> Status {
-    const auto string_p = receiveStringParameter();
+    ASSIGN_OR_RETURN(string_p, receiveStringParameter());
+    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
 
-    if (!string_p) {
-        return string_p.error();
-    }
-
-    auto protocol = verifyProtocol(Protocol::COM_END);
-
-    if (!protocol) {
-        return protocol.error();
-    }
-
-    if (!database->makeGroup(*string_p)) {
-        return Status::InvalidArguments; // TEMP
+    if (database->makeGroup(string_p)) {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
+    } else {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_ALREADY_EXISTS));
     }
     
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
+
+    return Status::Success;
 }
 
 auto ServerCommandHandler::deleteGroup() -> Status {
+    ASSIGN_OR_RETURN(num_p, receiveInt());
+    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_DELETE_NG));
 
+    if(true) {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
+    } else {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST));
+    }
+
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
+
+    return Status::Success;
 }
 
 auto ServerCommandHandler::listArticles() -> Status {
-
+    ASSIGN_OR_RETURN(num_p, receiveIntParameter())
+    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_LIST_ART));
 }
 
 auto ServerCommandHandler::createArticle() -> Status {
@@ -119,15 +135,9 @@ auto ServerCommandHandler::getArticle() -> Status {
 
 }
 
-auto ServerCommandHandler::sendProtocol(const Protocol protocol) noexcept -> bool {
-    std::cout << "Served sent a " << to_string(protocol) << " protocol" << std::endl;
-    return MessageHandler::sendProtocol(protocol);
-}
-
 auto ServerCommandHandler::verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>
 {
     Protocol protocol = receiveProtocol();
-    std::cout << "Server received an " << to_string(protocol) << " protocol, expected " << to_string(expected) << std::endl;
 
     if (protocol == expected) {
         return protocol;
