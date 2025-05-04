@@ -5,6 +5,10 @@
 #include <iostream>
 
 
+int Interface::getAtiveDB()
+{
+    return activeDB;
+}
 
 Interface::Interface(int activeDB)
 {

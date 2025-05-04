@@ -31,12 +31,11 @@ string printList(const vector<string>& vec) {
     }
     return result;
 }
-int main() {
-
-
-    Interface interface = Interface(); // 1 for memory, 2 for disk, or default constructor for user input
+void testInterface(Interface& interface) {
+     // 1 for memory, 2 for disk, or default constructor for user input
 
     //almost the same as the one in databaseMS
+    cout << " \nTEST INTERFACE on DB ["<<interface.getAtiveDB()<<"] : Adding groups \n\n";
     cout << "TEST 1 : Adding groups \n \n";
     cout << "Adding group1 : " << interface.makeGroup("group1") << endl;
     cout << "Adding group1 again : " << interface.makeGroup("group1") << endl;
@@ -91,6 +90,14 @@ int main() {
     } catch (const std::exception& e) {
         cout << "Error: " << e.what() << endl;
     }
+}
+int main() {
+    Interface interface(1); // 1 for memory, 2 for disk, or default constructor for user input
+    testInterface(interface);
+    interface.switchDateBase();
+    // testInterface(interface);
+
+   
 
     // Use functions from databaseMS and interface here
     return 0;

@@ -28,6 +28,7 @@ public:
     Article getArticle(int groupID, int articleID);
 
     int switchDateBase();
+    int getAtiveDB();
 
     Interface(/* args */);
     Interface(int activeDB);
