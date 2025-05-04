@@ -28,7 +28,7 @@ DatabaseDS::DatabaseDS(){
     return;
 }
 
-std::vector<std::string> listGroup(){
+std::vector<std::string> DatabaseDS::listGroup(){
     std::vector<std::string> listOfGroups;
     return listOfGroups;
 }
@@ -93,7 +93,7 @@ bool DatabaseDS::groupNameExists(const std::string& name) {
         } else {
             std::string folderName = entry.path().filename().string();
             auto underscorePos = folderName.rfind("_");
-            if (underscorePos =! std::string::npos){
+            if ((underscorePos != std::string::npos)){
                 std::string existingGroupName = folderName.substr(0, underscorePos);
                 if (existingGroupName == name){
                     return true; // Found a group with the same name

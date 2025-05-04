@@ -7,32 +7,19 @@
 #include <list>
 
 
-class Database
-{
+class Database {
+    public:
+        virtual ~Database() = default;
     
-public:
-    // Default contructur creates a root folder called "Newsgroup"
-    Database();
-    // Custom constructur makes it possible to decide the name of the root folder
-
-
-    virtual std::vector<std::string> listGroup();
-    virtual bool makeGroup(const std::string& name);
-    virtual bool removeGroup(int groupID);
-
-    virtual std::vector<std::pair<std::string, int>> listArticle(int groupID);
-    virtual bool makeArticle(int groupID, Article article);
-    virtual bool removeArticle(int groupID, int articleID);
-    virtual Article getArticle(int groupID, int articleID);
+        virtual std::vector<std::string> listGroup() = 0;
+        virtual bool makeGroup(const std::string& name) = 0;
+        virtual bool removeGroup(int groupID) = 0;
     
-private:
-    /* data */
-
-    static int IDnbr;
-    // increment id for each new article
-    void idIncr();
-
-    //Help functions
-};
+        virtual std::vector<std::pair<std::string, int>> listArticle(int groupID) = 0;
+        virtual bool makeArticle(int groupID, Article article) = 0;
+        virtual bool removeArticle(int groupID, int articleID) = 0;
+        virtual Article getArticle(int groupID, int articleID) = 0;
+    };
+    
 
 #endif
