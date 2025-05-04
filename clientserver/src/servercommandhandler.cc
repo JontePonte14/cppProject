@@ -79,6 +79,8 @@ auto ServerCommandHandler::listGroups() -> Status {
         RETURN_IF_FAILED(sendStringParameter(group, "Name"));
     }
 
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
+    
     return Status::ConnectionClosed;
 }
 
