@@ -11,7 +11,7 @@ class Database {
     public:
         virtual ~Database() = default;
     
-        virtual std::vector<std::string> listGroup() = 0;
+        virtual std::vector<std::pair<std::string, int>> listGroup() = 0;
         virtual bool makeGroup(const std::string& name) = 0;
         virtual bool removeGroup(int groupID) = 0;
     

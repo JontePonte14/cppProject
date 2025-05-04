@@ -1,7 +1,7 @@
 #include "databaseMS.h"
 #include "database.h"
 #include "article.h" 
-#include <unordered_map>
+#include <map>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -25,17 +25,17 @@ size_t articleID = 1;
 
 struct Group{
     string name;
-    string date;
-    unordered_map<int, Article> articles;
-    Group() : name(""), date(""), articles() {}
-    Group(const string& groupName, const string& groupDate)
-    : name(groupName), date(groupDate) {}
+
+    map<int, Article> articles;
+    Group() : name(""), articles() {}
+    Group(const string& groupName)
+    : name(groupName) {}
 };
 
 // groupID to name and articles, atricles by ID , coparitor ensuring they are sorted by date (thoght right now its not possible to add at at date diffrent than the currnet one) 
-unordered_map<int, Group> memory;
+map<int, Group> memory;
 
-
+vector<pair<int, Group>> mem;
 
 template <typename T>
 bool containsFirst(const vector<pair<int , T >>& vec, const T& key) {
@@ -58,10 +58,13 @@ vector<pair<string, int>> listGroup(){
     for (const auto& group : memory) {
         groups.emplace_back(group.second.name, group.first); // pair<name, groupID>
     }
+    //map is sorted by key, and key is groupID, wich is increasing by time so the order is already correct
 
-    std::sort(groups.begin(), groups.end(), [](const auto& a, const auto& b) {
-        return memory.at(a.second).date < memory.at(b.second).date;
-    });
+
+
+    // std::sort(groups.begin(), groups.end(), [](const auto& a, const auto& b) {
+    //     return memory.at(a.second).date < memory.at(b.second).date;
+    // });
 
     return groups;
 }
@@ -74,7 +77,7 @@ bool makeGroup(string name){
         }
     }
     string date = "2023-10-01"; // Placeholder for the date, should be set to the current date i guess?
-    memory[groupID] = Group(name, date);
+    memory[groupID] = Group(name);
 
     groupID++;
     return true;
@@ -97,13 +100,15 @@ vector<pair<string, int>> listArticle(int groupID){
         return {};
     }
     vector<pair<string, int>> result;
-    std::unordered_map<int, Article>& articles =memory[groupID].articles;
+    std::map<int, Article>& articles =memory[groupID].articles;
     for (const auto& article : articles) { 
         result.emplace_back(article.second.getTitle(), article.first); // pair<title, articleID>
     }
-    std::sort(result.begin(), result.end(), [&articles](const auto& a, const auto& b) {
-        return articles.at(a.second).getDate() < articles.at(b.second).getDate();
-    });
+    //map is sorted by key, and key is groupID, wich is increasing by time so the order is already correct
+    
+    // std::sort(result.begin(), result.end(), [&articles](const auto& a, const auto& b) {
+    //     return articles.at(a.second).getDate() < articles.at(b.second).getDate();
+    // });
     return result;
 }
 
