@@ -135,7 +135,24 @@ bool DatabaseDS::removeArticle(int groupID, int articleID){
 
 Article DatabaseDS::getArticle(int groupID, int articleID){
     Article article;
+    fs::path articlePath = findArticlePath(groupID, articleID);
+    if (articlePath.empty()) {
+        return article; // Couldn't find group or article check error message
+    }
 
+    json articleJson;
+    std::ifstream inFile(articlePath);
+
+    if (!inFile) {
+        std::cerr << "File was not found" << std::endl;
+        return article;
+    }
+
+    inFile >> articleJson;
+
+    // Overloading function in article.
+    article = articleJson;
+    
     return article;
 }
 

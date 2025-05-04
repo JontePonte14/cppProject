@@ -63,6 +63,11 @@ int main(){
     cout << DS.removeArticle(3, 2) << endl;
     cout << DS.makeArticle(2, article2) << " We then back to Finland instead" << endl;
 
+
+    cout << "-----------------" << endl;
+    cout << "TEST 6: getArticle()" << endl;
+    Article fetchedArticle = DS.getArticle(2, 2);
+    cout << "Title of fetched article: " << fetchedArticle.getTitle() << endl;
     /*
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 
