@@ -81,7 +81,7 @@ auto ServerCommandHandler::listGroups() -> Status {
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
     
-    return Status::ConnectionClosed;
+    return Status::Success;
 }
 
 auto ServerCommandHandler::createGroup() -> Status {
