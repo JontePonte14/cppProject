@@ -83,6 +83,13 @@ bool DatabaseDS::removeGroup(int groupID){
 
 std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
     std::vector<std::pair<std::string, int>> sortedArticles;
+    std::string groupFolder = findGroupWithID(groupID);
+
+    if (groupFolder == "") {
+        std::cerr << "No group was found";
+        return {};
+    }
+
     return sortedArticles;
 }
 
@@ -170,5 +177,32 @@ void DatabaseDS::loadGroupIdNbr(){
     }
 
     inFile >> groupIDnbr;
+}
+
+void DatabaseDS::saveArticleIdNbr(const std::string& groupFolderName,  const int& currentID){
+    std::string fileName = "articleID_number.txt";
+
+    std::ofstream outFile(root/groupFolderName/fileName);
+    if (!outFile) {
+        std::cerr << "There was a problem saving " << fileName << std::endl;
+    }
+
+    outFile << currentID;
+    outFile.close();
+}
+
+
+int DatabaseDS::loadArticleIdNbr(const std::string& groupFolderName){
+    std::string fileName = "articleID_number.txt";
+    std::ifstream inFile(root / groupFolderName / fileName);
+    int articleIDnbr; 
+
+    if (!inFile) {
+        std::cerr << fileName << " was not found" << std::endl;
+    }
+
+    inFile >> articleIDnbr;
+
+    return articleIDnbr;
 }
 
