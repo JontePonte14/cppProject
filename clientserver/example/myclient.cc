@@ -3,6 +3,7 @@
 #include "connectionclosedexception.h"
 #include "client_commanddecoder.h"
 #include "messagehandler.h"
+
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
@@ -13,29 +14,7 @@ using std::cin;
 using std::cout;
 using std::cerr;
 using std::endl;
-/*
- * Send an integer to the server as four bytes.
- */
-void writeNumber(const Connection& conn, int value)
-{
-        conn.write((value >> 24) & 0xFF);
-        conn.write((value >> 16) & 0xFF);
-        conn.write((value >> 8) & 0xFF);
-        conn.write(value & 0xFF);
-}
 
-/*
- * Read a string from the server.
- */
-string readString(const Connection& conn)
-{
-        string s;
-        char   ch;
-        while ((ch = conn.read()) != '$') {
-                s += ch;
-        }
-        return s;
-}
 
 /* Creates a client for the given args, if possible.
  * Otherwise exits with error code.
@@ -64,31 +43,13 @@ std::shared_ptr<Connection> init(int argc, char* argv[])
         return conn;
 }
 
-/* int app(const Connection& conn)
-{
-        cout << "Type a number: ";
-        int nbr;
-        while (cin >> nbr) {
-                try {
-                        cout << nbr << " is ...";
-                        writeNumber(conn, nbr);
-                        string reply = readString(conn);
-                        cout << " " << reply << endl;
-                        cout << "Type another number: ";
-                } catch (ConnectionClosedException&) {
-                        cout << " no reply from server. Exiting." << endl;
-                        return 1;
-                }
-        }
-        cout << "\nexiting.\n";
-        return 0;
-} */
-
 int app(const std::shared_ptr<Connection>& conn)
 {
         cout << "Connected to server, To see commands type help_com ";
         string com;
         Client_commanddecoder comdec(conn);
+ 
+        
         while (true) {
                 cout << "Type a command: " << endl;
                 try {

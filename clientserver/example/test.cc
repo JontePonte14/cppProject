@@ -19,7 +19,7 @@ int main() {
 	std::cout << "Size string*: " << sizeof(std::string*) << std::endl;
 	*/
 
-	DatabaseServer server(10, true);
+	DatabaseServer server(7777, true);
 
 	return 0;
 }
