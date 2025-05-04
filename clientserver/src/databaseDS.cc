@@ -9,6 +9,7 @@
 #include <ctime>
 #include <utility>
 #include <algorithm>
+#include <charconv> // for std::from_chars
 
 namespace fs=std::filesystem;
 using json = nlohmann::json;
@@ -28,8 +29,25 @@ DatabaseDS::DatabaseDS(){
     return;
 }
 
-std::vector<std::string> listGroup(){
-    std::vector<std::string> listOfGroups;
+std::vector<std::pair<std::string, int>> DatabaseDS::listGroup(){
+    std::vector<std::pair<std::string, int>> listOfGroups;
+    // std::string tempGroupName = "temp";
+    int tempIdNbr;
+
+    for (auto const& dir_entry : fs::directory_iterator(root)){
+        std::string folderName = dir_entry.path().filename().string();
+        auto underscorePos = folderName.rfind("_");
+        // Splitting the string to create a pair
+        std::string tempGroupName = folderName.substr(0, underscorePos);
+        std::string stringIdNbr = folderName.substr(underscorePos + 1);
+        std::from_chars(stringIdNbr.data(), stringIdNbr.data() + stringIdNbr.size(), tempIdNbr); // Maybe add check to see it works
+        listOfGroups.emplace_back(tempGroupName, tempIdNbr);
+    }
+
+    std::sort(listOfGroups.begin(), listOfGroups.end(), [](const auto &a, const auto &b) {
+        return a.second < b.second;
+    });
+
     return listOfGroups;
 }
 
@@ -46,15 +64,17 @@ bool DatabaseDS::makeGroup(const std::string& name){
 
     // creates new folder with a .created file
     fs::create_directory(fullPathToGroup);
-    std::ofstream createdFile(fullPathToGroup / ".created");
-    createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    createdFile.close();
-
     return true;
 }
 
 bool DatabaseDS::removeGroup(int groupID){
-    return false;
+    std::string folderName = findGroupWithID(groupID);
+    if (folderName == "") {
+        std::cerr << "No group was found" << std::endl;
+        return false;
+    }
+    fs::path pathToFolder = root / folderName;
+    return fs::remove_all(pathToFolder);
 }
 
 std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
@@ -93,7 +113,7 @@ bool DatabaseDS::groupNameExists(const std::string& name) {
         } else {
             std::string folderName = entry.path().filename().string();
             auto underscorePos = folderName.rfind("_");
-            if (underscorePos =! std::string::npos){
+            if ((underscorePos != std::string::npos)){
                 std::string existingGroupName = folderName.substr(0, underscorePos);
                 if (existingGroupName == name){
                     return true; // Found a group with the same name
@@ -103,6 +123,26 @@ bool DatabaseDS::groupNameExists(const std::string& name) {
 
     }
     return false; // Did not find a group with the same name
+}
+
+std::string DatabaseDS::findGroupWithID(const int& groupID){
+    // iterate to find the group with the correct ID
+    for (const auto& entry : fs::directory_iterator(root)){
+        if (!entry.is_directory()){
+            continue;
+        } else {
+            std::string folderName = entry.path().filename().string();
+            auto underscorePos = folderName.rfind("_");
+            if ((underscorePos != std::string::npos)){
+                std::string folderGroupID = folderName.substr(underscorePos+1);
+                if (folderGroupID == std::to_string(groupID)){
+                    return folderName; // Found group ID
+                }
+            }   
+        }
+
+    }
+    return ""; // Did not find a group with the same name
 }
 
 void DatabaseDS::saveGroupIdNbr(){

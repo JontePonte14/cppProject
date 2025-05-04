@@ -1,3 +1,6 @@
+#ifndef DATABASE_DS_H
+#define DATABASE_DS_H
+
 #include "json.hpp"
 #include "article.h"
 #include "database.h"
@@ -14,7 +17,7 @@ public:
     DatabaseDS();
     ~DatabaseDS() = default;
     
-    std::vector<std::string> listGroup() override;
+    std::vector<std::pair<std::string, int>> listGroup() override;
     // Cretes a group as a folder with the name : "name_groupID"
     bool makeGroup(const std::string& name)override;
     bool removeGroup(int groupID)override;
@@ -35,8 +38,12 @@ private:
     void idIncr();
 
     //Help functions
+
     //Check to see if a group already exists.
     bool groupNameExists(const std::string& name);
+    // Finds group with the id and return the full name of the folder as a string
+    // Returns "" (empty string) if no group was found
+    std::string findGroupWithID(const int& groupID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();
@@ -44,3 +51,4 @@ private:
     void saveArticleIdNbr(const std::filesystem::path& groupFolder);
     void loadArticleIdNbr(const std::filesystem::path& groupFolder);
 };
+#endif // DATABASE_MS_H
