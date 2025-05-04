@@ -59,10 +59,8 @@ bool DatabaseDS::removeGroup(int groupID){
         std::cerr << "No group was found" << std::endl;
         return false;
     }
-
-    
-
-    return false;
+    fs::path pathToFolder = root / folderName;
+    return fs::remove_all(pathToFolder);
 }
 
 std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
