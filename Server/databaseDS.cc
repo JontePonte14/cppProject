@@ -9,6 +9,7 @@
 #include <ctime>
 #include <utility>
 #include <algorithm>
+#include <charconv> // for std::from_chars
 
 namespace fs=std::filesystem;
 using json = nlohmann::json;
@@ -30,13 +31,22 @@ DatabaseDS::DatabaseDS(){
 
 std::vector<std::pair<std::string, int>> DatabaseDS::listGroup(){
     std::vector<std::pair<std::string, int>> listOfGroups;
-    std::string tempGroupName = "temp";
-    int tempIdNbr = -1;
+    // std::string tempGroupName = "temp";
+    // int tempIdNbr = -1;
 
     for (auto const& dir_entry : fs::directory_iterator(root)){
-        
-        listOfGroups.push_back(std::make_pair(tempGroupName, tempIdNbr));
+        std::string folderName = dir_entry.path().filename().string();
+        auto underscorePos = folderName.rfind("_");
+        // Splitting the string to create a pair
+        std::string tempGroupName = folderName.substr(0, underscorePos);
+        std::string stringIdNbr = folderName.substr(underscorePos + 1);
+        std::from_chars(stringIdNbr.data(), stringIdNbr.data() + stringIdNbr.size(), tempIdNbr); // Maybe add check to see it works
+        listOfGroups.emplace_back(tempGroupName, tempIdNbr);
     }
+
+    std::sort(listOfGroups.begin(), listOfGroups.end(), [](const auto &a, const auto &b) {
+        return a.second < b.second;
+    });
 
     return listOfGroups;
 }

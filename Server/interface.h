@@ -31,11 +31,10 @@ public:
 
     Interface(/* args */);
     ~Interface();
+    Interface(int activeDB);
 };
 
-Interface::Interface(/* args */)
-{
-}
+
 
 Interface::~Interface()
 {
