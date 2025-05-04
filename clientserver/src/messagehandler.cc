@@ -49,7 +49,7 @@ auto MessageHandler::sendInt(const uint32_t value, const std::string& id) noexce
 auto MessageHandler::sendIntParameter(const uint32_t param, const std::string& id) noexcept -> Status
 {
     RETURN_IF_FAILED(sendProtocol(Protocol::PAR_NUM));
-    RETURN_IF_FAILED(sendInt(param));
+    RETURN_IF_FAILED(sendInt(param, id));
 
     return Status::Success;
 }
@@ -115,7 +115,7 @@ auto MessageHandler::receiveStringParameter() noexcept -> Expected<std::string, 
         return Status::ProtocolViolation;
     }
 
-    const auto params = receiveInt();
+    const auto params = receiveIntParameter();
 
     if (!params) {
         return params.error();
