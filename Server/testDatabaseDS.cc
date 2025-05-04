@@ -26,7 +26,7 @@ int main(){
     cout << "TEST 3: listGroup()" << endl;
     std::vector<std::pair<std::string, int>> allGroups;
     allGroups = DS.listGroup();
-    for (const auto& [id, groupname] : allGroups) {
+    for (const auto& [groupname, id] : allGroups) {
         cout << "ID: " << id << ", Groupname: " << groupname << endl;
     }
 
@@ -68,6 +68,14 @@ int main(){
     cout << "TEST 6: getArticle()" << endl;
     Article fetchedArticle = DS.getArticle(2, 2);
     cout << "Title of fetched article: " << fetchedArticle.getTitle() << endl;
+
+    cout << "TEST 7: listArticle()" << endl;
+    std::vector<std::pair<std::string, int>> articlesInFinland;
+    articlesInFinland = DS.listArticle(2);
+    cout << "Iterating in the folder Finland_2" << endl;
+    for (const auto& [title, id] : articlesInFinland) {
+        cout << "Title: " << title << ", ID: " << id << endl;
+    }
     /*
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 

@@ -92,8 +92,8 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
     }
 
     int tempIdNbr;
-
-    for (auto const& file_entry : fs::directory_iterator(groupFolder)){
+    fs::path groupFolderPath = root / groupFolder;
+    for (auto const& file_entry : fs::directory_iterator(groupFolderPath)){
         fs::path filePath = file_entry.path();
         if (filePath.extension() == ".json") {
             std::string stemName = filePath.stem().string();
@@ -102,7 +102,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
             std::string articleTitle = stemName.substr(0, underscorePos);
             std::string stringArticleID = stemName.substr(underscorePos+1);
             std::from_chars(stringArticleID.data(), stringArticleID.data() + stringArticleID.size(), tempIdNbr);
-            sortedArticles.emplace_back(articleTitle, stringArticleID);
+            sortedArticles.emplace_back(articleTitle, tempIdNbr);
         }
 
     }
