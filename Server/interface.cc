@@ -1,144 +1,81 @@
 #include "interface.h"
 #include <string>
 #include <list>
+#include <ctime>
+
+
 
 Interface::Interface(/* args */){
     activeDB = 1;
-    db1 = DatabaseDS("Newsgroup");
-    db2 = DatabaseMS();
+    db = & db1;
+
+
 }
 
-std::string Interface::listGroup()
+std::vector<std::string> Interface::listGroup()
 {
-    if(activeDB == 1)
-    {
-        return db1.listGroup();
-    }
-    else
-    {
-        return db2.listGroup();
-    }
-
-
-    return std::string();
+    return db->listGroup();
 }
 
-bool Interface::makeGroup(const std::string& name)
+bool Interface::makeGroup(std::string groupName)
 {
-    if(activeDB == 1)
-    {
-        return db1.makeGroup(name);
-    }
-    else
-    {
-        return db2.makeGroup();
-    }
-    return false;
+    
+
+    return db->makeGroup(groupName);
 }
 
-bool Interface::removeGroup(const std::string& name)
+bool Interface::removeGroup(int groupID)
 {
-    if(activeDB == 1)
-    {
-        return db1.removeGroup(name);
-    }
-    else
-    {
-        return db2.removeGroup();
-    }
+    return db->removeGroup(groupID);
     
 }
 
-std::vector<std::pair<std::string, int>> Interface::listArticle(std::string name)
-{
-    if(activeDB == 1)
-    {
-        return db1.listArticle(name);
+std::string Interface::listArticle(int groupID){
+    std::vector<std::pair<std::string, int>> list = db1.listArticle(groupID);
+    std::vector<std::string> sortedNames;
+    for (const auto& pair : list) {
+        sortedNames.push_back(pair.first + " " + std::to_string(pair.second));
     }
-    else
-    {
-        //return db2.listGroup();
-
-        //temp
-        return db1.listArticle(name);
-    }
-    
+    return "";
 }
-// {  
-//     std::list<Article> articles;
-//     if(activeDB == 1)
-//     {
-//         articles = db1.listArticle();
-//     }
-//     else
-//     {
-//         articles = db2.listArticle();
-//     }
-//     if(articles.size() > 0)
-//     {
-//         std::string result;
-//         for(auto it = articles.begin(); it != articles.end(); ++it)
-//         {
-//             result += it->getTitle() + "\n";
-//         }
-//         return result;
-//     }
-//     else
-//     {
-//         return "No articles found";
-//     }
 
+
+bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text)
+{
+    std::time_t t = std::time(nullptr);
+    std::tm* now = std::localtime(&t);
+    std::string date =  std::to_string(now->tm_year + 1900) + "-" + std::to_string(now->tm_mon + 1) + "-" + std::to_string(now->tm_mday);
    
-// }
+    Article article = Article(articleTitle, date, articleAuthor, text);
+  
+    return db1.makeArticle(groupNBR, article);
 
-bool Interface::makeArticle(Article& article)
-{
-    if(activeDB == 1)
-    {
-        return db1.makeArticle(article);
-    }
-    else
-    {
-        return db2.makeArticle();
-    }
+
     
 }
 
-bool Interface::removeArticle(std::string articleGroup, std::string articleName, int articleID)
+bool Interface::removeArticle(int groupID, int articleID)
 {
-    if(activeDB == 1)
-    {
-        return db1.removeArticle(articleGroup, articleName, articleID);
-    }
-    else
-    {
-        return db2.removeArticle();
-    }
-    return false;
+   
+    return db->removeArticle(groupID, articleID);;
 }
 
-Article Interface::getArticle(std::string articleGroup, std::string articleName, int articleID)
+Article Interface::getArticle(int groupID, int articleID)
 {
-    if(activeDB == 1)
-    {
-        return db1.getArticle(articleGroup, articleName, articleID);
-    }
-    else
-    {
-        return db2.getArticle();
-    }
-    
-    return Article();
+
+    return db->getArticle(groupID, articleID);
 }
 int Interface::switchDateBase()
 {
     if(activeDB == 1)
     {
         activeDB = 2;
+        // db = &db2;
     }
     else
     {
         activeDB = 1;
+        db = &db1;
     }
     return activeDB;
 }        

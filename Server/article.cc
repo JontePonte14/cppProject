@@ -4,12 +4,10 @@
 using json = nlohmann::json;
 
 Article::Article(
-    const std::string g,
     const std::string t, 
     const std::string a, 
     const std::string d, // Format: year-month-day 
     const std::string b){
-        groupName = g;
         title = t;
         author = a;
         date = d;
@@ -60,7 +58,6 @@ void to_json(json& jFile, const Article& article){
 
 void from_json(const json& jFile, Article& article){
     article = Article(
-        jFile["groupname"],
         jFile["title"],
         jFile["author"],
         jFile["date"],
