@@ -105,6 +105,26 @@ bool DatabaseDS::groupNameExists(const std::string& name) {
     return false; // Did not find a group with the same name
 }
 
+bool DatabaseDS::findGroupWithID(const int& groupID){
+    // iterate to find the group with the correct ID
+    for (const auto& entry : fs::directory_iterator(root)){
+        if (!entry.is_directory()){
+            continue;
+        } else {
+            std::string folderName = entry.path().filename().string();
+            auto underscorePos = folderName.rfind("_");
+            if ((underscorePos != std::string::npos)){
+                std::string folderGroupID = folderName.substr(underscorePos);
+                if (folderGroupID == std::to_string(groupID)){
+                    return true; // Found group ID
+                }
+            }   
+        }
+
+    }
+    return false; // Did not find a group with the same name
+}
+
 void DatabaseDS::saveGroupIdNbr(){
     std::string fileName = "groupId_number.txt";
 

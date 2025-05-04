@@ -37,6 +37,7 @@ private:
     //Help functions
     //Check to see if a group already exists.
     bool groupNameExists(const std::string& name);
+    bool findGroupWithID(const int& groupID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();
