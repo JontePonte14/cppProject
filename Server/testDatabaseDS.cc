@@ -10,22 +10,32 @@ using std::string;
 namespace fs=std::filesystem;
 
 int main(){
-    DatabaseDS DS("Newsgroup");
+    DatabaseDS DS;
+    cout << "TEST 1: makegroup()" << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
-
-    //cout << DS.removeGroup("Sweden") << endl;
-    //cout << DS.removeGroup("Sweden") << endl;
+    cout << "-----------------" << endl;
+    cout << "TEST 2: removegroup()" << endl;
+    cout << DS.removeGroup(1) << endl;
+    cout << DS.removeGroup(6) << " = 0" << endl;
     cout << DS.makeGroup("Technology") << endl;
+    
+    cout << "-----------------" << endl;
+    cout << "TEST 3: listGroup()" << endl;
+    std::vector<std::pair<std::string, int>> allGroups;
+    allGroups = DS.listGroup();
+    for (const auto& [id, groupname] : allGroups) {
+        cout << "ID: " << id << ", Groupname: " << groupname << endl;
+    }
 
+    cout << "-----------------" << endl;
+    cout << "TEST 4: makeArticle()" << endl;
+    
     Article article(
-        "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title
         "Jonathan von Bergen",                   // author
-        "2025-04-08",                            // date
-        101,                                     // idNbr
         "In a groundbreaking announcement today, researchers at the Global AI Institute revealed a new artificial intelligence model that surpasses previous benchmarks in both reasoning and creativity. "
         "Dubbed 'Aurora', the model demonstrates a remarkable ability to understand context, generate human-like dialogue, and even compose original music and poetry. Experts say this represents a major leap forward, "
         "not just in terms of computational power, but in the sophistication of the underlying architecture, which integrates multimodal learning and reinforcement strategies.\n\n"
@@ -35,18 +45,20 @@ int main(){
         "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
     );
 
+    cout << DS.makeArticle(3, article) << " = 1 " << endl;
+    cout << DS.makeArticle(999, article) << " = 0" << endl;
+
+
     Article article2(
-        "Technology",                            // groupName
         "AI is good",                            // title
         "Jonathan von Bergen",                   // author
-        "2024-04-08",                            // date
-        1,                                       // idNbr
         "AI is good this is body"
     );
 
-    cout << "make article " << DS.makeArticle(article) << endl;
-    cout << "make article2 " << DS.makeArticle(article2) << endl;
+    cout << DS.makeArticle(2, article) << endl;
+    cout << DS.makeArticle(3, article2) << endl;
 
+    /*
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 
     cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 129) << endl;
@@ -89,6 +101,7 @@ int main(){
     for (const auto& [title, id] : sortedArticles) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }
+    */
 
     
 

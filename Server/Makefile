@@ -21,7 +21,7 @@ LDFLAGS = -g -lstdc++fs
 #LDFLAGS +=  -stdlib=libc++
 
 # Targets
-PROGS = TestArticle TestDatabaseDS
+PROGS = testArticle testDatabaseDS testDatabaseMS testInterface
 
 all: $(PROGS)
 
@@ -29,10 +29,13 @@ all: $(PROGS)
 #	./test_coding
 
 # Targets rely on implicit rules for compiling and linking
-TestArticle: TestArticle.o article.o
-TestDatabaseDS: TestDatabaseDS.o databaseDS.o article.o
+testArticle: testArticle.o article.o
 
+testDatabaseDS: testDatabaseDS.o databaseDS.o article.o
 
+testDatabaseMS: testDatabaseMS.o databaseMS.o article.o
+
+testInterface: testInterface.o article.o databaseDS.o databaseMS.o interface.o
 # Phony targets
 .PHONY: all test clean distclean
 
