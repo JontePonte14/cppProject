@@ -32,7 +32,7 @@ DatabaseDS::DatabaseDS(){
 std::vector<std::pair<std::string, int>> DatabaseDS::listGroup(){
     std::vector<std::pair<std::string, int>> listOfGroups;
     // std::string tempGroupName = "temp";
-    // int tempIdNbr = -1;
+    int tempIdNbr;
 
     for (auto const& dir_entry : fs::directory_iterator(root)){
         std::string folderName = dir_entry.path().filename().string();
