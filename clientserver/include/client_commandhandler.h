@@ -12,7 +12,7 @@ class Client_commandhandler {
 public:
     Client_commandhandler(const std::shared_ptr<Connection>& conn); //replcace with message handler
 
-    Expected<std::vector<std::string>, Status> LIST_NG();
+    std::vector<std::string> LIST_NG();
 
     Expected<std::vector<std::string>, Status> CREATE_NG(std::string title);
 
@@ -29,7 +29,7 @@ private:
     MessageHandler mh;
 
     void checkCondition(bool condition, std::string method, std::string message) const;
-    void checkCode(Protocol epectedCode, Protocol code, std::string method) const; 
+    bool checkCode(Protocol epectedCode, Protocol code) const; 
     
     MessageHandler conn;
 };

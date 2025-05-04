@@ -51,7 +51,7 @@ private:
 
     Expected<int, InputStatus> stringToInt (const std::string& p) const;
 
-    Expected<std::vector<std::string>, Status> reply;
+    std::vector<std::string> reply;
 
     Client_commandhandler comhand;
 };

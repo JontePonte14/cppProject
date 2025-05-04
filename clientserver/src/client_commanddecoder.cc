@@ -46,17 +46,17 @@ void Client_commanddecoder::com_decode(std::istream& is){
 
     else if(command == "create_ng"){
         cout << "Type the name of the newsgroup you want to create: " << endl;
-        CREATE_NG(is);
+        //CREATE_NG(is);
     }
 
     else if(command == "delete_ng"){
         cout << "Type the name of the newsgroup you want to delete: " << endl;
-        DELETE_NG(is);
+        //DELETE_NG(is);
     }
 
     else if(command == "list_art"){
         //cout << "List of articles in newsgroup ";
-        LIST_ART(is);
+        //LIST_ART(is);
     }
 
     else if(command == "create_art"){
@@ -79,15 +79,10 @@ void Client_commanddecoder::com_decode(std::istream& is){
 }
 void Client_commanddecoder::LIST_NG() {
     reply = comhand.LIST_NG();
-    if (!reply)
-    {
-        printConnectionError(reply.error());
-        return;
-    }
-    printReply(*reply);
+    printReply(reply);
 }
 
-void Client_commanddecoder::CREATE_NG(std::istream& is) {
+/* void Client_commanddecoder::CREATE_NG(std::istream& is) {
     auto title = readInputString(is);
     if (!title)
     {
@@ -106,9 +101,9 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
     }
     printReply(*reply);
 
-}
+} */
 
-void Client_commanddecoder::DELETE_NG(std::istream& is) {
+/* void Client_commanddecoder::DELETE_NG(std::istream& is) {
     auto Id = readInputId(is);
     if (!Id)
     {
@@ -126,7 +121,7 @@ void Client_commanddecoder::DELETE_NG(std::istream& is) {
         return;
     }
     printReply(*reply);
-}
+} */
 
 void Client_commanddecoder::LIST_ART(std::istream& is) {
     
@@ -151,10 +146,13 @@ void Client_commanddecoder::GET_ART(std::istream& is) {
 }
 
 void Client_commanddecoder::printReply(const std::vector<std::string>& vec) const{
-    cout << "Reply from server: " << endl;
-    for (string i: vec) {
-        std::cout << i << endl;
-    }   
+    if (!vec.empty())
+    {
+        cout << "Reply from server: " << endl;
+        for (string i: vec) {
+            std::cout << i << endl;
+        }   
+    }
 }
 
 Expected<int, InputStatus> Client_commanddecoder::stringToInt(const std::string& p) const{

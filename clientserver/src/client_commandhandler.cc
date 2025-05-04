@@ -10,30 +10,35 @@
 #include <vector>
 #include <optional>
 
+#define RETURN_IF_FAILED(expr) \
+    do { \
+        if (!(expr)) return {}; \
+    } while (0)
 
 using std::cout;
 using std::endl;
 Client_commandhandler::Client_commandhandler(const std::shared_ptr<Connection>& conn) : mh(conn) {
 }
 
-Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
+std::vector<std::string> Client_commandhandler::LIST_NG(){
 
     mh.sendProtocol(Protocol::COM_LIST_NG);
     mh.sendProtocol(Protocol::COM_END);
     Protocol code = mh.receiveProtocol();
-    if (code != Protocol::ANS_LIST_NG) {
+    /* if (code != Protocol::ANS_LIST_NG) {
         cout << "Expected: " << to_string(Protocol::ANS_LIST_NG) << " Got: " << to_string(code) << endl;
         return std::vector<std::string>{}; 
-    }
-
+    } */
+    RETURN_IF_FAILED(checkCode(Protocol::ANS_LIST_NG, code));
+    
     auto nbrGroups = mh.receiveIntParameter();
-    if (!nbrGroups) {
+    /* if (!nbrGroups) {
         cout << "Got no nbrGroups from server " << endl;
         return std::vector<std::string>{};
         //return nbrGroups.error();
-    }
+    } */
     int nbrGroupsInt = *nbrGroups;
-    checkCondition(nbrGroupsInt >= 0, "List groups", "Number of groups < 0"); //todo, ändra så sätter protocol violation istället för throw
+    checkCondition(nbrGroupsInt > 0, "List groups", "Number of groups < 0"); //todo, ändra så sätter protocol violation istället för throw
 
     std::vector<std::string> groupNamesString(nbrGroupsInt);
     std::vector<int> groupIdsInt(nbrGroupsInt);
@@ -59,7 +64,6 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     if (ans_end != Protocol::ANS_END) {
         cout << "Expected: " << to_string(Protocol::ANS_END) << " Got: " << to_string(ans_end) << endl;
     }
-    
     return groupNamesString;
 }
 
@@ -96,7 +100,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::CREATE_NG(std:
         return ProtocolViolation;
     }
     Protocol ans_end = mh.receiveProtocol();
-    checkCode(Protocol::ANS_END, ans_end, "Create groups"); // sätt violation istället för throw
+    checkCode(Protocol::ANS_END, ans_end); // sätt violation istället för throw
     return text;
 }
 
@@ -127,7 +131,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_NG(int 
         return ProtocolViolation;
     }
     Protocol ans_end = mh.receiveProtocol();
-    checkCode(Protocol::ANS_END, ans_end, "Delete groups"); // sätt violation istället för throw
+    checkCode(Protocol::ANS_END, ans_end); // sätt violation istället för throw
     return text;
 }
 
@@ -158,7 +162,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_ART(int g
         return ProtocolViolation;
     }
     Protocol ans_end = mh.receiveProtocol();
-    checkCode(Protocol::ANS_END, ans_end, "Delete groups"); // sätt violation istället för throw
+    checkCode(Protocol::ANS_END, ans_end); // sätt violation istället för throw
     return text;
 }
 
@@ -180,8 +184,18 @@ void Client_commandhandler::checkCondition(bool condition, std::string method, s
         throw std::runtime_error("Faulty method is " + method + ", With messege " + message);
     }
 }
-void Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
-    if(expectedCode != code){
-        throw std::runtime_error("Expected: " + to_string(expectedCode) + ". Got: " + to_string(code));
+bool Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
+    if(expectedCode == code){
+        return true;
     }
-}
+    else
+    {
+        cout << "PROTOCOL VIOLATION. Expected: " << to_string(expectedCode) << " Got: " << to_string(code);
+        return false;
+    }
+} 
+/* void Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
+    if(expectedCode != code){
+        throw std::runtime_error("Expected: " + std::string(to_string(expectedCode)) + ". Got: " + std::string(to_string(code)));
+    }
+} */
