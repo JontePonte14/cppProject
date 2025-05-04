@@ -76,56 +76,5 @@ int main(){
     for (const auto& [title, id] : articlesInFinland) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }
-    /*
-    //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
-
-    cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 129) << endl;
-
-
-    cout << "List newsgroup: ";
-    cout << DS.listGroup() << endl;
-
-    cout << "Tesing to get unavailable file: ";
-    Article testGet;
-    testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
-
     
-    std::vector<std::pair<std::string, int>> sortedArticles;
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology: " << endl;
-    for (const auto& [title, id] : sortedArticles) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-
-    cout << "----------" << endl;
-
-    cout << "Adding a third article" << endl;
-
-    Article article3(
-        "Technology",                            // groupName
-        "AI is very bad",                            // title
-        "Jenny von Bergen",                   // author
-        "2020-11-28",                            // date
-        1,                                       // idNbr
-        "AI is not so good people though, and I think it should be destroyed"
-    );
-
-
-    cout << "The end" << endl;
-    cout << "make article3 " << DS.makeArticle(article3) << endl;
-
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology (again): " << endl;
-    for (const auto& [title, id] : sortedArticles) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-    */
-
-    
-
-
-
-
-
-
 }

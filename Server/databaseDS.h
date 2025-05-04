@@ -32,9 +32,8 @@ private:
     /* data */
     std::filesystem::path root;
     static int groupIDnbr;
-    static int groupIDnbrMax;
 
-    // increment id for each new article
+    // increment id for each new group
     void idIncr();
 
     //Help functions

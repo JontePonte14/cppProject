@@ -19,7 +19,6 @@ DatabaseDS::DatabaseDS(){
     if (fs::create_directory(root)) {
         // We create a new IDnbr
         groupIDnbr = 1;
-        groupIDnbrMax = 1;
         saveGroupIdNbr();
 
     } else {
@@ -182,8 +181,6 @@ void DatabaseDS::idIncr(){
 }
 
 int DatabaseDS::groupIDnbr = -1;  // Initial value (will be overridden by loading)
-int DatabaseDS::groupIDnbrMax = -1; // Initial value
-
 
 // help functions
 bool DatabaseDS::groupNameExists(const std::string& name) {
