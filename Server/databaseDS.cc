@@ -29,7 +29,8 @@ DatabaseDS::DatabaseDS(){
 }
 
 std::vector<std::string> listGroup(){
-    return;
+    std::vector<std::string> listOfGroups;
+    return listOfGroups;
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
@@ -42,7 +43,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
     idIncr();
     saveGroupIdNbr();
     fs::path fullPathToGroup = root / groupName;
-    
+
     // creates new folder with a .created file
     fs::create_directory(fullPathToGroup);
     std::ofstream createdFile(fullPathToGroup / ".created");
@@ -62,32 +63,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
 }
 
 bool DatabaseDS::makeArticle(int group, Article article){
-    fs::path groupName = root / article.getGroupName();
-
-    if (!fileExists(groupName)){
-        return false;
-    }
-
-    article.setID(groupIDnbr);
-    idIncr();
-    saveIdNbr();
-    // Overloading function in article.h
-    json newArticleFile = article;
-
-    // Saves the file
-    std::string filename = std::to_string(article.getID()) + "_" + article.getTitle() + article.getDate() + "_" + ".json";
-    fs::path filePath = groupName / filename;
-    
-    std::ofstream outFile(filePath);
-    if (!outFile) {
-        std::cerr << "Error couldn't open file" << filePath << std::endl;
-        return false;
-    }
-
-    outFile << newArticleFile.dump(4);
-    outFile.close();
-
-    return true;
+    return false;
 }
 
 bool DatabaseDS::removeArticle(int groupID, int articleID){

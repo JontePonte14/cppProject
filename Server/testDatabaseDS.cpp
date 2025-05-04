@@ -10,12 +10,12 @@ using std::string;
 namespace fs=std::filesystem;
 
 int main(){
-    DatabaseDS DS("Newsgroup");
+    DatabaseDS DS;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
-
+    /*
     //cout << DS.removeGroup("Sweden") << endl;
     //cout << DS.removeGroup("Sweden") << endl;
     cout << DS.makeGroup("Technology") << endl;
@@ -89,6 +89,7 @@ int main(){
     for (const auto& [title, id] : sortedArticles) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }
+    */
 
     
 
