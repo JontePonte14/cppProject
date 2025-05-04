@@ -125,7 +125,12 @@ bool DatabaseDS::makeArticle(int group, Article article){
 }
 
 bool DatabaseDS::removeArticle(int groupID, int articleID){
-    return false;
+    fs::path articlePath = findArticlePath(groupID, articleID);
+
+    if (articlePath.empty()) {
+        return false; // Couldn't find group or article check error message
+    }
+    return fs::remove(articlePath);
 }
 
 Article DatabaseDS::getArticle(int groupID, int articleID){
@@ -183,11 +188,11 @@ std::string DatabaseDS::findGroupWithID(const int& groupID){
     return ""; // Did not find a group with the same name
 }
 
-fs::path DatabaseDS::findArticleName(const int& groupID, const int& articleID){
+fs::path DatabaseDS::findArticlePath(const int& groupID, const int& articleID){
     std::string groupName = findGroupWithID(groupID);
 
     if (groupName == "") {
-        std::cerr << "Coulnd't find group" << std::endl;
+        std::cerr << "Couldn't find group" << std::endl;
         return fs::path{};
     }
 

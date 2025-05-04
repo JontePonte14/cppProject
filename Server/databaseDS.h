@@ -46,7 +46,7 @@ private:
     std::string findGroupWithID(const int& groupID);
     // Checks if an article exist within a group given its groupID and articleID
     // Returns "" (empty string) if it couldn't be found
-    std::filesystem::path findArticleName(const int& groupID, const int& articleID);
+    std::filesystem::path findArticlePath(const int& groupID, const int& articleID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();

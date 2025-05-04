@@ -58,6 +58,11 @@ int main(){
     cout << DS.makeArticle(2, article) << endl;
     cout << DS.makeArticle(3, article2) << endl;
 
+    cout << "-----------------" << endl;
+    cout << "TEST 5: removeArticle()" << endl;
+    cout << DS.removeArticle(3, 2) << endl;
+    cout << DS.makeArticle(2, article2) << " We then back to Finland instead" << endl;
+
     /*
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 
