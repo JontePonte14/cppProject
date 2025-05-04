@@ -26,10 +26,10 @@ class MessageHandler {
         explicit MessageHandler(const std::shared_ptr<Connection>& connection);
         virtual ~MessageHandler() = default;
         
-        virtual auto sendProtocol(const Protocol protocol) noexcept -> bool;
-        auto sendInt(const uint32_t value) noexcept -> bool;
-        auto sendIntParameter(const uint32_t value) noexcept -> bool;
-        auto sendStringParameter(const string& param) noexcept -> bool;
+        virtual auto sendProtocol(const Protocol protocol) noexcept -> Status;
+        auto sendInt(const uint32_t value, const std::string& id = "") noexcept -> Status;
+        auto sendIntParameter(const uint32_t value, const std::string& id = "") noexcept -> Status;
+        auto sendStringParameter(const string& param, const std::string& id = "") noexcept -> Status;
 
         [[nodiscard]] auto receiveProtocol() noexcept -> Protocol;
         [[nodiscard]] auto receiveInt() noexcept -> Expected<uint32_t, Status>;
@@ -39,7 +39,7 @@ class MessageHandler {
         void setConnection(const std::shared_ptr<Connection>& connection) noexcept;
         
     protected:
-        auto sendByte(const byte b, const byte tries = 1) noexcept -> bool;
+        auto sendByte(const byte b, const byte tries = 1) noexcept -> Status;
         [[nodiscard]] auto receiveByte(const byte tries = 1) noexcept -> Expected<byte, Status>;
         
     private:
