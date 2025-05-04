@@ -14,7 +14,7 @@ public:
     DatabaseDS();
     ~DatabaseDS() = default;
     
-    std::vector<std::string> listGroup() override;
+    std::vector<std::pair<std::string, int>> listGroup() override;
     // Cretes a group as a folder with the name : "name_groupID"
     bool makeGroup(const std::string& name)override;
     bool removeGroup(int groupID)override;

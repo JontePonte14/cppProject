@@ -20,6 +20,10 @@ int main(){
     cout << DS.makeGroup("Technology") << endl;
 
     /*
+
+    cout << "List newsgroup: ";
+    cout << DS.listGroup() << endl;
+    
     Article article(
         "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title
