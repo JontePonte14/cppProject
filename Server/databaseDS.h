@@ -46,10 +46,7 @@ private:
     void loadGroupIdNbr();
     
     // saves the next articleID in the given news group folder
-    long saveArticleIdNbr(const std::string& groupFolderName, const int& currentID);
+    void saveArticleIdNbr(const std::string& groupFolderName, const int& currentID);
     // loads the current articleID in the given news group folder
-    void loadArticleIdNbr(const std::string& groupFolderName);
-
-    void saveArticleIdNbr(const std::filesystem::path& groupFolder);
-    void loadArticleIdNbr(const std::filesystem::path& groupFolder);
+    int loadArticleIdNbr(const std::string& groupFolderName);
 };

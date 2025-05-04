@@ -68,6 +68,7 @@ bool DatabaseDS::makeGroup(const std::string& name){
 
     // creates new folder with a .created file
     fs::create_directory(fullPathToGroup);
+    saveArticleIdNbr(groupName, 1);
     return true;
 }
 
