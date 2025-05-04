@@ -49,20 +49,16 @@ int main(){
     cout << DS.makeArticle(999, article) << " = 0" << endl;
 
 
-    /*
-
     Article article2(
-        "Technology",                            // groupName
         "AI is good",                            // title
         "Jonathan von Bergen",                   // author
-        "2024-04-08",                            // date
-        1,                                       // idNbr
         "AI is good this is body"
     );
 
-    cout << "make article " << DS.makeArticle(article) << endl;
-    cout << "make article2 " << DS.makeArticle(article2) << endl;
+    cout << DS.makeArticle(2, article) << endl;
+    cout << DS.makeArticle(3, article2) << endl;
 
+    /*
     //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
 
     cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 129) << endl;
