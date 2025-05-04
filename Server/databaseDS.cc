@@ -19,39 +19,32 @@ DatabaseDS::DatabaseDS(){
         // We create a new IDnbr
         groupIDnbr = 1;
         groupIDnbrMax = 1;
-        saveIdNbr();
+        saveGroupIdNbr();
 
     } else {
         // We load the old IDnbr
-        loadIdNbr();
+        loadGroupIdNbr();
     }
     return;
 }
 
-DatabaseDS::DatabaseDS(const std::filesystem::path& basePath){
-    root = basePath;
-    if (fs::create_directory(root)) {
-        // We create a new IDnbr
-        groupIDnbr = 1;
-        groupIDnbrMax = 1;
-        saveIdNbr();
-
-    } else {
-        // We load the old IDnbr
-        loadIdNbr();
-    }
-    return;
-}
-
-std::string DatabaseDS::listGroup(){
+std::vector<std::string> listGroup(){
     return "-1";
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
+    fs::path groupName = root / name;
+
+    if (fileExists(groupName)) {
+        return false;
+    }
+
+    
+
     return false;
 }
 
-bool DatabaseDS::removeGroup(const std::string& name){
+bool DatabaseDS::removeGroup(int groupID){
     return false;
 }
 
@@ -60,7 +53,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
     return sortedArticles;
 }
 
-bool DatabaseDS::makeArticle(Article& article){
+bool DatabaseDS::makeArticle(int group, Article article){
     fs::path groupName = root / article.getGroupName();
 
     if (!fileExists(groupName)){
@@ -108,7 +101,7 @@ int DatabaseDS::groupIDnbrMax = -1; // Initial value
 
 
 // help functions
-bool DatabaseDS::groupExists(const fs::path& fileName) {
+bool DatabaseDS::fileExists(const fs::path& fileName) {
     if (!fs::exists(fileName)) {
         std::cerr << "Error: Group doesn't exist" << std::endl;
         return false;
@@ -116,7 +109,7 @@ bool DatabaseDS::groupExists(const fs::path& fileName) {
     return true;
 }
 
-void DatabaseDS::saveIdNbr(){
+void DatabaseDS::saveGroupIdNbr(){
     std::string fileName = "groupId_number.txt";
 
     std::ofstream outFile(root/fileName);
@@ -128,7 +121,7 @@ void DatabaseDS::saveIdNbr(){
     outFile.close();
 }
 
-void DatabaseDS::loadIdNbr(){
+void DatabaseDS::loadGroupIdNbr(){
     std::string fileName = "groupId_number.txt";
     std::ifstream inFile(root / fileName);
 
