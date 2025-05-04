@@ -28,8 +28,16 @@ DatabaseDS::DatabaseDS(){
     return;
 }
 
-std::vector<std::string> DatabaseDS::listGroup(){
-    std::vector<std::string> listOfGroups;
+std::vector<std::pair<std::string, int>> DatabaseDS::listGroup(){
+    std::vector<std::pair<std::string, int>> listOfGroups;
+    std::string tempGroupName = "temp";
+    int tempIdNbr = -1;
+
+    for (auto const& dir_entry : fs::directory_iterator(root)){
+        
+        listOfGroups.push_back(std::make_pair(tempGroupName, tempIdNbr));
+    }
+
     return listOfGroups;
 }
 
@@ -46,10 +54,6 @@ bool DatabaseDS::makeGroup(const std::string& name){
 
     // creates new folder with a .created file
     fs::create_directory(fullPathToGroup);
-    std::ofstream createdFile(fullPathToGroup / ".created");
-    createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    createdFile.close();
-
     return true;
 }
 
