@@ -15,6 +15,7 @@ public:
     ~DatabaseDS() = default;
     
     std::vector<std::string> listGroup() override;
+    // Cretes a group as a folder with the name : "name_groupID"
     bool makeGroup(const std::string& name)override;
     bool removeGroup(int groupID)override;
 
@@ -33,7 +34,8 @@ private:
     void idIncr();
 
     //Help functions
-    bool fileExists(const std::filesystem::path& groupName);
+    //Check to see if a group already exists.
+    bool groupNameExists(const std::string& name);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();

@@ -29,19 +29,28 @@ DatabaseDS::DatabaseDS(){
 }
 
 std::vector<std::string> listGroup(){
-    return "-1";
+    return;
 }
 
 bool DatabaseDS::makeGroup(const std::string& name){
-    fs::path groupName = root / name;
+    //fs::path groupName = root / name;
 
-    if (fileExists(groupName)) {
+    if (groupNameExists(name)) {
+        std::cerr << "Group already exist" << std::endl;
         return false;
     }
 
-    
+    std::string groupName = name + "_" + std::to_string(groupIDnbr);
+    idIncr();
+    saveGroupIdNbr();
 
-    return false;
+    // creates new folder with a .created file
+    fs::create_directory(groupName);
+    std::ofstream createdFile(groupName / ".created");
+    createdFile << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    createdFile.close();
+
+    return true;
 }
 
 bool DatabaseDS::removeGroup(int groupID){
@@ -101,12 +110,24 @@ int DatabaseDS::groupIDnbrMax = -1; // Initial value
 
 
 // help functions
-bool DatabaseDS::fileExists(const fs::path& fileName) {
-    if (!fs::exists(fileName)) {
-        std::cerr << "Error: Group doesn't exist" << std::endl;
-        return false;
+bool DatabaseDS::groupNameExists(const std::string& name) {
+    // iterate to compare that the group doesn't exists.
+    for (const auto& entry : fs::directory_iterator(root)){
+        if (!entry.is_directory()){
+            continue;
+        } else {
+            std::string folderName = entry.path().filename().string();
+            auto underscorePos = folderName.rfind("_");
+            if (underscorePos =! std::string::npos){
+                std::string existingGroupName = folderName.substr(0, underscorePos);
+                if (existingGroupName == name){
+                    return true; // Found a group with the same name
+                }
+            }   
+        }
+
     }
-    return true;
+    return false; // Did not find a group with the same name
 }
 
 void DatabaseDS::saveGroupIdNbr(){
