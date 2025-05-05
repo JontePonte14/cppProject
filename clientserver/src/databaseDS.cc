@@ -47,7 +47,7 @@ std::vector<Database::ListObject> DatabaseDS::listGroup(){
     }
 
     std::sort(listOfGroups.begin(), listOfGroups.end(), [](const auto &a, const auto &b) {
-        return a.second < b.second;
+        return a.id < b.id;
     });
 
     return listOfGroups;
@@ -113,7 +113,7 @@ std::vector<Database::ListObject> DatabaseDS::listArticle(int groupID){
 
     // Sorting group
     std::sort(sortedArticles.begin(), sortedArticles.end(), [](const auto &a, const auto &b) {
-        return a.second < b.second;
+        return a.id < b.id;
     });
 
     return sortedArticles;

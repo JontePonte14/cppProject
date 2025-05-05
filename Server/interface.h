@@ -18,13 +18,13 @@ private:
 
 public:
     
-    std::vector<std::string> listGroup();
+    std::vector<Database::ListObject> listGroup();
     bool makeGroup(std::string groupName);
-    bool removeGroup(int groupID);
+    Database::RemoveStatus removeGroup(int groupID);
 
-    std::vector<std::string> listArticle(int groupID);
+    std::vector<Database::ListObject> listArticle(int groupID);
     bool makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text);
-    bool removeArticle(int groupID, int articleID);
+    Database::RemoveStatus removeArticle(int groupID, int articleID);
     Article getArticle(int groupID, int articleID);
 
     int switchDateBase();

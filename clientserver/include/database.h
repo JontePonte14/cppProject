@@ -14,7 +14,7 @@ class Database {
             std::string name;
             int id;
             ListObject(const std::string& groupName, int groupID)
-                : id(groupID), name(groupName) {} 
+                :  name(groupName), id(groupID) {} 
                 
             std::string toString() const {return name + " [" + std::to_string(id) + "]";}
         };
