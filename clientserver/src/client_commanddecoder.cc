@@ -52,8 +52,8 @@ void Client_commanddecoder::com_decode(std::istream& is){
     }
 
     else if(command == "delete_ng"){
-        cout << "Type the name of the newsgroup you want to delete: " << endl;
-        //DELETE_NG(is);
+        cout << "Type the Index number of the newsgroup you want to delete: " << endl;
+        DELETE_NG(is);
     }
 
     else if(command == "list_art"){
@@ -102,7 +102,8 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
 
 }
 
-/* void Client_commanddecoder::DELETE_NG(std::istream& is) {
+ void Client_commanddecoder::DELETE_NG(std::istream& is) {
+    //Input
     auto Id = readInputId(is);
     if (!Id)
     {
@@ -113,14 +114,10 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
         }
         return;
     }
-    reply = comhand.DELETE_NG(*Id);
-    if (!reply)
-    {
-        printConnectionError(reply.error());
-        return;
-    }
-    printReply(*reply);
-} */
+    //Output
+    auto reply = comhand.DELETE_NG(*Id);
+    printReply(reply);
+} 
 
 void Client_commanddecoder::LIST_ART(std::istream& is) {
     
@@ -194,13 +191,14 @@ Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::i
 }
 
 Expected<int, InputStatus> Client_commanddecoder::readInputId(std::istream& is) const {
-    std::string str;
-    is >> str;
-    if (str == "exit")
+    //ReadString
+    auto str = readInputString(is);
+    if (!str)
     {
-        return InputStatus::Exit;
+        return str.error();
     }
-    auto value = stringToInt(str);
+    //Convert to
+    auto value = stringToInt(*str);
     if (!value)
     {
         return value.error();
@@ -211,7 +209,6 @@ Expected<int, InputStatus> Client_commanddecoder::readInputId(std::istream& is) 
         return InputStatus::IdLessZero;
     }
     return valueInt;
-
 }
 
 std::string Client_commanddecoder::removeWhitespaces(std::string& str) const {

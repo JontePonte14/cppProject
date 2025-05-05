@@ -129,7 +129,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_NG(int 
         return ProtocolViolation;
     }
     Protocol ans_end = mh.receiveProtocol();
-    checkCode(Protocol::ANS_END, ans_end); // sätt violation istället för throw
+    RETURN_IF_FAILED(checkCode(Protocol::ANS_END, ans_end)); 
     return text;
 }
 
