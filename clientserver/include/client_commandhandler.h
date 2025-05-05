@@ -27,7 +27,7 @@ public:
     Expected<std::vector<std::string>, Status> GET_ART(int groupIndex, int articleIndex);
 private:
     
-    Expected<std::vector<std::string>, Status> receiveIntStringPairs(const int nbrGroups);
+    Expected<std::vector<std::string>, Status> receiveIntStringPairs(const int nbrGroups, const std::string idType);
     bool checkCondition(bool condition, std::string message) const;
     bool checkCode(Protocol epectedCode, Protocol code) const; 
     

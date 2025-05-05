@@ -41,9 +41,9 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     RETURN_IF_ERROR(nbrGroups);
     int nbrGroupsInt = *nbrGroups;
     RETURN_IF_FAILED(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
-    //auto intStringPairs = receiveIntStringPairs(nbrGroupsInt);
-    //RETURN_IF_FAILED(intStringPairs);
-    ///replyText = *intStringPairs;
+    auto intStringPairs = receiveIntStringPairs(nbrGroupsInt, "group");
+    RETURN_IF_FAILED(intStringPairs);
+    replyText = *intStringPairs;
     //ANS_END
     Protocol ans_end = mh.receiveProtocol();
     RETURN_IF_FAILED(checkCode(Protocol::ANS_END, ans_end));
@@ -215,7 +215,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int gr
     return std::vector<std::string>{};
 }
 
-Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt) {
+Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt, const std::string idType) {
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
     //Receive index plus groupname
@@ -223,11 +223,11 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStri
         auto groupId = mh.receiveIntParameter();
         auto groupName = mh.receiveStringParameter();
         if (!groupId) {
-            cout << "Missing Group Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
+            cout << "Missing " << idType <<" Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
             return groupId.error();
         }
         if (!groupName) {
-            cout << "Missing Group Name on iteration: " << i << "Expected length: " << nbrGroupsInt <<endl;
+            cout << "Missing " << idType <<" Name on iteration: "<< i << "Expected length: " << nbrGroupsInt <<endl;
             return groupName.error();
         }
         nameIdPair = std::to_string(*groupId) + " " + *groupName; 
