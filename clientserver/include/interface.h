@@ -25,7 +25,7 @@ public:
     std::vector<Database::ListObject> listArticle(int groupID);
     bool makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text);
     Database::RemoveStatus removeArticle(int groupID, int articleID);
-    Article getArticle(int groupID, int articleID);
+    auto getArticle(int groupID, int articleID) -> Expected<Article, Database::RemoveStatus>;
 
     int switchDateBase();
     int getAtiveDB();

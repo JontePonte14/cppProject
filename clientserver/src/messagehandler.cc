@@ -3,6 +3,7 @@
 #include "connection.h"
 #include "protocol.h"
 #include <iostream>
+#include "logger.h"
 
 class ConnectionClosedException;
 
@@ -17,7 +18,8 @@ MessageHandler::MessageHandler(const std::shared_ptr<Connection>& connection)
 
 auto MessageHandler::sendProtocol(const Protocol protocol) const noexcept -> Status
 {
-    std::cout << "Sent protocol " << to_string(protocol) << std::endl;
+    Logger::log("NETWORK", "Sent protocol " + std::string(to_string(protocol)));
+
     return sendByte(to_code(protocol));
 }
 
@@ -38,7 +40,7 @@ auto MessageHandler::sendStringParameter(const std::string& param, const std::st
         RETURN_IF_FAILED(sendByte(c));
     }
 
-    std::cout << "Sent string " << (id == "" ? "= " : "[" + id + "] = ") << param << std::endl;
+    Logger::log("NETWORK",  "Sent string " + (id == "" ? "= " : "[" + id + "] = ") + param);
 
     return Status::Success;
 }
@@ -48,7 +50,7 @@ auto MessageHandler::receiveProtocol() const noexcept -> Expected<Protocol, Stat
     ASSIGN_OR_RETURN(code, receiveByte());
     const auto protocol = from_code(code);
 
-    std::cout << "Received protocol " << to_string(protocol) << std::endl;
+    Logger::log("NETWORK", "Received protocol " + std::string(to_string(protocol)));
 
     return protocol;
 }
@@ -58,7 +60,7 @@ auto MessageHandler::receiveProtocol(const Protocol expected) const noexcept -> 
     ASSIGN_OR_RETURN(code, receiveByte());
     const auto protocol = from_code(code);
 
-    std::cout << "Received protocol " << to_string(protocol) << std::endl;
+    Logger::log("NETWORK", "Received protocol " + std::string(to_string(protocol)));
 
     if (protocol != expected) {
         return Status::ProtocolViolation;
@@ -94,7 +96,7 @@ auto MessageHandler::receiveStringParameter() const noexcept -> Expected<std::st
         param += b;
     }
 
-    std::cout << "Received string " << param << std::endl;
+    Logger::log("NETWORK", "Received string " + param);
 
     return param;
 }
@@ -148,7 +150,7 @@ auto MessageHandler::sendInt(const uint32_t value, const std::string& id) const 
     RETURN_IF_FAILED(sendByte(b3));
     RETURN_IF_FAILED(sendByte(b4));
    
-    std::cout << "Sent int " << (id == "" ? "= " : "[" + id + "] = ") << value << std::endl;
+    Logger::log("NETWORK",  "Sent int " + (id == "" ? "= " : "[" + id + "] = ") + std::to_string(value));
 
     return Status::Success;
 }
@@ -156,19 +158,13 @@ auto MessageHandler::sendInt(const uint32_t value, const std::string& id) const 
 auto MessageHandler::receiveInt() const noexcept -> Expected<uint32_t, Status>
 {
     uint32_t value { 0 };
-    Expected<byte, Status> b;
 
     for(char i = 24; i >= 0; i -= 8) {
-        const auto b = receiveByte();
-
-        if (b) {
-            value |= static_cast<uint32_t>(*b) << i;
-        } else {
-            return b.error();
-        }
+        ASSIGN_OR_RETURN(b, receiveByte());
+        value |= static_cast<uint32_t>(b) << i;
     }
 
-    std::cout << "Received int " << value << std::endl;
+    Logger::log("NETWORK", "Received int " + std::to_string(value));
 
     return value;
 }

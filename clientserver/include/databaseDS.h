@@ -25,7 +25,7 @@ public:
     std::vector<Database::ListObject> listArticle(int groupID) override;
     bool makeArticle( int group, Article article) override;
     Database::RemoveStatus removeArticle(int groupID, int articleID) override;
-    Article getArticle(int groupID, int articleID) override;
+    Expected<Article, RemoveStatus> getArticle(int groupID, int articleID) override;
 
 
 private:

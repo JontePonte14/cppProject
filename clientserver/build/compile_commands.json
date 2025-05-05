@@ -72,6 +72,12 @@
   "output": "CMakeFiles/clientserver.dir/src/article.cc.o"
 },
 {
+  "directory": "/root/EDAF50/cppProject/clientserver/build",
+  "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/clientserver.dir/src/logger.cc.o -c /root/EDAF50/cppProject/clientserver/src/logger.cc",
+  "file": "/root/EDAF50/cppProject/clientserver/src/logger.cc",
+  "output": "CMakeFiles/clientserver.dir/src/logger.cc.o"
+},
+{
   "directory": "/root/EDAF50/cppProject/clientserver/build/example",
   "command": "/usr/bin/c++  -I/root/EDAF50/cppProject/clientserver/include -I/root/EDAF50/cppProject/clientserver/src -I/root/EDAF50/cppProject/clientserver/build/src -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow -std=gnu++17 -o CMakeFiles/myserver.dir/myserver.cc.o -c /root/EDAF50/cppProject/clientserver/example/myserver.cc",
   "file": "/root/EDAF50/cppProject/clientserver/example/myserver.cc",

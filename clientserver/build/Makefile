@@ -429,6 +429,30 @@ src/interface.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/interface.cc.s
 .PHONY : src/interface.cc.s
 
+src/logger.o: src/logger.cc.o
+.PHONY : src/logger.o
+
+# target to build an object file
+src/logger.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/logger.cc.o
+.PHONY : src/logger.cc.o
+
+src/logger.i: src/logger.cc.i
+.PHONY : src/logger.i
+
+# target to preprocess a source file
+src/logger.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/logger.cc.i
+.PHONY : src/logger.cc.i
+
+src/logger.s: src/logger.cc.s
+.PHONY : src/logger.s
+
+# target to generate assembly for a file
+src/logger.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/clientserver.dir/build.make CMakeFiles/clientserver.dir/src/logger.cc.s
+.PHONY : src/logger.cc.s
+
 src/messagehandler.o: src/messagehandler.cc.o
 .PHONY : src/messagehandler.o
 
@@ -544,6 +568,9 @@ help:
 	@echo "... src/interface.o"
 	@echo "... src/interface.i"
 	@echo "... src/interface.s"
+	@echo "... src/logger.o"
+	@echo "... src/logger.i"
+	@echo "... src/logger.s"
 	@echo "... src/messagehandler.o"
 	@echo "... src/messagehandler.i"
 	@echo "... src/messagehandler.s"

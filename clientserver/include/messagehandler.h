@@ -39,10 +39,12 @@ enum Status {
     decltype(auto) var = std::move(*CONCAT(_result_, __LINE__));
 
 // Macro used for receiving and unpacking a Protocol, checking if it is valid and expected else returning error
-#define RECEIVE_AND_VERIFY_PROTOCOL(expected)                           \
-    Expected<Protocol, Status> _protocol = receiveProtocol(expected);   \
-    if (!_protocol)                                                     \
-        return _protocol.error();
+#define RECEIVE_AND_VERIFY_PROTOCOL(expected)                               \
+    do {                                                                    \
+        Expected<Protocol, Status> _protocol = receiveProtocol(expected);   \
+        if (!_protocol)                                                     \
+            return _protocol.error();                                       \
+    } while(0)
 
 class MessageHandler {
 

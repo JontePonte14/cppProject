@@ -1,7 +1,7 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-
+#include "expected.h"
 #include "article.h"
 #include <string>
 #include <list>
@@ -39,7 +39,7 @@ class Database {
         virtual std::vector<ListObject>  listArticle(int groupID) = 0;
         virtual bool makeArticle(int groupID, Article article) = 0;
         virtual RemoveStatus removeArticle(int groupID, int articleID) = 0;
-        virtual Article getArticle(int groupID, int articleID) = 0;
+        virtual Expected<Article, RemoveStatus> getArticle(int groupID, int articleID) = 0;
     };
     
 

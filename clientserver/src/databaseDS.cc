@@ -164,11 +164,11 @@ Database::RemoveStatus DatabaseDS::removeArticle(int groupID, int articleID){
   
 }
 
-Article DatabaseDS::getArticle(int groupID, int articleID){
+Expected<Article, Database::RemoveStatus> DatabaseDS::getArticle(int groupID, int articleID){
     Article article;
     fs::path articlePath = findArticlePath(groupID, articleID);
     if (articlePath.empty()) {
-        return article; // Couldn't find group or article check error message
+        return Database::RemoveStatus::ARTICLE_NOT_FOUND; // Couldn't find group or article check error message
     }
 
     json articleJson;

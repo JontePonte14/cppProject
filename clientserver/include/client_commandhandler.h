@@ -8,7 +8,7 @@
 #include <string>
 
 
-class Client_commandhandler {
+class Client_commandhandler : public MessageHandler {
 public:
     Client_commandhandler(const std::shared_ptr<Connection>& conn); //replcace with message handler
 
@@ -26,12 +26,8 @@ public:
 
     Expected<std::vector<std::string>, Status> GET_ART(int groupIndex, int articleIndex);
 private:
-    MessageHandler mh;
-
     bool checkCondition(bool condition, std::string message) const;
     bool checkCode(Protocol epectedCode, Protocol code) const; 
-    
-    MessageHandler conn;
 };
 
 #endif
