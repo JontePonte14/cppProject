@@ -1,1 +1,0 @@
-/usr/bin/c++ -O2 -g -DNDEBUG -Wall -Wextra -pedantic -Wpointer-arith -Wcast-align -Wno-switch -Wno-shadow CMakeFiles/myserver.dir/myserver.cc.o -o myserver  ../libclientserver.a 
