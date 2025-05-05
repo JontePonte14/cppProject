@@ -41,30 +41,13 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     RETURN_IF_ERROR(nbrGroups);
     int nbrGroupsInt = *nbrGroups;
     RETURN_IF_FAILED(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
-    std::vector<std::string> nameIdPairVector(nbrGroupsInt);
-    std::string nameIdPair;
-    //Receive index plus groupname
-    for (size_t i = 0; i < nbrGroupsInt; i++) {
-        auto groupId = mh.receiveIntParameter();
-        auto groupName = mh.receiveStringParameter();
-        if (!groupId) {
-            cout << "Missing Group Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
-            return groupId.error();
-        }
-        if (!groupName) {
-            cout << "Missing Group Name on iteration: " << i << "Expected length: " << nbrGroupsInt <<endl;
-            return groupName.error();
-        }
-        nameIdPair = std::to_string(*groupId) + " " + *groupName; 
-        nameIdPairVector[i] = nameIdPair;
-    }
-    if (nbrGroupsInt == 0) {
-        nameIdPairVector = {"No newsgroups exist"};
-    }
+    //auto intStringPairs = receiveIntStringPairs(nbrGroupsInt);
+    //RETURN_IF_FAILED(intStringPairs);
+    ///replyText = *intStringPairs;
     //ANS_END
     Protocol ans_end = mh.receiveProtocol();
     RETURN_IF_FAILED(checkCode(Protocol::ANS_END, ans_end));
-    return nameIdPairVector;
+    return replyText;
 }
 
 Expected<std::vector<std::string>, Status> Client_commandhandler::CREATE_NG(std::string title){
@@ -230,6 +213,30 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_ART(int
 
 Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int groupIndex, int articleIndex){
     return std::vector<std::string>{};
+}
+
+Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt) {
+    std::vector<std::string> nameIdPairVector(nbrGroupsInt);
+    std::string nameIdPair;
+    //Receive index plus groupname
+    for (size_t i = 0; i < nbrGroupsInt; i++) {
+        auto groupId = mh.receiveIntParameter();
+        auto groupName = mh.receiveStringParameter();
+        if (!groupId) {
+            cout << "Missing Group Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
+            return groupId.error();
+        }
+        if (!groupName) {
+            cout << "Missing Group Name on iteration: " << i << "Expected length: " << nbrGroupsInt <<endl;
+            return groupName.error();
+        }
+        nameIdPair = std::to_string(*groupId) + " " + *groupName; 
+        nameIdPairVector[i] = nameIdPair;
+    }
+    if (nbrGroupsInt == 0) {
+        nameIdPairVector = {"No newsgroups exist"};
+    }
+    return nameIdPairVector;
 }
 
 bool Client_commandhandler::checkCondition(bool condition, std::string message) const{
