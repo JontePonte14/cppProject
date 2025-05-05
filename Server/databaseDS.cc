@@ -25,7 +25,6 @@ DatabaseDS::DatabaseDS(){
         // We load the old IDnbr
         loadGroupIdNbr();
     }
-    return;
 }
 
 std::vector<std::pair<std::string, int>> DatabaseDS::listGroup(){
@@ -86,7 +85,7 @@ std::vector<std::pair<std::string, int>> DatabaseDS::listArticle(int groupID){
     std::string groupFolder = findGroupWithID(groupID);
 
     if (groupFolder == "") {
-        std::cerr << "No group was found";
+        std::cerr << "No group was found" << std::endl;
         return {};
     }
 
@@ -118,7 +117,7 @@ bool DatabaseDS::makeArticle(int group, Article article){
     std::string groupFolder = findGroupWithID(group);
 
     if (groupFolder == "") {
-        std::cerr << "No group was found: ";
+        std::cerr << "No group was found \n";
         return false;
     }
     
