@@ -11,21 +11,31 @@ namespace fs=std::filesystem;
 
 int main(){
     DatabaseDS DS;
+    cout << "TEST 1: makegroup()" << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Sweden") << endl;
     cout << DS.makeGroup("Finland") << endl;
 
-    /*
-    //cout << DS.removeGroup("Sweden") << endl;
-    //cout << DS.removeGroup("Sweden") << endl;
+    cout << "-----------------" << endl;
+    cout << "TEST 2: removegroup()" << endl;
+    cout << Database::toString(DS.removeGroup(1)) << endl;
+    cout << Database::toString(DS.removeGroup(6)) << " = 0" << endl;
     cout << DS.makeGroup("Technology") << endl;
+    
+    cout << "-----------------" << endl;
+    cout << "TEST 3: listGroup()" << endl;
+    std::vector<Database::ListObject> allGroups;
+    allGroups = DS.listGroup();
+    for (const auto& [groupname, id] : allGroups) {
+        cout << "ID: " << id << ", Groupname: " << groupname << endl;
+    }
 
+    cout << "-----------------" << endl;
+    cout << "TEST 4: makeArticle()" << endl;
+    
     Article article(
-        "Technology",                            // groupName
         "AI Breakthrough in 2025",               // title
         "Jonathan von Bergen",                   // author
-        "2025-04-08",                            // date
-        101,                                     // idNbr
         "In a groundbreaking announcement today, researchers at the Global AI Institute revealed a new artificial intelligence model that surpasses previous benchmarks in both reasoning and creativity. "
         "Dubbed 'Aurora', the model demonstrates a remarkable ability to understand context, generate human-like dialogue, and even compose original music and poetry. Experts say this represents a major leap forward, "
         "not just in terms of computational power, but in the sophistication of the underlying architecture, which integrates multimodal learning and reinforcement strategies.\n\n"
@@ -35,67 +45,36 @@ int main(){
         "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
     );
 
+    cout << DS.makeArticle(3, article) << " = 1 " << endl;
+    cout << DS.makeArticle(999, article) << " = 0" << endl;
+
+
     Article article2(
-        "Technology",                            // groupName
         "AI is good",                            // title
         "Jonathan von Bergen",                   // author
-        "2024-04-08",                            // date
-        1,                                       // idNbr
         "AI is good this is body"
     );
 
-    cout << "make article " << DS.makeArticle(article) << endl;
-    cout << "make article2 " << DS.makeArticle(article2) << endl;
+    cout << DS.makeArticle(2, article) << endl;
+    cout << DS.makeArticle(3, article2) << endl;
 
-    //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
+    cout << "-----------------" << endl;
+    cout << "TEST 5: removeArticle()" << endl;
+    cout << Database::toString(DS.removeArticle(3, 2)) << endl;
+    cout << DS.makeArticle(2, article2) << " We then back to Finland instead" << endl;
 
-    cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 129) << endl;
 
+    cout << "-----------------" << endl;
+    cout << "TEST 6: getArticle()" << endl;
+    Article fetchedArticle = DS.getArticle(2, 2);
+    cout << "Title of fetched article: " << fetchedArticle.getTitle() << endl;
 
-    cout << "List newsgroup: ";
-    cout << DS.listGroup() << endl;
-
-    cout << "Tesing to get unavailable file: ";
-    Article testGet;
-    testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
-
+    cout << "TEST 7: listArticle()" << endl;
+    std::vector<Database::ListObject> articlesInFinland;
+    articlesInFinland = DS.listArticle(2);
+    cout << "Iterating in the folder Finland_2" << endl;
+    for (const auto& obj: articlesInFinland) { //finns även en toString nu
+        cout << "Title: " << obj.name << ", ID: " << obj.id << endl;
+    }   
     
-    std::vector<std::pair<std::string, int>> sortedArticles;
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology: " << endl;
-    for (const auto& [title, id] : sortedArticles) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-
-    cout << "----------" << endl;
-
-    cout << "Adding a third article" << endl;
-
-    Article article3(
-        "Technology",                            // groupName
-        "AI is very bad",                            // title
-        "Jenny von Bergen",                   // author
-        "2020-11-28",                            // date
-        1,                                       // idNbr
-        "AI is not so good people though, and I think it should be destroyed"
-    );
-
-
-    cout << "The end" << endl;
-    cout << "make article3 " << DS.makeArticle(article3) << endl;
-
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology (again): " << endl;
-    for (const auto& [title, id] : sortedArticles) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-    */
-
-    
-
-
-
-
-
-
 }
