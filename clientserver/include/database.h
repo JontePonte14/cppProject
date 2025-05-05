@@ -19,10 +19,10 @@ class Database {
             std::string toString() const {return name + " [" + std::to_string(id) + "]";}
         };
     
-        enum class RemoveStatus { OK = 1, GROUP_NOT_FOUND = 2 , ARTICLE_NOT_FOUND  = 3, UNKNOWN_ERROR = 4};
+        enum class RemoveStatus { SUCCESS = 1, GROUP_NOT_FOUND = 2 , ARTICLE_NOT_FOUND  = 3, UNKNOWN_ERROR = 4};
         static std::string toString(Database::RemoveStatus status) {
             switch (status) {
-                case Database::RemoveStatus::OK: return "OK";
+                case Database::RemoveStatus::SUCCESS: return "SUCCESS";
                 case Database::RemoveStatus::GROUP_NOT_FOUND: return "GROUP_NOT_FOUND";
                 case Database::RemoveStatus::ARTICLE_NOT_FOUND: return "ARTICLE_NOT_FOUND";
                 case Database::RemoveStatus::UNKNOWN_ERROR: return "UNKNOWN_ERROR";

@@ -92,7 +92,7 @@ Database::RemoveStatus DatabaseMS::removeGroup(int groupID){
     }
     memory.erase(groupIt); 
 
-    return Database::RemoveStatus::OK;
+    return Database::RemoveStatus::SUCCESS;
 }
 
 vector<Database::ListObject> DatabaseMS::listArticle(int groupID){
@@ -139,7 +139,7 @@ Database::RemoveStatus  DatabaseMS::removeArticle(int groupID, int articleID){
         return Database::RemoveStatus::ARTICLE_NOT_FOUND;
     }
     articles.erase(articleIt); //ersaing with the iterator using the pointer
-    return Database::RemoveStatus::OK;
+    return Database::RemoveStatus::SUCCESS;
 
 
 }

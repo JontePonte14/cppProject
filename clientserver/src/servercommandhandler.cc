@@ -78,8 +78,8 @@ auto ServerCommandHandler::listGroups() -> Status {
     RETURN_IF_FAILED(sendIntParameter(groups.size(), "# of groups"));
 
     for (const auto& group : groups) {
-        RETURN_IF_FAILED(sendIntParameter(id++, "group ID"));
-        RETURN_IF_FAILED(sendStringParameter(group, "group name"));
+        RETURN_IF_FAILED(sendIntParameter(group.id, "group ID"));
+        RETURN_IF_FAILED(sendStringParameter(group.name, "group name"));
     }
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
@@ -137,8 +137,8 @@ auto ServerCommandHandler::listArticles() -> Status {
         RETURN_IF_FAILED(sendIntParameter(num_p, "# of articles"));
 
         for(const auto& article : articles) {
-            RETURN_IF_FAILED(sendIntParameter(id++, "article ID"));
-            RETURN_IF_FAILED(sendStringParameter(article, "article title"));
+            RETURN_IF_FAILED(sendIntParameter(article.id, "article ID"));
+            RETURN_IF_FAILED(sendStringParameter(article.name, "article title"));
         }
     } else {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
@@ -177,13 +177,17 @@ auto ServerCommandHandler::deleteArticle() -> Status {
     RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_DELETE_ART));
-
-    if (database->removeArticle(groupID, articleID)) {
+    auto status = database->removeArticle(groupID, articleID);
+    if (status == Database::RemoveStatus::SUCCESS) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
-    } else {
+    } else if (status == Database::RemoveStatus::GROUP_NOT_FOUND) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
-        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST)); // SHOULD DEPEND ON removeArticle result, could be missing article instead of group
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST));
+    } else if (status == Database::RemoveStatus::ARTICLE_NOT_FOUND) {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_ART_DOES_NOT_EXIST));
     }
+
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 
@@ -196,13 +200,21 @@ auto ServerCommandHandler::getArticle() -> Status {
     RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_GET_ART));
-
-    if (database->removeArticle(groupID, articleID)) {
-        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
-    } else {
+    Article article;
+    try {
+        article = database->getArticle(groupID, articleID);
+    } catch (const std::exception& e) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
-        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST)); // SHOULD DEPEND ON removeArticle result, could be missing article instead of group
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST));
+        return Status::FailedTransfer;
     }
+ 
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
+    RETURN_IF_FAILED(sendIntParameter(article.getID(), "article ID"));
+    RETURN_IF_FAILED(sendStringParameter(article.getTitle(), "article title"));
+    RETURN_IF_FAILED(sendStringParameter(article.getAuthor(), "article author"));
+    RETURN_IF_FAILED(sendStringParameter(article.getBody(), "article body"));
+    
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 

@@ -78,7 +78,7 @@ Database::RemoveStatus DatabaseDS::removeGroup(int groupID){
     }
     fs::path pathToFolder = root / folderName;
     if (fs::remove_all(pathToFolder)){
-        return Database::RemoveStatus::OK;
+        return Database::RemoveStatus::SUCCESS;
     } else {
         std::cerr << "Error removing group" << std::endl;
         return Database::RemoveStatus::UNKNOWN_ERROR;
@@ -156,7 +156,7 @@ Database::RemoveStatus DatabaseDS::removeArticle(int groupID, int articleID){
         return Database::RemoveStatus::ARTICLE_NOT_FOUND; // Couldn't find group or article check error message
     }
     if (fs::remove(articlePath)){
-        return Database::RemoveStatus::OK;
+        return Database::RemoveStatus::SUCCESS;
     } else {
         std::cerr << "Error removing article" << std::endl;
         return Database::RemoveStatus::UNKNOWN_ERROR;
