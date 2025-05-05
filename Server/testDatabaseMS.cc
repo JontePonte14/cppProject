@@ -32,7 +32,7 @@ string pairToString(const vector<pair<string, int>>& vec) {
     return result;
 
 }
-void printGroups(const std::vector<Database::Group>& groups) {
+void printListObjects(const std::vector<Database::ListObject>& groups) {
     for (const auto& g : groups) {
         std::cout << g.toString() + "\n";
     }
@@ -45,47 +45,51 @@ int main() {
     cout << "Adding group1 again : " << db.makeGroup("group1") << endl;
     cout << "Adding group2 : " << db.makeGroup("group2") << endl;
     cout << "List groups : \n";
-    printGroups(db.listGroup());
+    printListObjects(db.listGroup());
     
     //removing groups
     cout << "TEST 2 : Removing groups \n \n ";
-    cout <<"removing group with ID 1 : " << db.removeGroup(1) << endl;
-    cout <<"removing group with ID 3 : " << db.removeGroup(3) << endl;
+    cout <<"removing group with ID 1 : " << Database::toString(db.removeGroup(1)) << endl;
+    cout <<"removing group with ID 3 : " << Database::toString(db.removeGroup(3)) << endl;
     cout << "List groups : \n";
-    printGroups(db.listGroup());
+    printListObjects(db.listGroup());
     
     //adding articles to groups
     
     cout << "TEST 3 : Adding Articles \n \n ";
     cout << "Adding group3 : " << db.makeGroup("group3") << endl;
     
-    cout << "List Article in group ID 1 : \n"<< pairToString( db.listArticle(1)) << endl;
-    cout << "List Article in group ID 2 : \n"<< pairToString( db.listArticle(2)) << endl;
+    cout << "List Article in group ID 1 : \n"; 
+    printListObjects( db.listArticle(1));
+    cout << "List Article in group ID 2 : \n";
+    printListObjects( db.listArticle(2));
     
     cout << "make article : " << db.makeArticle(2, article1) << endl;
     cout << "make article2 : " << db.makeArticle(2, article2) << endl;
-    cout << "List Articule in group ID 2 : \n"<< pairToString( db.listArticle(2)) << endl;
-    cout << "List Articule in group ID 3 : \n"<< pairToString( db.listArticle(3)) << endl;
+    cout << "List Articule in group ID 2 : \n";
+    printListObjects( db.listArticle(2));
+    cout << "List Articule in group ID 3 : \n";
+    printListObjects( db.listArticle(3));
     
-    cout << "removing article with ID 1 : " << db.removeArticle(2, 1) << endl;
-    cout << "removing article with ID 3 : " << db.removeArticle(2, 3) << endl;
+    cout << "removing article with ID 1 : " << Database::toString(db.removeArticle(2, 1)) << endl;
+    cout << "removing article with ID 3 : " << Database::toString(db.removeArticle(2, 3)) << endl;
     
-    cout << "List Articule in group ID 2 : \n"<< pairToString( db.listArticle(2)) << endl;
-    
+    cout << "List Articule in group ID 2 : \n";
+    printListObjects( db.listArticle(2));
     //remaking old group, gets new ID
     
     cout << "TEST 4 : Remaking group \n \n ";
     cout << "Make group1 : " << db.makeGroup("group1") << endl;
     cout << "List groups : \n";
-    printGroups(db.listGroup());
+    printListObjects(db.listGroup());
     
     
     cout << "TEST 5 : Multiplke copys \n \n ";
     cout << "Make article : " << db.makeArticle(3, article1) << endl;
     cout << "Make article : " << db.makeArticle(3, article1) << endl;
     cout << "Make article : " << db.makeArticle(3, article1) << endl;
-    cout << "List Article in group ID 3 : \n"<< pairToString( db.listArticle(3)) << endl;
-
+    cout << "List Articule in group ID 3 : \n";
+    printListObjects( db.listArticle(3));
     cout << "TEST 5 : Get Articles \n \n ";
     try{
         cout<< "Getting article with ID 2 : " << db.getArticle(2, 2).getTitle() << endl;
