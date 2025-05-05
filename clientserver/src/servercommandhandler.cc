@@ -3,28 +3,6 @@
 #include "protocol.h"
 #include <iostream>
 
-// Macros for now, maybe change to lambdas later
-
-#define RETURN_IF_FAILED(expr)              \
-    do {                                    \
-        Status _status = (expr);            \
-        if (_status != Status::Success)     \
-            return _status;                 \
-    } while (0)
-   
-#define RETURN_IF_ERROR(expr) \
-    { auto _s = (expr); if (!_s) return _s.error(); }
-
-#define CONCAT_IMPL(a, b) a ## b
-#define CONCAT(a, b) CONCAT_IMPL(a, b)
-
-#define ASSIGN_OR_RETURN(var, expr)                              \
-    auto CONCAT(_result_, __LINE__) = (expr);                    \
-    if (!CONCAT(_result_, __LINE__))                             \
-        return CONCAT(_result_, __LINE__).error();               \
-    decltype(auto) var = std::move(*CONCAT(_result_, __LINE__));
-    
-
 ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Interface>& database) 
     : CommandHandler(), database(database) {
 }
@@ -33,8 +11,8 @@ ServerCommandHandler::ServerCommandHandler(const std::shared_ptr<Interface>& dat
     : CommandHandler(connection), database(database) {
 }
 
-auto ServerCommandHandler::processRequest() noexcept -> Status {
-    Protocol protocol = receiveProtocol();
+auto ServerCommandHandler::processRequest() const noexcept -> Status {
+    ASSIGN_OR_RETURN(protocol, receiveProtocol());
 
     switch (protocol) {
         case Protocol::COM_LIST_NG:
@@ -61,15 +39,17 @@ auto ServerCommandHandler::processRequest() noexcept -> Status {
         default:
             return Status::ProtocolViolation;
     }
+
+    return Status::Success;
 }
 
-auto ServerCommandHandler::processRequest(const std::shared_ptr<Connection>& connection) noexcept -> Status {
+auto ServerCommandHandler::processRequest(const std::shared_ptr<Connection>& connection) const noexcept -> Status {
     setConnection(connection);
     return processRequest();
 }
 
-auto ServerCommandHandler::listGroups() -> Status {
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+auto ServerCommandHandler::listGroups() const -> Status {
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_LIST_NG));
 
     const auto groups = database->listGroup();
@@ -87,10 +67,9 @@ auto ServerCommandHandler::listGroups() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::createGroup() -> Status {
+auto ServerCommandHandler::createGroup() const -> Status {
     ASSIGN_OR_RETURN(string_p, receiveStringParameter());
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
-
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_CREATE_NG));
     
     if (database->makeGroup(string_p)) {
@@ -105,9 +84,9 @@ auto ServerCommandHandler::createGroup() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::deleteGroup() -> Status {
+auto ServerCommandHandler::deleteGroup() const -> Status {
     ASSIGN_OR_RETURN(num_p, receiveIntParameter());
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_DELETE_NG));
 
     if(true) {
@@ -122,9 +101,9 @@ auto ServerCommandHandler::deleteGroup() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::listArticles() -> Status {
+auto ServerCommandHandler::listArticles() const -> Status {
     ASSIGN_OR_RETURN(num_p, receiveIntParameter());
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_LIST_ART));
 
     const auto articles = database->listArticle(num_p);
@@ -150,13 +129,13 @@ auto ServerCommandHandler::listArticles() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::createArticle() -> Status {
+auto ServerCommandHandler::createArticle() const -> Status {
     ASSIGN_OR_RETURN(id, receiveIntParameter());
     ASSIGN_OR_RETURN(title, receiveStringParameter());
     ASSIGN_OR_RETURN(author, receiveStringParameter());
     ASSIGN_OR_RETURN(text, receiveStringParameter());
 
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_CREATE_ART));
 
     if (database->makeArticle(id, title, author, text)) {
@@ -171,11 +150,10 @@ auto ServerCommandHandler::createArticle() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::deleteArticle() -> Status {
+auto ServerCommandHandler::deleteArticle() const -> Status {
     ASSIGN_OR_RETURN(groupID, receiveIntParameter());
     ASSIGN_OR_RETURN(articleID, receiveIntParameter());
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
-
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_DELETE_ART));
     auto status = database->removeArticle(groupID, articleID);
     if (status == Database::RemoveStatus::SUCCESS) {
@@ -194,10 +172,10 @@ auto ServerCommandHandler::deleteArticle() -> Status {
     return Status::Success;
 }
 
-auto ServerCommandHandler::getArticle() -> Status {
+auto ServerCommandHandler::getArticle() const -> Status {
     ASSIGN_OR_RETURN(groupID, receiveIntParameter());
     ASSIGN_OR_RETURN(articleID, receiveIntParameter());
-    RETURN_IF_ERROR(verifyProtocol(Protocol::COM_END));
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_GET_ART));
     Article article;
@@ -219,15 +197,4 @@ auto ServerCommandHandler::getArticle() -> Status {
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 
     return Status::Success;
-}
-
-auto ServerCommandHandler::verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>
-{
-    Protocol protocol = receiveProtocol();
-
-    if (protocol == expected) {
-        return protocol;
-    }
-
-    else return Status::ProtocolViolation;
 }

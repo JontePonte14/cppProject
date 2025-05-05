@@ -12,22 +12,20 @@ class ServerCommandHandler : public CommandHandler {
         ServerCommandHandler(const std::shared_ptr<Interface>& database, const std::shared_ptr<Connection>& connection);
         virtual ~ServerCommandHandler() = default;
 
-        [[nodiscard]] auto processRequest() noexcept -> Status;
-        [[nodiscard]] auto processRequest(const std::shared_ptr<Connection>& connection) noexcept -> Status;
+        [[nodiscard]] auto processRequest() const noexcept -> Status;
+        [[nodiscard]] auto processRequest(const std::shared_ptr<Connection>& connection) const noexcept -> Status;
 
-        auto listGroups() -> Status override;
-        auto createGroup() -> Status override;
-        auto deleteGroup() -> Status override;
+        auto listGroups() const -> Status override;
+        auto createGroup() const -> Status override;
+        auto deleteGroup() const -> Status override;
 
-        auto listArticles() -> Status override;
-        auto createArticle() -> Status override;
-        auto deleteArticle() -> Status override;
-        auto getArticle() -> Status override;
+        auto listArticles() const -> Status override;
+        auto createArticle() const -> Status override;
+        auto deleteArticle() const -> Status override;
+        auto getArticle() const -> Status override;
 
     private:
         std::shared_ptr<Interface> database;
-
-        [[nodiscard]] auto verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>;
 };
 
 #endif
