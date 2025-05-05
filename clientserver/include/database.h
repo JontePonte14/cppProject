@@ -20,7 +20,7 @@ class Database {
         };
     
         enum class RemoveStatus { OK = 1, GROUP_NOT_FOUND = 2 , ARTICLE_NOT_FOUND  = 3, UNKNOWN_ERROR = 4};
-        std::string toString(Database::RemoveStatus status) {
+        static std::string toString(Database::RemoveStatus status) {
             switch (status) {
                 case Database::RemoveStatus::OK: return "OK";
                 case Database::RemoveStatus::GROUP_NOT_FOUND: return "GROUP_NOT_FOUND";
