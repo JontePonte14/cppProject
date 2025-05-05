@@ -51,6 +51,7 @@ private:
 
     Expected<int, InputStatus> stringToInt (const std::string& p) const;
 
+    std::string removeWhitespaces(std::string& str) const;
     //Expected<std::vector<std::string>, Status> reply;
 
     Client_commandhandler comhand;

@@ -40,7 +40,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     RETURN_IF_ERROR(nbrGroups);
 
     int nbrGroupsInt = *nbrGroups;
-    RETURN_IF_FAILED(checkCondition(nbrGroupsInt > 0, "Error, number of groups received from server is greater than 0"));
+    RETURN_IF_FAILED(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
 
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
@@ -59,6 +59,11 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
         nameIdPair = std::to_string(*groupId) + " " + *groupName; 
         nameIdPairVector[i] = nameIdPair;
     }
+    if (nbrGroupsInt == 0)
+    {
+        nameIdPairVector = {"No newsgroups exist"};
+    }
+    
     Protocol ans_end = mh.receiveProtocol();
     RETURN_IF_FAILED(checkCode(Protocol::ANS_END, ans_end));
     return nameIdPairVector;

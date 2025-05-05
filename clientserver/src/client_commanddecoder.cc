@@ -24,10 +24,9 @@ Client_commanddecoder::Client_commanddecoder(const std::shared_ptr<Connection>& 
 void Client_commanddecoder::com_decode(std::istream& is){
     //std::vector<std::string> userInputs = readInputsStream(input); //Look at messege protocol for inputs
     std::string command;
-    is >> command;
-    if (is.peek() == '\n') { //remove whitespace so we can register empty input
-        is.ignore(1);
-    } 
+    std::getline(is, command);
+
+    removeWhitespaces(command);
 
     std::transform(command.begin(), command.end(), command.begin(),
     [](unsigned char c){ return std::tolower(c); });
@@ -48,7 +47,7 @@ void Client_commanddecoder::com_decode(std::istream& is){
     }
 
     else if(command == "create_ng"){
-        cout << "Type the name of the newsgroup you want to create: " << endl;
+        cout << "Type the name of the newsgroup you want to create (or type exit): " << endl;
         CREATE_NG(is);
     }
 
@@ -159,7 +158,8 @@ void Client_commanddecoder::printReply(const Expected<std::vector<std::string>, 
         cout << "Reply from server: " << endl;
         for (string i: vec) {
             std::cout << i << endl;
-        } 
+        }
+        cout << "" << endl;
     }
 }
 
@@ -177,6 +177,8 @@ Expected<int, InputStatus> Client_commanddecoder::stringToInt(const std::string&
 }
 
 Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::istream& is) const {
+    // Skip any leading whitespace, including leftover newline
+
     std::string str;
     std::getline(is, str);
     if (str.empty())
@@ -187,7 +189,7 @@ Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::i
     {
         return InputStatus::Exit;
     }
-    
+    removeWhitespaces(str);
     return str;
 }
 
@@ -210,6 +212,15 @@ Expected<int, InputStatus> Client_commanddecoder::readInputId(std::istream& is) 
     }
     return valueInt;
 
+}
+
+std::string Client_commanddecoder::removeWhitespaces(std::string& str) const {
+    str.erase(
+        std::remove_if(str.begin(), str.end(),
+            [](unsigned char c) { return std::isspace(c); }),
+        str.end());
+
+    return str;
 }
 void Client_commanddecoder::HELP_COM() const{
     cout << "List of commands: " << endl;
