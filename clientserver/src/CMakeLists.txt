@@ -9,7 +9,7 @@ target_sources(clientserver
         databaseserver.cc
         client_commandhandler.cc
         client_commanddecoder.cc
-        database.cc
+        interface.cc
         databaseDS.cc
         databaseMS.cc
         article.cc

@@ -2,7 +2,7 @@
 #define DATABASE_SERVER_H
 
 #include "server.h"
-#include "database.h"
+#include "interface.h"
 #include "servercommandhandler.h"
 #include "database.h"
 
@@ -15,7 +15,7 @@ class DatabaseServer final : public Server {
         void start();
 
     private:
-        std::shared_ptr<Database> database;
+        std::shared_ptr<Interface> database;
         ServerCommandHandler handler;
 
         void serveConnection();

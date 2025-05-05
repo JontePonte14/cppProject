@@ -4,7 +4,7 @@
 #include "protocol.h"
 
 DatabaseServer::DatabaseServer(const int port, const bool run)
-    : Server(port), database(std::make_shared<Database>()), handler(database)
+    : Server(port), database(std::make_shared<Interface>()), handler(database)
 {
     std::cout << "Database server initialized with port " << port << std::endl;
 

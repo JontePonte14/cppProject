@@ -2,14 +2,14 @@
 #define SERVER_COMMAND_HANDLER_H
 
 #include "commandhandler.h"
-#include "database.h"
+#include "interface.h"
 #include <memory>
 
 class ServerCommandHandler : public CommandHandler {
 
     public:
-        ServerCommandHandler(const std::shared_ptr<Database>& database);
-        ServerCommandHandler(const std::shared_ptr<Database>& database, const std::shared_ptr<Connection>& connection);
+        ServerCommandHandler(const std::shared_ptr<Interface>& database);
+        ServerCommandHandler(const std::shared_ptr<Interface>& database, const std::shared_ptr<Connection>& connection);
         virtual ~ServerCommandHandler() = default;
 
         [[nodiscard]] auto processRequest() noexcept -> Status;
@@ -25,7 +25,7 @@ class ServerCommandHandler : public CommandHandler {
         auto getArticle() -> Status override;
 
     private:
-        std::shared_ptr<Database> database;
+        std::shared_ptr<Interface> database;
 
         [[nodiscard]] auto verifyProtocol(const Protocol expected) -> Expected<Protocol, Status>;
 };
