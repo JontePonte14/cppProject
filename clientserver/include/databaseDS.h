@@ -32,9 +32,8 @@ private:
     /* data */
     std::filesystem::path root;
     static int groupIDnbr;
-    static int groupIDnbrMax;
 
-    // increment id for each new article
+    // increment id for each new group
     void idIncr();
 
     //Help functions
@@ -44,11 +43,16 @@ private:
     // Finds group with the id and return the full name of the folder as a string
     // Returns "" (empty string) if no group was found
     std::string findGroupWithID(const int& groupID);
+    // Checks if an article exist within a group given its groupID and articleID
+    // Returns "" (empty string) if it couldn't be found
+    std::filesystem::path findArticlePath(const int& groupID, const int& articleID);
 
     void saveGroupIdNbr();
     void loadGroupIdNbr();
     
-    void saveArticleIdNbr(const std::filesystem::path& groupFolder);
-    void loadArticleIdNbr(const std::filesystem::path& groupFolder);
+    // saves the next articleID in the given news group folder
+    void saveArticleIdNbr(const std::string& groupFolderName, const int& currentID);
+    // loads the current articleID in the given news group folder
+    int loadArticleIdNbr(const std::string& groupFolderName);
 };
 #endif // DATABASE_MS_H

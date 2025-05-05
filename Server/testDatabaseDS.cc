@@ -26,7 +26,7 @@ int main(){
     cout << "TEST 3: listGroup()" << endl;
     std::vector<std::pair<std::string, int>> allGroups;
     allGroups = DS.listGroup();
-    for (const auto& [id, groupname] : allGroups) {
+    for (const auto& [groupname, id] : allGroups) {
         cout << "ID: " << id << ", Groupname: " << groupname << endl;
     }
 
@@ -58,56 +58,23 @@ int main(){
     cout << DS.makeArticle(2, article) << endl;
     cout << DS.makeArticle(3, article2) << endl;
 
-    /*
-    //cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 999) << endl;
+    cout << "-----------------" << endl;
+    cout << "TEST 5: removeArticle()" << endl;
+    cout << DS.removeArticle(3, 2) << endl;
+    cout << DS.makeArticle(2, article2) << " We then back to Finland instead" << endl;
 
-    cout << "remove article: " << DS.removeArticle("Technology", "AI Breakthrough in 2025", 129) << endl;
 
+    cout << "-----------------" << endl;
+    cout << "TEST 6: getArticle()" << endl;
+    Article fetchedArticle = DS.getArticle(2, 2);
+    cout << "Title of fetched article: " << fetchedArticle.getTitle() << endl;
 
-    cout << "List newsgroup: ";
-    cout << DS.listGroup() << endl;
-
-    cout << "Tesing to get unavailable file: ";
-    Article testGet;
-    testGet = DS.getArticle("Technology", "AI Breakthrough in 2025", 129);
-
-    
-    std::vector<std::pair<std::string, int>> sortedArticles;
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology: " << endl;
-    for (const auto& [title, id] : sortedArticles) {
+    cout << "TEST 7: listArticle()" << endl;
+    std::vector<std::pair<std::string, int>> articlesInFinland;
+    articlesInFinland = DS.listArticle(2);
+    cout << "Iterating in the folder Finland_2" << endl;
+    for (const auto& [title, id] : articlesInFinland) {
         cout << "Title: " << title << ", ID: " << id << endl;
     }
-
-    cout << "----------" << endl;
-
-    cout << "Adding a third article" << endl;
-
-    Article article3(
-        "Technology",                            // groupName
-        "AI is very bad",                            // title
-        "Jenny von Bergen",                   // author
-        "2020-11-28",                            // date
-        1,                                       // idNbr
-        "AI is not so good people though, and I think it should be destroyed"
-    );
-
-
-    cout << "The end" << endl;
-    cout << "make article3 " << DS.makeArticle(article3) << endl;
-
-    sortedArticles = DS.listArticle("Technology");
-    cout << "Iterating over articles in the group Technology (again): " << endl;
-    for (const auto& [title, id] : sortedArticles) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-    */
-
     
-
-
-
-
-
-
 }
