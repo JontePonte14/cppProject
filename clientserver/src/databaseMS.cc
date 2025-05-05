@@ -84,15 +84,15 @@ bool  DatabaseMS::makeGroup(const std::string& name){
     return true;
 }
 
-bool  DatabaseMS::removeGroup(int groupID){
+Database::RemoveStatus DatabaseMS::removeGroup(int groupID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         std::cerr << "Group with ID: " << groupID << " not found.\n";
-        return false;
+        return Database::RemoveStatus::GROUP_NOT_FOUND;
     }
     memory.erase(groupIt); 
 
-    return true;
+    return Database::RemoveStatus::OK;
 }
 
 vector<Database::ListObject> DatabaseMS::listArticle(int groupID){
@@ -125,21 +125,21 @@ bool  DatabaseMS::makeArticle(int groupID, Article article){
     articleID++;
     return true;
 }
-bool  DatabaseMS::removeArticle(int groupID, int articleID){
+Database::RemoveStatus  DatabaseMS::removeArticle(int groupID, int articleID){
     auto groupIt = memory.find(groupID); //pointer looking for the groupID
     if (groupIt == memory.end()) {
         std::cerr << "Group with ID: "<< groupID <<" not found.\n";
-        return false;
+        return Database::RemoveStatus::GROUP_NOT_FOUND;
     }
 
     auto& articles = groupIt->second.articles; // map<int, Article>
     auto articleIt = articles.find(articleID); // pointer looking for the articleID
     if (articleIt == groupIt->second.articles.end()) {
         std::cerr << "Article with ID: " <<articleID << " not found in group with ID : "<< groupID <<".\n";
-        return false;
+        return Database::RemoveStatus::ARTICLE_NOT_FOUND;
     }
     articles.erase(articleIt); //ersaing with the iterator using the pointer
-    return true;
+    return Database::RemoveStatus::OK;
 
 
 }

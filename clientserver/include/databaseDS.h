@@ -20,11 +20,11 @@ public:
     std::vector<Database::ListObject> listGroup() override;
     // Cretes a group as a folder with the name : "name_groupID"
     bool makeGroup(const std::string& name)override;
-    bool removeGroup(int groupID)override;
+    Database::RemoveStatus removeGroup(int groupID)override;
 
     std::vector<Database::ListObject> listArticle(int groupID) override;
     bool makeArticle( int group, Article article) override;
-    bool removeArticle(int groupID, int articleID) override;
+    Database::RemoveStatus removeArticle(int groupID, int articleID) override;
     Article getArticle(int groupID, int articleID) override;
 
 

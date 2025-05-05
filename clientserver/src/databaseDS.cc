@@ -70,14 +70,20 @@ bool DatabaseDS::makeGroup(const std::string& name){
     return true;
 }
 
-bool DatabaseDS::removeGroup(int groupID){
+Database::RemoveStatus DatabaseDS::removeGroup(int groupID){
     std::string folderName = findGroupWithID(groupID);
     if (folderName == "") {
         std::cerr << "No group was found" << std::endl;
-        return false;
+        return Database::RemoveStatus::GROUP_NOT_FOUND;
     }
     fs::path pathToFolder = root / folderName;
-    return fs::remove_all(pathToFolder);
+    if (fs::remove_all(pathToFolder)){
+        return Database::RemoveStatus::OK;
+    } else {
+        std::cerr << "Error removing group" << std::endl;
+        return Database::RemoveStatus::UNKNOWN_ERROR;
+    }
+
 }
 
 std::vector<Database::ListObject> DatabaseDS::listArticle(int groupID){
@@ -143,13 +149,19 @@ bool DatabaseDS::makeArticle(int group, Article article){
     return true;
 }
 
-bool DatabaseDS::removeArticle(int groupID, int articleID){
+Database::RemoveStatus DatabaseDS::removeArticle(int groupID, int articleID){
     fs::path articlePath = findArticlePath(groupID, articleID);
 
     if (articlePath.empty()) {
-        return false; // Couldn't find group or article check error message
+        return Database::RemoveStatus::ARTICLE_NOT_FOUND; // Couldn't find group or article check error message
     }
-    return fs::remove(articlePath);
+    if (fs::remove(articlePath)){
+        return Database::RemoveStatus::OK;
+    } else {
+        std::cerr << "Error removing article" << std::endl;
+        return Database::RemoveStatus::UNKNOWN_ERROR;
+    }
+  
 }
 
 Article DatabaseDS::getArticle(int groupID, int articleID){
