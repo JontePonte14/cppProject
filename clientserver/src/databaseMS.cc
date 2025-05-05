@@ -51,11 +51,11 @@ bool containsSecond(const std::vector<std::pair<int, T>>& vec, int id) {
         return pair.second == id;
     });
 }
-vector<pair<string, int>> DatabaseMS::listGroup(){
+vector<Database::ListObject> DatabaseMS::listGroup(){
     //making sureits sorted by date
     // sort(  groupIDName.begin(), groupIDName.end(), [](const auto& a, const auto& b) {
     //     return groupIDArticleList[a.second].getDate() <groupIDArticleList[b.second].getDate(); });
-    vector<pair<string, int>> groups;
+    vector<Database::ListObject> groups;
 
     for (const auto& group : memory) {
         groups.emplace_back(group.second.name, group.first); // pair<name, groupID>
@@ -95,12 +95,12 @@ bool  DatabaseMS::removeGroup(int groupID){
     return true;
 }
 
-vector<pair<string, int>> DatabaseMS::listArticle(int groupID){
+vector<Database::ListObject> DatabaseMS::listArticle(int groupID){
     if (memory.find(groupID) == memory.end())  {
         std::cerr << "Group with ID: " << groupID << " not found.\n";
         return {};
     }
-    vector<pair<string, int>> result;
+    vector<Database::ListObject> result;
     std::map<int, Article>& articles =memory[groupID].articles;
     for (const auto& article : articles) { 
         result.emplace_back(article.second.getTitle(), article.first); // pair<title, articleID>

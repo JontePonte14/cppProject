@@ -32,6 +32,11 @@ string pairToString(const vector<pair<string, int>>& vec) {
     return result;
 
 }
+void printGroups(const std::vector<Database::Group>& groups) {
+    for (const auto& g : groups) {
+        std::cout << g.toString() + "\n";
+    }
+}
 int main() {
     DatabaseMS db = DatabaseMS();
     //adding groups
@@ -39,13 +44,15 @@ int main() {
     cout << "Adding group1 : " << db.makeGroup("group1") << endl;
     cout << "Adding group1 again : " << db.makeGroup("group1") << endl;
     cout << "Adding group2 : " << db.makeGroup("group2") << endl;
-    cout << "List groups : \n" <<pairToString( db.listGroup()) << endl;
+    cout << "List groups : \n";
+    printGroups(db.listGroup());
     
     //removing groups
     cout << "TEST 2 : Removing groups \n \n ";
     cout <<"removing group with ID 1 : " << db.removeGroup(1) << endl;
     cout <<"removing group with ID 3 : " << db.removeGroup(3) << endl;
-    cout << "List groups : \n" <<pairToString( db.listGroup()) << endl;
+    cout << "List groups : \n";
+    printGroups(db.listGroup());
     
     //adding articles to groups
     
@@ -69,7 +76,9 @@ int main() {
     
     cout << "TEST 4 : Remaking group \n \n ";
     cout << "Make group1 : " << db.makeGroup("group1") << endl;
-    cout << "List groups : \n" <<pairToString( db.listGroup()) << endl;
+    cout << "List groups : \n";
+    printGroups(db.listGroup());
+    
     
     cout << "TEST 5 : Multiplke copys \n \n ";
     cout << "Make article : " << db.makeArticle(3, article1) << endl;

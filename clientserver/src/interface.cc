@@ -51,29 +51,13 @@ Interface::Interface(){ //default constructor, user input
   
 }
 
-std::vector<std::string> Interface::listGroup()
-{
-   
-    std::vector<std::pair<std::string, int>> list =  db->listGroup();
-    std::vector<std::string> sortedNames;
-    for (const auto& pair : list) {
-        sortedNames.push_back(pair.first + " " + std::to_string(pair.second));
-    }
-    return sortedNames;
-}
+std::vector<Database::ListObject> Interface::listGroup(){return db->listGroup();}
 
 bool Interface::makeGroup(std::string groupName){ return db->makeGroup(groupName);}
 
 bool Interface::removeGroup(int groupID){    return db->removeGroup(groupID);}
 
-std::vector<std::string>   Interface::listArticle(int groupID){
-    std::vector<std::pair<std::string, int>> list = db1.listArticle(groupID);
-    std::vector<std::string> sortedNames;
-    for (const auto& pair : list) {
-        sortedNames.push_back(pair.first + " " + std::to_string(pair.second));
-    }
-    return sortedNames;
-}
+std::vector<Database::ListObject>   Interface::listArticle(int groupID){ return db->listArticle(groupID);}
 
 
 bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text)
@@ -84,7 +68,7 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
    
     Article article = Article(articleTitle, articleAuthor, text);
   
-    return db1.makeArticle(groupNBR, article);
+    return db->makeArticle(groupNBR, article);
 
 
     

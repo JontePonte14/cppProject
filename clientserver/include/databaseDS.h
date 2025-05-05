@@ -17,12 +17,12 @@ public:
     DatabaseDS();
     ~DatabaseDS() = default;
     
-    std::vector<std::pair<std::string, int>> listGroup() override;
+    std::vector<Database::ListObject> listGroup() override;
     // Cretes a group as a folder with the name : "name_groupID"
     bool makeGroup(const std::string& name)override;
     bool removeGroup(int groupID)override;
 
-    std::vector<std::pair<std::string, int>> listArticle(int groupID) override;
+    std::vector<Database::ListObject> listArticle(int groupID) override;
     bool makeArticle( int group, Article article) override;
     bool removeArticle(int groupID, int articleID) override;
     Article getArticle(int groupID, int articleID) override;
