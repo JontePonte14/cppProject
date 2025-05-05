@@ -209,7 +209,6 @@ auto ServerCommandHandler::getArticle() const -> Status {
     RETURN_IF_FAILED(sendStringParameter(article.getAuthor(), "article author"));
     RETURN_IF_FAILED(sendStringParameter(article.getBody(), "article body"));
     
-
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 
     return Status::Success;
