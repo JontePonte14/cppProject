@@ -15,6 +15,7 @@ enum Status {
     ConnectionClosed,
     FailedTransfer,
     InvalidArguments,
+    DatabaseError,
     Success,
 };
 
