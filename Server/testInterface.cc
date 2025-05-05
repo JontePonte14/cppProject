@@ -68,7 +68,7 @@ void testInterface(Interface& interface) {
     cout << "List Articule in group ID 2 : \n"<< printList( interface.listArticle(2)) << endl;
     
     //remaking old group, gets new ID
-    /*
+    
     cout << "TEST 4 : Remaking group \n \n";
     cout << "Make group1 : " << interface.makeGroup("group1") << endl;
     cout << "List groups : \n" <<printList( interface.listGroup()) << endl;
@@ -90,81 +90,79 @@ void testInterface(Interface& interface) {
     } catch (const std::exception& e) {
         cout << "Error: " << e.what() << endl;
     }
-        */
+
 }
 
-void testDatabaseDS(DatabaseDS DS) {
-    // JUST DOING DS
-    cout << "-----------------TESTING DS HERE ONLY--------------" << endl;     
-    //almost the same as the one in databaseMS
-    cout << "TEST 1 : Adding groups \n \n";
-    cout << "Adding group1 : " << DS.makeGroup("group1") << endl;
-    cout << "Adding group1 again : " << DS.makeGroup("group1") << endl;
-    cout << "Adding group2 : " << DS.makeGroup("group2") << endl;
-    cout << "List groups : \n";
-    std::vector<std::pair<std::string, int>> tempPairVector;
-    tempPairVector = DS.listGroup();
-    for (const auto& [groupname, id] : tempPairVector) {
-        cout << "ID: " << id << ", Groupname: " << groupname << endl;
-    }
+// void testDatabaseDS(DatabaseDS DS) {
+//     // JUST DOING DS
+//     cout << "-----------------TESTING DS HERE ONLY--------------" << endl;     
+//     //almost the same as the one in databaseMS
+//     cout << "TEST 1 : Adding groups \n \n";
+//     cout << "Adding group1 : " << DS.makeGroup("group1") << endl;
+//     cout << "Adding group1 again : " << DS.makeGroup("group1") << endl;
+//     cout << "Adding group2 : " << DS.makeGroup("group2") << endl;
+//     cout << "List groups : \n";
+//     std::vector<std::pair<std::string, int>> tempPairVector;
+//     tempPairVector = DS.listGroup();
+//     for (const auto& [groupname, id] : tempPairVector) {
+//         cout << "ID: " << id << ", Groupname: " << groupname << endl;
+//     }
     
-    //removing groups
-    cout << "" << endl;
-    cout << "TEST 2 : Removing groups \n \n";
-    cout <<"removing group with ID 1 : " << DS.removeGroup(1) << endl;
-    cout <<"removing group with ID 3 : " << DS.removeGroup(3) << endl;
-    cout << "List groups : \n";
-    tempPairVector = DS.listGroup();
-    for (const auto& [groupname, id] : tempPairVector) {
-        cout << "ID: " << id << ", Groupname: " << groupname << endl;
-    }
+//     //removing groups
+//     cout << "" << endl;
+//     cout << "TEST 2 : Removing groups \n \n";
+//     cout <<"removing group with ID 1 : " << DS.removeGroup(1) << endl;
+//     cout <<"removing group with ID 3 : " << DS.removeGroup(3) << endl;
+//     cout << "List groups : \n";
+//     tempPairVector = DS.listGroup();
+//     for (const auto& [groupname, id] : tempPairVector) {
+//         cout << "ID: " << id << ", Groupname: " << groupname << endl;
+//     }
     
-    //adding articles to groups
-    cout << "" << endl;
-    cout << "TEST 3 : Adding Articles \n \n";
-    cout << "Adding group3 : " << DS.makeGroup("group3") << endl;
-    cout << "List Article in group ID 1 (doesnt exist): \n";
-    tempPairVector = DS.listArticle(1);
-    for (const auto& [title, id] : tempPairVector) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
+//     //adding articles to groups
+//     cout << "" << endl;
+//     cout << "TEST 3 : Adding Articles \n \n";
+//     cout << "Adding group3 : " << DS.makeGroup("group3") << endl;
+//     cout << "List Article in group ID 1 (doesnt exist): \n";
+//     tempPairVector = DS.listArticle(1);
+//     for (const auto& [title, id] : tempPairVector) {
+//         cout << "Title: " << title << ", ID: " << id << endl;
+//     }
 
-    cout << "List Article in group ID 2 : \n";
-    tempPairVector = DS.listArticle(2);
-    for (const auto& [title, id] : tempPairVector) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
+//     cout << "List Article in group ID 2 : \n";
+//     tempPairVector = DS.listArticle(2);
+//     for (const auto& [title, id] : tempPairVector) {
+//         cout << "Title: " << title << ", ID: " << id << endl;
+//     }
     
-    cout << "Make article : " << DS.makeArticle(2, article1) << endl;
-    cout << "Make article2 : " << DS.makeArticle(2, article2) << endl;
-    cout << "List Articule in group ID 2 : \n";
-    tempPairVector = DS.listArticle(2);
-    for (const auto& [title, id] : tempPairVector) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-    cout << "List Articule in group ID 3 : \n";
-    tempPairVector = DS.listArticle(3);
-    for (const auto& [title, id] : tempPairVector) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
+//     cout << "Make article : " << DS.makeArticle(2, article1) << endl;
+//     cout << "Make article2 : " << DS.makeArticle(2, article2) << endl;
+//     cout << "List Articule in group ID 2 : \n";
+//     tempPairVector = DS.listArticle(2);
+//     for (const auto& [title, id] : tempPairVector) {
+//         cout << "Title: " << title << ", ID: " << id << endl;
+//     }
+//     cout << "List Articule in group ID 3 : \n";
+//     tempPairVector = DS.listArticle(3);
+//     for (const auto& [title, id] : tempPairVector) {
+//         cout << "Title: " << title << ", ID: " << id << endl;
+//     }
     
-    cout << "removing article with ID 1 : " << DS.removeArticle(2, 1) << endl;
-    cout << "removing article with ID 3 : " << DS.removeArticle(2, 3) << endl;
+//     cout << "removing article with ID 1 : " << DS.removeArticle(2, 1) << endl;
+//     cout << "removing article with ID 3 : " << DS.removeArticle(2, 3) << endl;
     
-    cout << "List Articule in group ID 2 : \n";
-    tempPairVector = DS.listArticle(2);
-    for (const auto& [title, id] : tempPairVector) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
-}
+//     cout << "List Articule in group ID 2 : \n";
+//     tempPairVector = DS.listArticle(2);
+//     for (const auto& [title, id] : tempPairVector) {
+//         cout << "Title: " << title << ", ID: " << id << endl;
+//     }
+// }
 
 int main() {
-    Interface interface(2); // 1 for memory, 2 for disk, or default constructor for user input
+    Interface interface(1); // 1 for memory, 2 for disk, or default constructor for user input
     testInterface(interface);
-    // interface.switchDateBase();
-    // testInterface(interface);
-    // DatabaseDS DS;
-    // testDatabaseDS(DS);
+    interface.switchDateBase();
+    testInterface(interface);
 
    
 
