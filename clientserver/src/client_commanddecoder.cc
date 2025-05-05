@@ -15,7 +15,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-
+#define RETURN_IF_ERROR(input)        \
+    if (!(input)) {                         \
+        return;                             \
+    }
 
 Client_commanddecoder::Client_commanddecoder(const std::shared_ptr<Connection>& conn) : comhand(conn) { //replace with messagehandler
 
@@ -31,8 +34,7 @@ void Client_commanddecoder::com_decode(std::istream& is){
     std::transform(command.begin(), command.end(), command.begin(),
     [](unsigned char c){ return std::tolower(c); });
 
-    if (is.fail())
-    {
+    if (is.fail()) {
         cout << "STREAM FAIL" << endl;
     }
 
@@ -41,38 +43,34 @@ void Client_commanddecoder::com_decode(std::istream& is){
     }
 
     else if(command == "list_ng"){
-        //cout << "List of news groups " << endl;
         LIST_NG();
-
     }
 
     else if(command == "create_ng"){
-        cout << "Type the name of the newsgroup you want to create (or type exit): " << endl;
         CREATE_NG(is);
     }
 
     else if(command == "delete_ng"){
-        cout << "Type the Index number of the newsgroup you want to delete: " << endl;
         DELETE_NG(is);
     }
 
     else if(command == "list_art"){
-        //cout << "List of articles in newsgroup ";
-        //LIST_ART(is);
+        LIST_ART(is);
     }
 
     else if(command == "create_art"){
-        //cout << "Article succesfully created ";
+        CREATE_ART(is);
     } 
 
     else if(command == "delete_art"){
-        //cout << "Article succesfully deleted ";
+        cout << "Function not implemented " << endl;
+        //DELETE_ART(is);
     }
     else if(command == "get_art"){
-        //cout << "Article: ";
+        cout << "Function not implemented " << endl;
+        //GET_ART(is);
     }
-    else if (command == "exit")
-    {
+    else if (command == "exit") {
         
     }
     else {
@@ -86,16 +84,9 @@ void Client_commanddecoder::LIST_NG() {
 
 void Client_commanddecoder::CREATE_NG(std::istream& is) {
     //Inputs
+    cout << "Type the name of the newsgroup you want to create (or type exit): " << endl;
     auto title = readInputString(is);
-    if (!title)
-    {
-        printInputError(title.error());
-        if (title.error() == InputStatus::EmptyInput)
-        {
-            CREATE_NG(is);
-        }
-        return;
-    }
+    RETURN_IF_ERROR(title);
     //Outputs
     auto reply = comhand.CREATE_NG(*title);
     printReply(reply);
@@ -104,47 +95,73 @@ void Client_commanddecoder::CREATE_NG(std::istream& is) {
 
  void Client_commanddecoder::DELETE_NG(std::istream& is) {
     //Input
+    cout << "Type the Index number of the newsgroup you want to delete (or type exit): " << endl;
     auto Id = readInputId(is);
-    if (!Id)
-    {
-        printInputError(Id.error());
-        if (Id.error() == InputStatus::EmptyInput)
-        {
-            DELETE_NG(is);
-        }
-        return;
-    }
+    RETURN_IF_ERROR(Id);
     //Output
     auto reply = comhand.DELETE_NG(*Id);
     printReply(reply);
 } 
 
 void Client_commanddecoder::LIST_ART(std::istream& is) {
-    
-
-    cout << "Reply from server: " << endl;
-    //reply = comhand.LIST_ART(parameters);
+    //Input
+    cout << "Type the Index number of the newsgroup you want to see (or type exit): " << endl;
+    auto Id = readInputId(is);
+    RETURN_IF_ERROR(Id);
+    //Output
+    auto reply = comhand.LIST_ART(*Id);
+    printReply(reply);
 }
 
 void Client_commanddecoder::CREATE_ART(std::istream& is) {
-    cout << "Reply from server: " << endl;
-    //reply = comhand.CREATE_ART(parameters);
+    //Input
+    cout << "Type the Index number of the newsgroup, where you want your article created (or type exit): " << endl;
+    auto Id = readInputId(is);
+    RETURN_IF_ERROR(Id);
+    cout << "Type the Title (or type exit): " << endl;
+    auto title = readInputString(is);
+    RETURN_IF_ERROR(title);
+    cout << "Type the author (or type exit): " << endl;
+    auto author = readInputString(is);
+    RETURN_IF_ERROR(author);
+    cout << "Type the text (or type exit) (Type a string for now): " << endl;
+    auto text = readInputString(is);
+    RETURN_IF_ERROR(text);
+    //Output
+    auto reply = comhand.CREATE_ART(*Id, *title, *author, *text);
+    printReply(reply);
 }
 
 void Client_commanddecoder::DELETE_ART(std::istream& is) {
-    cout << "Reply from server: " << endl;
-    //reply = comhand.DELETE_ART(parameters);
+    //Input
+    cout << "Type the Index number of the newsgroup, where article is located (or type exit): " << endl;
+    auto Id = readInputId(is);
+    RETURN_IF_ERROR(Id);
+    cout << "Type the Index number of the article to be deleted (or type exit): " << endl;
+    auto IdArt = readInputId(is);
+    RETURN_IF_ERROR(IdArt);
+    //Output
+    auto reply = comhand.DELETE_ART(*Id, *IdArt);
+    //printReply(reply);
 }
 
 void Client_commanddecoder::GET_ART(std::istream& is) {
-    cout << "Reply from server: " << endl;
-    //reply = comhand.GET_ART(parameters);
+    //Input
+    cout << "Type the Index number of the newsgroup, where article is located (or type exit): " << endl;
+    auto Id = readInputId(is);
+    RETURN_IF_ERROR(Id);
+    cout << "Type the Index number of the article to be retreived (or type exit): " << endl;
+    auto IdArt = readInputId(is);
+    RETURN_IF_ERROR(IdArt);
+    //Output
+    auto reply = comhand.DELETE_ART(*Id, *IdArt);
+    //printReply(reply);
 }
 
 void Client_commanddecoder::printReply(const Expected<std::vector<std::string>, Status>& reply) const{
     if (!reply)
     {
-        if (reply.error()) //errors are printed in client_commandhandler
+        if (reply.error()) //Connection errors are printed in client_commandhandler
         {
             return;
         }
@@ -174,16 +191,17 @@ Expected<int, InputStatus> Client_commanddecoder::stringToInt(const std::string&
 }
 
 Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::istream& is) const {
-    // Skip any leading whitespace, including leftover newline
 
     std::string str;
     std::getline(is, str);
     if (str.empty())
     {
-        return InputStatus::EmptyInput;
+        printInputError(InputStatus::EmptyInput);
+        return readInputString(is); //recursive call untill correct input
     }
     else if (str == "exit")
     {
+        printInputError(InputStatus::Exit);
         return InputStatus::Exit;
     }
     removeWhitespaces(str);
@@ -197,16 +215,18 @@ Expected<int, InputStatus> Client_commanddecoder::readInputId(std::istream& is) 
     {
         return str.error();
     }
-    //Convert to
+    //Convert to int
     auto value = stringToInt(*str);
     if (!value)
     {
-        return value.error();
+        printInputError(InputStatus::IdNotNumber);
+        return readInputId(is); //recursive call untill correct input
     }
     int valueInt = *value;
     if (valueInt < 0)
     {
-        return InputStatus::IdLessZero;
+        printInputError(InputStatus::IdLessZero);
+        return readInputId(is); //recursive call untill correct input
     }
     return valueInt;
 }
@@ -228,12 +248,6 @@ void Client_commanddecoder::HELP_COM() const{
     cout << "Create an article in newsgroup: CREATE_ART" << endl;
     cout << "Delete an article: DELETE_ART" << endl;
     cout << "Get an article: GET_ART" << endl; 
-    /* cout << "Create a newsgroup: CREATE_NG <title>" << endl;
-    cout << "Delete a newsgroup: DELETE_NG <NG_id_number>" << endl;
-    cout << "List articles in newsgroup: LIST_ART <NG_id_number>" << endl;
-    cout << "Create an article in newsgroup: CREATE_ART <NG_id_number> <title> <author> <text>" << endl;
-    cout << "Delete an article: DELETE_ART <NG_id_number> <ART_id_number>" << endl;
-    cout << "Get an article: GET_ART <NG_id_number> <ART_id_number>" << endl; */
 }
 
 void Client_commanddecoder::printConnectionError(const Status& error) const{
