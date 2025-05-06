@@ -116,7 +116,8 @@ auto ServerCommandHandler::listArticles() const -> Status {
     const auto articles = database->listArticle(groupID);
     const auto n = articles.size();
 
-    if(n == 0) {
+    // Kanske bör ändras. Men har var felet för listArticles()
+    if(n >= 0) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
         RETURN_IF_FAILED(sendIntParameter(n, "# of articles"));
 
