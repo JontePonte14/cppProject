@@ -1,8 +1,8 @@
 CMakeFiles/clientserver.dir/src/connection.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/connection.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/connection.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connectionclosedexception.h \
  /usr/include/arpa/inet.h /usr/include/features.h \
  /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \

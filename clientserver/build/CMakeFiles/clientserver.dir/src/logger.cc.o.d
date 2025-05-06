@@ -1,7 +1,7 @@
 CMakeFiles/clientserver.dir/src/logger.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/logger.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/logger.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/logger.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/logger.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \

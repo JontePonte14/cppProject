@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/EDAF50/cppProject/clientserver
+CMAKE_SOURCE_DIR = /home/ture/Documents/C++/cppProject/clientserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/EDAF50/cppProject/clientserver/build
+CMAKE_BINARY_DIR = /home/ture/Documents/C++/cppProject/clientserver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,14 +132,14 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles /root/EDAF50/cppProject/clientserver/build/src//CMakeFiles/progress.marks
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /root/EDAF50/cppProject/clientserver/build/CMakeFiles 0
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles /home/ture/Documents/C++/cppProject/clientserver/build/src//CMakeFiles/progress.marks
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ture/Documents/C++/cppProject/clientserver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -148,17 +148,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /root/EDAF50/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -184,6 +184,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /root/EDAF50/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/ture/Documents/C++/cppProject/clientserver/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

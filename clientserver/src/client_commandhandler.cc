@@ -10,21 +10,22 @@
 #include <vector>
 #include <optional>
 
-#define RETURN_IF_FAILED(expr) \
+#define RETURN_IF_FAILED_THIS(expr) \
     do { \
         if (!(expr)) return ProtocolViolation; \
     } while (0)
 
-#define RETURN_IF_ERROR(expr)                          \
+/* #define RETURN_IF_ERROR(expr)                          \
     do {                                                \
         if (!(expr)) {                                  \
             std::cout << "Got no " #expr " from server" << std::endl; \
             return (expr).error();                      \
         }                                               \
-    } while (0)
+    } while (0) */
 
 using std::cout;
 using std::endl;
+
 Client_commandhandler::Client_commandhandler(const std::shared_ptr<Connection>& conn) : MessageHandler(conn) {
 }
 
@@ -40,13 +41,15 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     //Data fropm server
     ASSIGN_OR_RETURN(nbrGroupsInt, receiveIntParameter());
 
-    RETURN_IF_FAILED(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
-    auto intStringPairs = receiveIntStringPairs(nbrGroupsInt, "group");
-    RETURN_IF_FAILED(intStringPairs);
-    replyText = *intStringPairs;
+    RETURN_IF_FAILED_THIS(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
+    auto groupId = mh.receiveIntParameter(); //DENNA RADEN GER FEL
+    //ASSIGN_OR_RETURN(groupId, mh.receiveIntParameter());
+    //ASSIGN_OR_RETURN(groupName, mh.receiveStringParameter());
+    /* auto intStringPairs = receiveIntStringPairs(nbrGroupsInt);
+    RETURN_IF_FAILED_THIS(intStringPairs);
+    replyText = *intStringPairs; */
     //ANS_END
-    Protocol ans_end = mh.receiveProtocol();
-    RETURN_IF_FAILED(checkCode(Protocol::ANS_END, ans_end));
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
     return replyText;
 }
 
@@ -129,30 +132,10 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_ART(int g
 
     if (ans == Protocol::ANS_ACK) {
         ASSIGN_OR_RETURN(nbrArtsInt, receiveIntParameter());
-        std::vector<std::string> nameIdPairVector(nbrArtsInt);
-        std::string nameIdPair;
         //Receive article index plus article name
-        for (size_t i = 0; i < nbrArtsInt; i++) {
-            auto artId = receiveIntParameter();       
-            auto artName = receiveStringParameter();
-            if (!artId) {
-                cout << "Missing Article Id on iteration: " << i << "Expected length: " << nbrArtsInt << endl;
-                return artId.error();
-            }
-            if (!artName) {
-                cout << "Missing Article Name on iteration: " << i << "Expected length: " << nbrArtsInt <<endl;
-                return artName.error();
-            }
-            nameIdPair = std::to_string(*artId) + " " + *artName; 
-            nameIdPairVector[i] = nameIdPair;
-        }
-        if (nbrArtsInt == 0) {
-            replyText = {"No articles exist in newsgroup"};
-        }
-        else {
-            replyText = nameIdPairVector;
-        }
-        
+        auto intStringPairs = receiveIntStringPairs(nbrArtsInt);
+        RETURN_IF_FAILED_THIS(intStringPairs);
+        replyText = *intStringPairs;
     }
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
@@ -213,23 +196,27 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int gr
     return std::vector<std::string>{};
 }
 
-Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt, const std::string idType) {
+Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt) {
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
+    cout << "nmbrgroups: " << nbrGroupsInt << endl;
     //Receive index plus groupname
-    for (size_t i = 0; i < nbrGroupsInt; i++) {
-        auto groupId = mh.receiveIntParameter();
-        auto groupName = mh.receiveStringParameter();
-        if (!groupId) {
+    for (int i = 0; i < nbrGroupsInt; i++) {
+        /* auto groupId = mh.receiveIntParameter();
+        auto groupName = mh.receiveStringParameter(); */
+        cout << "iteration: " << i << endl;
+        ASSIGN_OR_RETURN(groupId, mh.receiveIntParameter());
+        ASSIGN_OR_RETURN(groupName, mh.receiveStringParameter());
+        /* if (!groupId) {
             cout << "Missing " << idType <<" Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
             return groupId.error();
         }
         if (!groupName) {
             cout << "Missing " << idType <<" Name on iteration: "<< i << "Expected length: " << nbrGroupsInt <<endl;
             return groupName.error();
-        }
-        nameIdPair = std::to_string(*groupId) + " " + *groupName; 
-        nameIdPairVector[i] = nameIdPair;
+        } */
+        //nameIdPair = std::to_string(groupId) + " " + groupName; 
+        //nameIdPairVector[i] = nameIdPair;
     }
     if (nbrGroupsInt == 0) {
         nameIdPairVector = {"No newsgroups exist"};

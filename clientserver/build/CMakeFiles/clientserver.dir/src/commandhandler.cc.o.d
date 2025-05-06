@@ -1,7 +1,7 @@
 CMakeFiles/clientserver.dir/src/commandhandler.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/commandhandler.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/commandhandler.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/commandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/commandhandler.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -127,7 +127,7 @@ CMakeFiles/clientserver.dir/src/commandhandler.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h \
@@ -165,13 +165,13 @@ CMakeFiles/clientserver.dir/src/commandhandler.cc.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/stdexcept \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
- /root/EDAF50/cppProject/clientserver/include/protocol.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/array /usr/include/c++/13/compare \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/ios_base.h \

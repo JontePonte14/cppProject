@@ -1,8 +1,8 @@
 CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/servercommandhandler.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/servercommandhandler.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/servercommandhandler.h \
- /root/EDAF50/cppProject/clientserver/include/commandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/servercommandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/commandhandler.h \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -128,7 +128,7 @@ CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/stl_tempbuf.h \
  /usr/include/c++/13/bits/stl_raw_storage_iter.h \
  /usr/include/c++/13/bits/align.h \
@@ -166,14 +166,14 @@ CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: \
  /usr/include/c++/13/backward/auto_ptr.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/stdexcept \
- /root/EDAF50/cppProject/clientserver/include/interface.h \
- /root/EDAF50/cppProject/clientserver/include/article.h \
- /root/EDAF50/cppProject/clientserver/include/json.hpp \
+ /home/ture/Documents/C++/cppProject/clientserver/include/interface.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/article.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/json.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
@@ -261,11 +261,11 @@ CMakeFiles/clientserver.dir/src/servercommandhandler.cc.o: \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h /usr/include/c++/13/any \
- /root/EDAF50/cppProject/clientserver/include/databaseMS.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseMS.h \
  /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/list.tcc \
- /root/EDAF50/cppProject/clientserver/include/database.h \
- /root/EDAF50/cppProject/clientserver/include/databaseDS.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /root/EDAF50/cppProject/clientserver/include/protocol.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/database.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseDS.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connectionclosedexception.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/iostream

@@ -1,8 +1,8 @@
 CMakeFiles/clientserver.dir/src/databaseDS.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/databaseDS.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/databaseDS.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/databaseDS.h \
- /root/EDAF50/cppProject/clientserver/include/json.hpp \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseDS.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/json.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -253,15 +253,15 @@ CMakeFiles/clientserver.dir/src/databaseDS.cc.o: \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h /usr/include/c++/13/any \
- /root/EDAF50/cppProject/clientserver/include/article.h \
- /root/EDAF50/cppProject/clientserver/include/database.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/article.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/database.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant /usr/include/c++/13/list \
  /usr/include/c++/13/bits/stl_list.h /usr/include/c++/13/bits/list.tcc \
- /root/EDAF50/cppProject/clientserver/include/article.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/article.h \
  /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/iostream \
- /root/EDAF50/cppProject/clientserver/include/json.hpp \
+ /home/ture/Documents/C++/cppProject/clientserver/include/json.hpp \
  /usr/include/c++/13/charconv

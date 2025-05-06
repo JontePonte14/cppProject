@@ -1,4 +1,4 @@
-# Install script for directory: /root/EDAF50/cppProject/clientserver/src
+# Install script for directory: /home/ture/Documents/C++/cppProject/clientserver/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -1,11 +1,11 @@
 example/CMakeFiles/myclient.dir/myclient.cc.o: \
- /root/EDAF50/cppProject/clientserver/example/myclient.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/example/myclient.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /root/EDAF50/cppProject/clientserver/include/client_commanddecoder.h \
- /root/EDAF50/cppProject/clientserver/include/client_commandhandler.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connectionclosedexception.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/client_commanddecoder.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/client_commandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -164,7 +164,7 @@ example/CMakeFiles/myclient.dir/myclient.cc.o: \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator_args.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
@@ -193,6 +193,6 @@ example/CMakeFiles/myclient.dir/myclient.cc.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
  /usr/include/c++/13/optional \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h

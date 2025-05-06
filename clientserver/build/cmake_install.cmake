@@ -1,4 +1,4 @@
-# Install script for directory: /root/EDAF50/cppProject/clientserver
+# Install script for directory: /home/ture/Documents/C++/cppProject/clientserver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,12 +44,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/root/EDAF50/cppProject/clientserver/build/src/cmake_install.cmake")
+  include("/home/ture/Documents/C++/cppProject/clientserver/build/src/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/root/EDAF50/cppProject/clientserver/build/example/cmake_install.cmake")
+  include("/home/ture/Documents/C++/cppProject/clientserver/build/example/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -60,5 +60,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/root/EDAF50/cppProject/clientserver/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ture/Documents/C++/cppProject/clientserver/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

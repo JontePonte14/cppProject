@@ -1,7 +1,7 @@
 CMakeFiles/clientserver.dir/src/messagehandler.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/messagehandler.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/messagehandler.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -160,14 +160,14 @@ CMakeFiles/clientserver.dir/src/messagehandler.cc.o: \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator_args.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
  /usr/include/c++/13/bits/stl_relops.h /usr/include/c++/13/stdexcept \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/protocol.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connectionclosedexception.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/array /usr/include/c++/13/compare \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/bits/ios_base.h \
@@ -186,7 +186,7 @@ CMakeFiles/clientserver.dir/src/messagehandler.cc.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /root/EDAF50/cppProject/clientserver/include/logger.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/logger.h \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \

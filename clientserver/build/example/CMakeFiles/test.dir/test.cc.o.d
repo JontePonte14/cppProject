@@ -1,9 +1,9 @@
 example/CMakeFiles/test.dir/test.cc.o: \
- /root/EDAF50/cppProject/clientserver/example/test.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/example/test.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/databaseserver.h \
- /root/EDAF50/cppProject/clientserver/include/server.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseserver.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/server.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -127,8 +127,8 @@ example/CMakeFiles/test.dir/test.cc.o: \
  /usr/include/c++/13/bits/vector.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator_args.h \
- /root/EDAF50/cppProject/clientserver/include/interface.h \
- /root/EDAF50/cppProject/clientserver/include/article.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/interface.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/article.h \
  /usr/include/c++/13/string /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
@@ -167,7 +167,7 @@ example/CMakeFiles/test.dir/test.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /root/EDAF50/cppProject/clientserver/include/json.hpp \
+ /home/ture/Documents/C++/cppProject/clientserver/include/json.hpp \
  /usr/include/c++/13/algorithm /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
@@ -257,15 +257,15 @@ example/CMakeFiles/test.dir/test.cc.o: \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /usr/include/c++/13/numeric /usr/include/c++/13/bits/stl_numeric.h \
  /usr/include/c++/13/pstl/glue_numeric_defs.h /usr/include/c++/13/any \
- /root/EDAF50/cppProject/clientserver/include/databaseMS.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseMS.h \
  /usr/include/c++/13/list /usr/include/c++/13/bits/stl_list.h \
  /usr/include/c++/13/bits/list.tcc \
- /root/EDAF50/cppProject/clientserver/include/database.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/database.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
- /root/EDAF50/cppProject/clientserver/include/databaseDS.h \
- /root/EDAF50/cppProject/clientserver/include/servercommandhandler.h \
- /root/EDAF50/cppProject/clientserver/include/commandhandler.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/databaseDS.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/servercommandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/commandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/iostream \
- /root/EDAF50/cppProject/clientserver/include/logger.h
+ /home/ture/Documents/C++/cppProject/clientserver/include/logger.h

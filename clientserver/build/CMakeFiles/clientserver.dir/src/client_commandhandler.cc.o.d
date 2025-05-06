@@ -1,9 +1,9 @@
 CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: \
- /root/EDAF50/cppProject/clientserver/src/client_commandhandler.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/src/client_commandhandler.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/client_commandhandler.h \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/client_commandhandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -162,7 +162,7 @@ CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: \
  /usr/include/c++/13/bits/basic_string.tcc \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator_args.h \
- /root/EDAF50/cppProject/clientserver/include/expected.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/expected.h \
  /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/bits/parse_numbers.h /usr/include/c++/13/utility \
@@ -191,7 +191,7 @@ CMakeFiles/clientserver.dir/src/client_commandhandler.cc.o: \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc \
- /root/EDAF50/cppProject/clientserver/include/messagehandler.h \
- /root/EDAF50/cppProject/clientserver/include/protocol.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/messagehandler.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/protocol.h \
  /usr/include/c++/13/array /usr/include/c++/13/compare \
  /usr/include/c++/13/optional

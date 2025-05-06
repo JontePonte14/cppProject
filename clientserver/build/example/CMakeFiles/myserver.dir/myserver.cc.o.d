@@ -1,10 +1,10 @@
 example/CMakeFiles/myserver.dir/myserver.cc.o: \
- /root/EDAF50/cppProject/clientserver/example/myserver.cc \
+ /home/ture/Documents/C++/cppProject/clientserver/example/myserver.cc \
  /usr/include/stdc-predef.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
- /root/EDAF50/cppProject/clientserver/include/connectionclosedexception.h \
- /root/EDAF50/cppProject/clientserver/include/server.h \
- /root/EDAF50/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connectionclosedexception.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/server.h \
+ /home/ture/Documents/C++/cppProject/clientserver/include/connection.h \
  /usr/include/c++/13/memory /usr/include/c++/13/bits/memoryfwd.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
