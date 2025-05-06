@@ -73,6 +73,12 @@ void Client_commanddecoder::com_decode(std::istream& is){
     else if (command == "exit") {
         
     }
+    else if (command == "change_database")
+    {
+        cout << "Function not implemented " << endl;
+        /* code */
+    }
+    
     else {
         cout << "FAIL! no such command exists, type help_com for command list" << endl;
     }
@@ -158,13 +164,19 @@ void Client_commanddecoder::GET_ART(std::istream& is) {
     //printReply(reply);
 }
 
+void Client_commanddecoder::CHANGE_DATABASE(std::istream& is) {
+    cout << "Type the Index number of the database you want to switch to " << endl;
+    auto Index = readInputId(is);
+    auto reply = comhand.CHANGE_DATABASE(*Index);
+    printReply(reply);
+}
+
 void Client_commanddecoder::printReply(const Expected<std::vector<std::string>, Status>& reply) const{
-    if (!reply)
+    if (!reply && reply.error())
     {
-        if (reply.error()) //Connection errors are printed in client_commandhandler
-        {
-            return;
-        }
+        printConnectionError(reply.error());
+        return;
+        
     }
     else
     {
@@ -223,9 +235,9 @@ Expected<int, InputStatus> Client_commanddecoder::readInputId(std::istream& is) 
         return readInputId(is); //recursive call untill correct input
     }
     int valueInt = *value;
-    if (valueInt < 0)
+    if (valueInt < ONE_INDEXING)
     {
-        printInputError(InputStatus::IdLessZero);
+        printInputError(InputStatus::IdTooBigIndex);
         return readInputId(is); //recursive call untill correct input
     }
     return valueInt;
@@ -248,6 +260,7 @@ void Client_commanddecoder::HELP_COM() const{
     cout << "Create an article in newsgroup: CREATE_ART" << endl;
     cout << "Delete an article: DELETE_ART" << endl;
     cout << "Get an article: GET_ART" << endl; 
+    cout << "change database: CHANGE_DATABASE" << endl; 
 }
 
 void Client_commanddecoder::printConnectionError(const Status& error) const{
@@ -283,8 +296,8 @@ void Client_commanddecoder::printInputError(const InputStatus& error) const{
     case InputStatus::Exit:
         cout << "Exeting" << endl;
         break;
-    case InputStatus::IdLessZero:
-        cout << "Please input Id bigger than zero" << endl;
+    case InputStatus::IdTooBigIndex:
+        cout << "Please input Id bigger than " << (ONE_INDEXING -1) << endl;
         break;
     case InputStatus::IdTooBig:
         cout << "Try inputing smaller number" << endl;

@@ -8,10 +8,12 @@
 #include <vector>
 #include <optional>
 
+
+
 enum class InputStatus {
     EmptyInput,
     Exit,
-    IdLessZero,
+    IdTooBigIndex,
     IdTooBig,
     IdNotNumber,
 };
@@ -36,6 +38,8 @@ private:
     void DELETE_ART(std::istream& is);
 
     void GET_ART(std::istream& is);
+
+    void CHANGE_DATABASE(std::istream& is);
 
     void HELP_COM() const;
 

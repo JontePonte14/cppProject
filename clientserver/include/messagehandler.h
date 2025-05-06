@@ -6,6 +6,7 @@
 #include "expected.h"
 
 using byte = unsigned char;
+const int ONE_INDEXING = 1; 
 
 class Connection;
 enum class Protocol : byte;

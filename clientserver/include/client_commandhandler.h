@@ -8,6 +8,7 @@
 #include <string>
 
 
+
 class Client_commandhandler : public MessageHandler {
 public:
     Client_commandhandler(const std::shared_ptr<Connection>& conn); //replcace with message handler
@@ -25,11 +26,13 @@ public:
     Expected<std::vector<std::string>, Status> DELETE_ART(int groupIndex, int articleIndex);
 
     Expected<std::vector<std::string>, Status> GET_ART(int groupIndex, int articleIndex);
+
+    Expected<std::vector<std::string>, Status> CHANGE_DATABASE(int dataBaseIndex);
 private:
     
     Expected<std::vector<std::string>, Status> receiveIntStringPairs(const int nbrGroups);
-    bool checkCondition(bool condition, std::string message) const;
-    bool checkCode(Protocol epectedCode, Protocol code) const; 
+    Status checkCondition(bool condition, Status error) const;
+    //bool checkCode(Protocol epectedCode, Protocol code) const; 
     
     MessageHandler mh;
 };

@@ -24,6 +24,7 @@ enum class Protocol : code {
         COM_DELETE_ART = 6, // delete article
         COM_GET_ART    = 7, // get article
         COM_END        = 8, // command end
+        COM_CHANGE_DATABASE = 9, //change database
 
         /* Answer codes, server -> client */
         ANS_LIST_NG    = 20, // answer list newsgroups
@@ -36,6 +37,7 @@ enum class Protocol : code {
         ANS_END        = 27, // answer end
         ANS_ACK        = 28, // acknowledge
         ANS_NAK        = 29, // negative acknowledge
+        ANS_CHANGE_DATABASE = 30, //answer change database
 
         /* Parameters */
         PAR_STRING = 40, // string
@@ -44,7 +46,8 @@ enum class Protocol : code {
         /* Error codes */
         ERR_NG_ALREADY_EXISTS  = 50, // newsgroup already exists
         ERR_NG_DOES_NOT_EXIST  = 51, // newsgroup does not exist
-        ERR_ART_DOES_NOT_EXIST = 52  // article does not exist
+        ERR_ART_DOES_NOT_EXIST = 52,  // article does not exist
+        ERR_DATABASE_DOES_NOT_EXIST = 53 //database does not exist
 };
 
 constexpr std::array<std::pair<Protocol, code>, 24> protocol_to_code = {{

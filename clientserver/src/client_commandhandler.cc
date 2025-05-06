@@ -10,10 +10,23 @@
 #include <vector>
 #include <optional>
 
-#define RETURN_IF_FAILED_THIS(expr) \
+/* #define RETURN_IF_FAILED_CONDITION(expr) \
     do { \
         if (!(expr)) return ProtocolViolation; \
+    } while (0) */
+#define RETURN_IF_FAILED_CLIENT(expr)              \
+    do {                                    \
+        Status _status = (expr);            \
+        if (_status != Status::Success)     \
+            return _status;                 \
     } while (0)
+
+// Macro used for unpacking an Expected<V, E> object into V if valid, else returning E
+#define ASSIGN_OR_RETURN_CLIENT(var, expr)                              \
+auto CONCAT(_result_, __LINE__) = (expr);                    \
+if (!CONCAT(_result_, __LINE__))                             \
+    return CONCAT(_result_, __LINE__).error();               \
+decltype(auto) var = std::move(*CONCAT(_result_, __LINE__));
 
 /* #define RETURN_IF_ERROR(expr)                          \
     do {                                                \
@@ -22,6 +35,7 @@
             return (expr).error();                      \
         }                                               \
     } while (0) */
+
 
 using std::cout;
 using std::endl;
@@ -41,13 +55,11 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     //Data fropm server
     ASSIGN_OR_RETURN(nbrGroupsInt, receiveIntParameter());
 
-    RETURN_IF_FAILED_THIS(checkCondition(nbrGroupsInt >= 0, "Error, number of groups received from server is less than 0"));
-    auto groupId = mh.receiveIntParameter(); //DENNA RADEN GER FEL
-    //ASSIGN_OR_RETURN(groupId, mh.receiveIntParameter());
-    //ASSIGN_OR_RETURN(groupName, mh.receiveStringParameter());
-    /* auto intStringPairs = receiveIntStringPairs(nbrGroupsInt);
-    RETURN_IF_FAILED_THIS(intStringPairs);
-    replyText = *intStringPairs; */
+    RETURN_IF_FAILED_CLIENT(checkCondition(nbrGroupsInt >= 0, Status::InvalidArguments));
+    std::vector<std::string> nameIdPairVector(nbrGroupsInt);
+    std::string nameIdPair;
+    ASSIGN_OR_RETURN_CLIENT(intStringPair, receiveIntStringPairs(nbrGroupsInt));
+    replyText = intStringPair;
     //ANS_END
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
     return replyText;
@@ -132,10 +144,10 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_ART(int g
 
     if (ans == Protocol::ANS_ACK) {
         ASSIGN_OR_RETURN(nbrArtsInt, receiveIntParameter());
+        RETURN_IF_FAILED_CLIENT(checkCondition(nbrArtsInt >= 0, Status::InvalidArguments));
         //Receive article index plus article name
-        auto intStringPairs = receiveIntStringPairs(nbrArtsInt);
-        RETURN_IF_FAILED_THIS(intStringPairs);
-        replyText = *intStringPairs;
+        ASSIGN_OR_RETURN_CLIENT(intStringPairs, receiveIntStringPairs(nbrArtsInt))
+        replyText = intStringPairs;
     }
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
@@ -189,34 +201,122 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::CREATE_ART(int
 }
 
 Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_ART(int groupIndex, int articleIndex){
-    return std::vector<std::string>{};
+    std::vector<std::string> replyText;
+    //Data sent to server
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_DELETE_ART));
+    RETURN_IF_FAILED(sendIntParameter(groupIndex));
+    RETURN_IF_FAILED(sendIntParameter(articleIndex));
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_END));
+    //ANS_CREATE_ART
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_DELETE_ART);
+    //Data from server
+    ASSIGN_OR_RETURN(ans, receiveProtocol());
+    if (ans == Protocol::ANS_ACK) {
+        replyText.push_back("Article succesfully Deleted");
+    }
+    else if (ans == Protocol::ANS_NAK) {
+        auto error = receiveProtocol();
+        if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
+            replyText.push_back("News group does not exist ");
+        }
+        else if (error && *error == Protocol::ERR_ART_DOES_NOT_EXIST){
+            replyText.push_back("Article does not exist ");
+        }
+        else
+        {
+            return ProtocolViolation;
+        }
+        
+    }
+    else {
+        return ProtocolViolation;
+    }
+    //ANS_END
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
+    return replyText;
 }
 
 Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int groupIndex, int articleIndex){
-    return std::vector<std::string>{};
+    std::vector<std::string> replyText;
+    //Data sent to server
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_GET_ART));
+    RETURN_IF_FAILED(sendIntParameter(groupIndex));
+    RETURN_IF_FAILED(sendIntParameter(articleIndex));
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_END));
+    //ANS_CREATE_ART
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_GET_ART);
+    //Data from server
+    ASSIGN_OR_RETURN(ans, receiveProtocol());
+    if (ans == Protocol::ANS_ACK) {
+        ASSIGN_OR_RETURN(title, receiveStringParameter());
+        ASSIGN_OR_RETURN(author, receiveStringParameter());
+        ASSIGN_OR_RETURN(text, receiveStringParameter());
+        replyText.push_back(title);
+        replyText.push_back(author);
+        replyText.push_back(" ");
+        replyText.push_back(text);
+    }
+    else if (ans == Protocol::ANS_NAK) {
+        auto error = receiveProtocol();
+        if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
+            replyText.push_back("News group does not exist ");
+        }
+        else if (error && *error == Protocol::ERR_ART_DOES_NOT_EXIST){
+            replyText.push_back("Article does not exist ");
+        }
+        else
+        {
+            return ProtocolViolation;
+        }
+        
+    }
+    else {
+        return ProtocolViolation;
+    }
+    //ANS_END
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
+    return replyText;
+}
+Expected<std::vector<std::string>, Status> Client_commandhandler::CHANGE_DATABASE(int dataBaseIndex){
+    std::vector<std::string> replyText;
+    //Data sent to server
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_CHANGE_DATABASE));
+    RETURN_IF_FAILED(sendIntParameter(dataBaseIndex));
+    RETURN_IF_FAILED(sendProtocol(Protocol::COM_END));
+    //ANS_CHANGE_DATABASE
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_CHANGE_DATABASE);
+    //Data from server
+    ASSIGN_OR_RETURN(ans, receiveProtocol());
+    if (ans == Protocol::ANS_ACK) {
+        replyText.push_back("Database changed");
+    }
+    else if (ans == Protocol::ANS_NAK) {
+        auto error = receiveProtocol();
+        if (error && *error == Protocol::ERR_DATABASE_DOES_NOT_EXIST) {
+            replyText.push_back("Database does not exist ");
+        }
+        else
+        {
+            return ProtocolViolation;
+        }
+        
+    }
+    else {
+        return ProtocolViolation;
+    }
+    //ANS_END
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
+    return replyText;
 }
 
 Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt) {
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
-    cout << "nmbrgroups: " << nbrGroupsInt << endl;
     //Receive index plus groupname
     for (int i = 0; i < nbrGroupsInt; i++) {
-        /* auto groupId = mh.receiveIntParameter();
-        auto groupName = mh.receiveStringParameter(); */
-        cout << "iteration: " << i << endl;
-        ASSIGN_OR_RETURN(groupId, mh.receiveIntParameter());
-        ASSIGN_OR_RETURN(groupName, mh.receiveStringParameter());
-        /* if (!groupId) {
-            cout << "Missing " << idType <<" Id on iteration: " << i << "Expected length: " << nbrGroupsInt << endl;
-            return groupId.error();
-        }
-        if (!groupName) {
-            cout << "Missing " << idType <<" Name on iteration: "<< i << "Expected length: " << nbrGroupsInt <<endl;
-            return groupName.error();
-        } */
-        //nameIdPair = std::to_string(groupId) + " " + groupName; 
-        //nameIdPairVector[i] = nameIdPair;
+        ASSIGN_OR_RETURN(groupId, receiveIntParameter());
+        ASSIGN_OR_RETURN(groupName, receiveStringParameter());
+        nameIdPairVector[i] = std::to_string(groupId) + " " + groupName;
     }
     if (nbrGroupsInt == 0) {
         nameIdPairVector = {"No newsgroups exist"};
@@ -224,16 +324,15 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStri
     return nameIdPairVector;
 }
 
-bool Client_commandhandler::checkCondition(bool condition, std::string message) const{
+Status Client_commandhandler::checkCondition(bool condition, Status error) const{
     if (condition) {
-        return true;
+        return Success;
     }
     else {
-        cout << message << endl;
-        return false;
+        return error;
     }
 }
-bool Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
+/* bool Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
     if(expectedCode == code){
         return true;
     }
@@ -241,9 +340,4 @@ bool Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) cons
         cout << "PROTOCOL VIOLATION. Expected: " << to_string(expectedCode) << " Got: " << to_string(code) << endl;
         return false;
     }
-} 
-/* void Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
-    if(expectedCode != code){
-        throw std::runtime_error("Expected: " + std::string(to_string(expectedCode)) + ". Got: " + std::string(to_string(code)));
-    }
-} */
+}  */
