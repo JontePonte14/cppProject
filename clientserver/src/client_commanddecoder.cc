@@ -63,20 +63,20 @@ void Client_commanddecoder::com_decode(std::istream& is){
     } 
 
     else if(command == "delete_art"){
-        cout << "Function not implemented " << endl;
-        //DELETE_ART(is);
+        //cout << "Function not implemented " << endl;
+        DELETE_ART(is);
     }
     else if(command == "get_art"){
-        cout << "Function not implemented " << endl;
-        //GET_ART(is);
+        //cout << "Function not implemented " << endl;
+        GET_ART(is);
     }
     else if (command == "exit") {
         
     }
     else if (command == "change_database")
     {
-        cout << "Function not implemented " << endl;
-        /* code */
+        //cout << "Function not implemented " << endl;
+        CHANGE_DATABASE(is);
     }
     
     else {
@@ -148,7 +148,7 @@ void Client_commanddecoder::DELETE_ART(std::istream& is) {
     RETURN_IF_ERROR(IdArt);
     //Output
     auto reply = comhand.DELETE_ART(*Id, *IdArt);
-    //printReply(reply);
+    printReply(reply);
 }
 
 void Client_commanddecoder::GET_ART(std::istream& is) {
@@ -161,12 +161,14 @@ void Client_commanddecoder::GET_ART(std::istream& is) {
     RETURN_IF_ERROR(IdArt);
     //Output
     auto reply = comhand.DELETE_ART(*Id, *IdArt);
-    //printReply(reply);
+    printReply(reply);
 }
 
 void Client_commanddecoder::CHANGE_DATABASE(std::istream& is) {
+    //Input
     cout << "Type the Index number of the database you want to switch to " << endl;
     auto Index = readInputId(is);
+    //Output
     auto reply = comhand.CHANGE_DATABASE(*Index);
     printReply(reply);
 }
