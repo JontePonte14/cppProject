@@ -36,6 +36,9 @@ auto ServerCommandHandler::processRequest() const noexcept -> Status {
         case Protocol::COM_GET_ART:
             return getArticle();
             break;
+        case Protocol::COM_CHANGE_DATABASE:
+            return changeDatabase();
+            break;
         default:
             return Status::ProtocolViolation;
     }
@@ -214,4 +217,20 @@ auto ServerCommandHandler::getArticle() const -> Status {
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 
     return Status::Success;
+}
+
+auto ServerCommandHandler::changeDatabase() const -> Status {
+    ASSIGN_OR_RETURN(dataBaseIndex, receiveIntParameter());
+    RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
+
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_CHANGE_DATABASE));
+
+    if(database->switchDateBase(dataBaseIndex)) {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
+    } else {
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
+        RETURN_IF_FAILED(sendProtocol(Protocol::ERR_DATABASE_DOES_NOT_EXIST));
+    }
+
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 }

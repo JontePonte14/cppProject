@@ -50,7 +50,7 @@ enum class Protocol : code {
         ERR_DATABASE_DOES_NOT_EXIST = 53 //database does not exist
 };
 
-constexpr std::array<std::pair<Protocol, code>, 24> protocol_to_code = {{
+constexpr std::array<std::pair<Protocol, code>, 28> protocol_to_code = {{
         {Protocol::UNDEFINED, 0},
         {Protocol::COM_LIST_NG, 1},
         {Protocol::COM_CREATE_NG, 2},
@@ -60,6 +60,7 @@ constexpr std::array<std::pair<Protocol, code>, 24> protocol_to_code = {{
         {Protocol::COM_DELETE_ART, 6},
         {Protocol::COM_GET_ART, 7},
         {Protocol::COM_END, 8},
+        {Protocol::COM_CHANGE_DATABASE, 9},
         {Protocol::ANS_LIST_NG, 20},
         {Protocol::ANS_CREATE_NG, 21},
         {Protocol::ANS_DELETE_NG, 22},
@@ -70,11 +71,13 @@ constexpr std::array<std::pair<Protocol, code>, 24> protocol_to_code = {{
         {Protocol::ANS_END, 27},
         {Protocol::ANS_ACK, 28},
         {Protocol::ANS_NAK, 29},
+        {Protocol::ANS_CHANGE_DATABASE, 30},
         {Protocol::PAR_STRING, 40},
         {Protocol::PAR_NUM, 41},
         {Protocol::ERR_NG_ALREADY_EXISTS, 50},
         {Protocol::ERR_NG_DOES_NOT_EXIST, 51},
-        {Protocol::ERR_ART_DOES_NOT_EXIST, 52}
+        {Protocol::ERR_ART_DOES_NOT_EXIST, 52},
+        {Protocol::ERR_DATABASE_DOES_NOT_EXIST, 53},
 }};
 
 [[nodiscard]] constexpr auto to_code(const Protocol protocol) noexcept -> code {
@@ -97,7 +100,7 @@ constexpr std::array<std::pair<Protocol, code>, 24> protocol_to_code = {{
         return Protocol::UNDEFINED;
 }
     
-constexpr std::array<std::pair<Protocol, std::string_view>, 24> protocol_to_string = {{
+constexpr std::array<std::pair<Protocol, std::string_view>, 28> protocol_to_string = {{
         {Protocol::UNDEFINED, "UNDEFINED"},
         {Protocol::COM_LIST_NG, "COM_LIST_NG"},
         {Protocol::COM_CREATE_NG, "COM_CREATE_NG"},
@@ -107,6 +110,7 @@ constexpr std::array<std::pair<Protocol, std::string_view>, 24> protocol_to_stri
         {Protocol::COM_DELETE_ART, "COM_DELETE_ART"},
         {Protocol::COM_GET_ART, "COM_GET_ART"},
         {Protocol::COM_END, "COM_END"},
+        {Protocol::COM_CHANGE_DATABASE, "COM_CHANGE_DATABASE"},
         {Protocol::ANS_LIST_NG, "ANS_LIST_NG"},
         {Protocol::ANS_CREATE_NG, "ANS_CREATE_NG"},
         {Protocol::ANS_DELETE_NG, "ANS_DELETE_NG"},
@@ -117,11 +121,14 @@ constexpr std::array<std::pair<Protocol, std::string_view>, 24> protocol_to_stri
         {Protocol::ANS_END, "ANS_END"},
         {Protocol::ANS_ACK, "ANS_ACK"},
         {Protocol::ANS_NAK, "ANS_NAK"},
+        {Protocol::ANS_CHANGE_DATABASE, "ANS_CHANGE_DATABASE"},
         {Protocol::PAR_STRING, "PAR_STRING"},
         {Protocol::PAR_NUM, "PAR_NUM"},
         {Protocol::ERR_NG_ALREADY_EXISTS, "ERR_NG_ALREADY_EXISTS"},
         {Protocol::ERR_NG_DOES_NOT_EXIST, "ERR_NG_DOES_NOT_EXIST"},
-        {Protocol::ERR_ART_DOES_NOT_EXIST, "ERR_ART_DOES_NOT_EXIST"}
+        {Protocol::ERR_ART_DOES_NOT_EXIST, "ERR_ART_DOES_NOT_EXIST"},
+        {Protocol::ERR_ART_DOES_NOT_EXIST, "ERR_ART_DOES_NOT_EXIST"},
+        {Protocol::ERR_DATABASE_DOES_NOT_EXIST, "ERR_DATABASE_DOES_NOT_EXIST"},
 }};
 
 [[nodiscard]] constexpr auto to_string(const Protocol protocol) noexcept -> std::string_view {

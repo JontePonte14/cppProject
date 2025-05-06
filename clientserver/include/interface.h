@@ -27,7 +27,7 @@ public:
     Database::RemoveStatus removeArticle(int groupID, int articleID);
     auto getArticle(int groupID, int articleID) -> Expected<Article, Database::RemoveStatus>;
 
-    int switchDateBase();
+    bool switchDateBase(int dataBaseIndex);
     int getAtiveDB();
 
     Interface(/* args */);

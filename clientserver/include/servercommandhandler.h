@@ -23,6 +23,8 @@ class ServerCommandHandler : public CommandHandler {
         auto createArticle() const -> Status override;
         auto deleteArticle() const -> Status override;
         auto getArticle() const -> Status override;
+    
+        auto changeDatabase() const -> Status override;
 
     private:
         std::shared_ptr<Interface> database;

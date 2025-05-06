@@ -20,6 +20,8 @@ class CommandHandler : public MessageHandler {
         virtual auto createArticle() const -> Status = 0;
         virtual auto deleteArticle() const -> Status = 0;
         virtual auto getArticle() const -> Status = 0;
+
+        virtual auto changeDatabase() const -> Status = 0;
 };
 
 #endif

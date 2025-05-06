@@ -76,17 +76,20 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
 
 Database::RemoveStatus Interface::removeArticle(int groupID, int articleID){    return db->removeArticle(groupID, articleID);}
 Expected<Article, Database::RemoveStatus> Interface::getArticle(int groupID, int articleID){    return db->getArticle(groupID, articleID);}
-int Interface::switchDateBase()
+bool Interface::switchDateBase(int dataBaseIndex)
 {
-    if(activeDB == 1)
-    {
-        activeDB = 2;
-        db = &db2;
-    }
-    else
+    if(dataBaseIndex == 1)
     {
         activeDB = 1;
-        db = &db1;
+        db = &db2;
     }
-    return activeDB;
+    else if(dataBaseIndex == 2) 
+    {
+        activeDB = 2;
+        db = &db1;
+    } else {
+        return false;
+    }
+
+    return false;
 }        
