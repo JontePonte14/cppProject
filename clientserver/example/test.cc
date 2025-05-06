@@ -1,6 +1,28 @@
 #include "databaseserver.h"
+#include <iostream>
+#include "logger.h"
 
-int main() {
+int main(int argc, char* argv[])
+{
+	if (argc < 1) {
+		std::cerr << "Usage: test port-number [logLevel]*" << std::endl;
+		exit(1);
+	}
+
+	int port = -1;
+	try {
+			port = std::stoi(argv[1]);
+	} catch (std::exception& e) {
+			std::cerr << "Wrong port number. " << e.what() << std::endl;
+			exit(2);
+	}
+
+	for(int i = 1; i < argc; ++i) {
+		std::string logLevel = argv[i];
+		std::cout << logLevel << std::endl;
+		Logger::setLogLevel(logLevel, true);
+	}
+
 	/*
 	std::cout << "Size of bool: " << sizeof(bool) << std::endl;
 	std::cout << "Size of char: " << sizeof(char) << std::endl;
@@ -19,7 +41,7 @@ int main() {
 	std::cout << "Size string*: " << sizeof(std::string*) << std::endl;
 	*/
 
-	DatabaseServer server(7777, true);
+	DatabaseServer server(port, true);
 
 	return 0;
 }

@@ -8,7 +8,7 @@
 #include <string>
 
 
-class Client_commandhandler {
+class Client_commandhandler : public MessageHandler {
 public:
     Client_commandhandler(const std::shared_ptr<Connection>& conn); //replcace with message handler
 

@@ -12,20 +12,14 @@ class CommandHandler : public MessageHandler {
         CommandHandler(const std::shared_ptr<Connection>& connection);
         virtual ~CommandHandler() = default;
 
-        virtual auto listGroups() -> Status = 0;
-        virtual auto createGroup() -> Status = 0;
-        virtual auto deleteGroup() -> Status = 0;
+        virtual auto listGroups() const -> Status = 0;
+        virtual auto createGroup() const -> Status = 0;
+        virtual auto deleteGroup() const -> Status = 0;
 
-        virtual auto listArticles() -> Status = 0;
-        virtual auto createArticle() -> Status = 0;
-        virtual auto deleteArticle() -> Status = 0;
-        virtual auto getArticle() -> Status = 0;
-    
-    /*
-    protected:
-        void checkCode(const Protocol received, const Protocol expected, const string& method);
-        void checkCondition(const bool condition, const string& method, const string& message);
-    */
+        virtual auto listArticles() const -> Status = 0;
+        virtual auto createArticle() const -> Status = 0;
+        virtual auto deleteArticle() const -> Status = 0;
+        virtual auto getArticle() const -> Status = 0;
 };
 
 #endif

@@ -55,7 +55,7 @@ std::vector<Database::ListObject> Interface::listGroup(){return db->listGroup();
 
 bool Interface::makeGroup(std::string groupName){ return db->makeGroup(groupName);}
 
-bool Interface::removeGroup(int groupID){    return db->removeGroup(groupID);}
+Database::RemoveStatus Interface::removeGroup(int groupID){    return db->removeGroup(groupID);}
 
 std::vector<Database::ListObject>   Interface::listArticle(int groupID){ return db->listArticle(groupID);}
 
@@ -74,7 +74,7 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
     
 }
 
-bool Interface::removeArticle(int groupID, int articleID){    return db->removeArticle(groupID, articleID);}
+Database::RemoveStatus Interface::removeArticle(int groupID, int articleID){    return db->removeArticle(groupID, articleID);}
 Article Interface::getArticle(int groupID, int articleID){    return db->getArticle(groupID, articleID);}
 int Interface::switchDateBase()
 {

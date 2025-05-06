@@ -23,6 +23,10 @@ void DatabaseServer::start() {
         }
 
         std::cout << "Database server has closed" << std::endl;
+    } 
+    
+    else {
+        std::cout << "Database failed to start" << std::endl;
     }
 }
 

@@ -24,13 +24,22 @@ Article article2(
     "As debates continue, one thing is clear: AI is no longer just a tool for automation—it's becoming a collaborator in shaping the future."
 );
 
-string printList(const vector<string>& vec) {
+string printList(const vector<Database::ListObject>& vec) {
     string result;
     for (const auto& s: vec) {
-        result += "[" + s + "]\n";
+        result += s.toString() + "\n";
     }
     return result;
 }
+// std::string toString(Database::RemoveStatus status) { //flyttad till daatabase.h
+//     switch (status) {
+//         case Database::RemoveStatus::OK: return "OK";
+//         case Database::RemoveStatus::GROUP_NOT_FOUND: return "GROUP_NOT_FOUND";
+//         case Database::RemoveStatus::ARTICLE_NOT_FOUND: return "ARTICLE_NOT_FOUND";
+//         case Database::RemoveStatus::UNKNOWN_ERROR: return "UNKNOWN_ERROR";
+//         default: return "UNKNOWN_STATUS";
+//     }
+// }
 void testInterface(Interface& interface) {
      // 1 for memory, 2 for disk, or default constructor for user input
 
@@ -44,8 +53,8 @@ void testInterface(Interface& interface) {
     
     //removing groups
     cout << "TEST 2 : Removing groups \n \n";
-    cout <<"removing group with ID 1 : " << interface.removeGroup(1) << endl;
-    cout <<"removing group with ID 3 : " << interface.removeGroup(3) << endl;
+    cout <<"removing group with ID 1 : " << Database::toString(interface.removeGroup(1)) << endl;
+    cout <<"removing group with ID 3 : " << Database::toString(interface.removeGroup(3)) << endl;
     cout << "List groups : \n" <<printList( interface.listGroup()) << endl;
     
     //adding articles to groups
@@ -62,8 +71,8 @@ void testInterface(Interface& interface) {
     cout << "List Articule in group ID 2 : \n"<< printList( interface.listArticle(2)) << endl;
     cout << "List Articule in group ID 3 : \n"<< printList( interface.listArticle(3)) << endl;
     
-    cout << "removing article with ID 1 : " << interface.removeArticle(2, 1) << endl;
-    cout << "removing article with ID 3 : " << interface.removeArticle(2, 3) << endl;
+    cout << "Removing article with ID 1 : " <<  Database::toString(interface.removeArticle(2, 1)) << endl;
+    cout << "Removing article with ID 3 : " <<  Database::toString(interface.removeArticle(2, 3)) << endl;
     
     cout << "List Articule in group ID 2 : \n"<< printList( interface.listArticle(2)) << endl;
     

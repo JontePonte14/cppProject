@@ -47,7 +47,7 @@ std::vector<Database::ListObject> DatabaseDS::listGroup(){
     }
 
     std::sort(listOfGroups.begin(), listOfGroups.end(), [](const auto &a, const auto &b) {
-        return a.second < b.second;
+        return a.id < b.id;
     });
 
     return listOfGroups;
@@ -78,7 +78,7 @@ Database::RemoveStatus DatabaseDS::removeGroup(int groupID){
     }
     fs::path pathToFolder = root / folderName;
     if (fs::remove_all(pathToFolder)){
-        return Database::RemoveStatus::OK;
+        return Database::RemoveStatus::SUCCESS;
     } else {
         std::cerr << "Error removing group" << std::endl;
         return Database::RemoveStatus::UNKNOWN_ERROR;
@@ -113,7 +113,7 @@ std::vector<Database::ListObject> DatabaseDS::listArticle(int groupID){
 
     // Sorting group
     std::sort(sortedArticles.begin(), sortedArticles.end(), [](const auto &a, const auto &b) {
-        return a.second < b.second;
+        return a.id < b.id;
     });
 
     return sortedArticles;
@@ -156,7 +156,7 @@ Database::RemoveStatus DatabaseDS::removeArticle(int groupID, int articleID){
         return Database::RemoveStatus::ARTICLE_NOT_FOUND; // Couldn't find group or article check error message
     }
     if (fs::remove(articlePath)){
-        return Database::RemoveStatus::OK;
+        return Database::RemoveStatus::SUCCESS;
     } else {
         std::cerr << "Error removing article" << std::endl;
         return Database::RemoveStatus::UNKNOWN_ERROR;
@@ -164,11 +164,11 @@ Database::RemoveStatus DatabaseDS::removeArticle(int groupID, int articleID){
   
 }
 
-Article DatabaseDS::getArticle(int groupID, int articleID){
+Expected<Article, Database::RemoveStatus> DatabaseDS::getArticle(int groupID, int articleID){
     Article article;
     fs::path articlePath = findArticlePath(groupID, articleID);
     if (articlePath.empty()) {
-        return article; // Couldn't find group or article check error message
+        return Database::RemoveStatus::ARTICLE_NOT_FOUND; // Couldn't find group or article check error message
     }
 
     json articleJson;

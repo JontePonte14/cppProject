@@ -18,13 +18,13 @@ int main(){
 
     cout << "-----------------" << endl;
     cout << "TEST 2: removegroup()" << endl;
-    cout << DS.removeGroup(1) << endl;
-    cout << DS.removeGroup(6) << " = 0" << endl;
+    cout << Database::toString(DS.removeGroup(1)) << endl;
+    cout << Database::toString(DS.removeGroup(6)) << " = 0" << endl;
     cout << DS.makeGroup("Technology") << endl;
     
     cout << "-----------------" << endl;
     cout << "TEST 3: listGroup()" << endl;
-    std::vector<std::pair<std::string, int>> allGroups;
+    std::vector<Database::ListObject> allGroups;
     allGroups = DS.listGroup();
     for (const auto& [groupname, id] : allGroups) {
         cout << "ID: " << id << ", Groupname: " << groupname << endl;
@@ -60,7 +60,7 @@ int main(){
 
     cout << "-----------------" << endl;
     cout << "TEST 5: removeArticle()" << endl;
-    cout << DS.removeArticle(3, 2) << endl;
+    cout << Database::toString(DS.removeArticle(3, 2)) << endl;
     cout << DS.makeArticle(2, article2) << " We then back to Finland instead" << endl;
 
 
@@ -70,11 +70,11 @@ int main(){
     cout << "Title of fetched article: " << fetchedArticle.getTitle() << endl;
 
     cout << "TEST 7: listArticle()" << endl;
-    std::vector<std::pair<std::string, int>> articlesInFinland;
+    std::vector<Database::ListObject> articlesInFinland;
     articlesInFinland = DS.listArticle(2);
     cout << "Iterating in the folder Finland_2" << endl;
-    for (const auto& [title, id] : articlesInFinland) {
-        cout << "Title: " << title << ", ID: " << id << endl;
-    }
+    for (const auto& obj: articlesInFinland) { //finns även en toString nu
+        cout << "Title: " << obj.name << ", ID: " << obj.id << endl;
+    }   
     
 }

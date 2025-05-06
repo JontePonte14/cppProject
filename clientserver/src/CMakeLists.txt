@@ -13,5 +13,6 @@ target_sources(clientserver
         databaseDS.cc
         databaseMS.cc
         article.cc
+        logger.cc
         
 )

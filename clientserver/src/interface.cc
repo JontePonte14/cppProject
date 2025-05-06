@@ -75,7 +75,7 @@ bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string a
 }
 
 Database::RemoveStatus Interface::removeArticle(int groupID, int articleID){    return db->removeArticle(groupID, articleID);}
-Article Interface::getArticle(int groupID, int articleID){    return db->getArticle(groupID, articleID);}
+Expected<Article, Database::RemoveStatus> Interface::getArticle(int groupID, int articleID){    return db->getArticle(groupID, articleID);}
 int Interface::switchDateBase()
 {
     if(activeDB == 1)
