@@ -9,7 +9,8 @@
 #include <fstream>
 #include <vector>
 #include <optional>
-
+const std::string NO_NEWSGROUPS_MESSAGE = "Newsgroup does not exist";
+const std::string NO_ARTICLES_MESSAGE = "No articles in newsgroups";
 /* #define RETURN_IF_FAILED_CONDITION(expr) \
     do { \
         if (!(expr)) return ProtocolViolation; \
@@ -58,7 +59,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_NG(){
     RETURN_IF_FAILED_CLIENT(checkCondition(nbrGroupsInt >= 0, Status::InvalidArguments));
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
-    ASSIGN_OR_RETURN_CLIENT(intStringPair, receiveIntStringPairs(nbrGroupsInt));
+    ASSIGN_OR_RETURN_CLIENT(intStringPair, receiveIntStringPairs(nbrGroupsInt, NO_NEWSGROUPS_MESSAGE));
     replyText = intStringPair;
     //ANS_END
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
@@ -116,7 +117,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_NG(int 
     else if (ans == Protocol::ANS_NAK) {
         const auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
-            replyText.push_back("News group does not exist ");
+            replyText.push_back(NO_NEWSGROUPS_MESSAGE);
         }
         else {
             return ProtocolViolation;
@@ -146,13 +147,13 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::LIST_ART(int g
         ASSIGN_OR_RETURN(nbrArtsInt, receiveIntParameter());
         RETURN_IF_FAILED_CLIENT(checkCondition(nbrArtsInt >= 0, Status::InvalidArguments));
         //Receive article index plus article name
-        ASSIGN_OR_RETURN_CLIENT(intStringPairs, receiveIntStringPairs(nbrArtsInt))
+        ASSIGN_OR_RETURN_CLIENT(intStringPairs, receiveIntStringPairs(nbrArtsInt, NO_ARTICLES_MESSAGE))
         replyText = intStringPairs;
     }
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
-            replyText = {"News group does not exist "};
+            replyText = {NO_NEWSGROUPS_MESSAGE};
         }
         else {
             return ProtocolViolation;
@@ -186,7 +187,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::CREATE_ART(int
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
-            replyText.push_back("News group does not exist ");
+            replyText.push_back(NO_NEWSGROUPS_MESSAGE);
         }
         else {
             return ProtocolViolation;
@@ -217,10 +218,10 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::DELETE_ART(int
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
-            replyText.push_back("News group does not exist ");
+            replyText.push_back(NO_NEWSGROUPS_MESSAGE);
         }
         else if (error && *error == Protocol::ERR_ART_DOES_NOT_EXIST){
-            replyText.push_back("Article does not exist ");
+            replyText.push_back(NO_ARTICLES_MESSAGE);
         }
         else
         {
@@ -259,10 +260,10 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int gr
     else if (ans == Protocol::ANS_NAK) {
         auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_NG_DOES_NOT_EXIST) {
-            replyText.push_back("News group does not exist ");
+            replyText.push_back(NO_NEWSGROUPS_MESSAGE);
         }
         else if (error && *error == Protocol::ERR_ART_DOES_NOT_EXIST){
-            replyText.push_back("Article does not exist ");
+            replyText.push_back(NO_ARTICLES_MESSAGE);
         }
         else
         {
@@ -309,7 +310,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::CHANGE_DATABAS
     return replyText;
 }
 
-Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt) {
+Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStringPairs(const int nbrGroupsInt, std::string emptyMessege) {
     std::vector<std::string> nameIdPairVector(nbrGroupsInt);
     std::string nameIdPair;
     //Receive index plus groupname
@@ -319,7 +320,7 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::receiveIntStri
         nameIdPairVector[i] = std::to_string(groupId) + " " + groupName;
     }
     if (nbrGroupsInt == 0) {
-        nameIdPairVector = {"No newsgroups exist"};
+        nameIdPairVector = {emptyMessege};
     }
     return nameIdPairVector;
 }

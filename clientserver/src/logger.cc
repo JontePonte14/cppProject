@@ -7,7 +7,7 @@
 
 namespace Logger {
     std::unordered_map<std::string, bool> logLevels = {
-        {"NETWORK", true},
+        {"NETWORK", false},
         {"SERVER", false},
         {"DATABASE", false}
     };

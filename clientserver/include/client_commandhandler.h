@@ -30,7 +30,7 @@ public:
     Expected<std::vector<std::string>, Status> CHANGE_DATABASE(int dataBaseIndex);
 private:
     
-    Expected<std::vector<std::string>, Status> receiveIntStringPairs(const int nbrGroups);
+    Expected<std::vector<std::string>, Status> receiveIntStringPairs(const int nbrGroups, std::string emptyMessege);
     Status checkCondition(bool condition, Status error) const;
     //bool checkCode(Protocol epectedCode, Protocol code) const; 
     

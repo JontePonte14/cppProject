@@ -199,13 +199,14 @@ auto ServerCommandHandler::getArticle() const -> Status {
     if (!_article) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
         RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST));
+        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
         return Status::DatabaseError;
     }
 
     const auto article = *_article;
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
-    RETURN_IF_FAILED(sendIntParameter(article.getID(), "article ID"));
+    //RETURN_IF_FAILED(sendIntParameter(article.getID(), "article ID"));
     RETURN_IF_FAILED(sendStringParameter(article.getTitle(), "article title"));
     RETURN_IF_FAILED(sendStringParameter(article.getAuthor(), "article author"));
     RETURN_IF_FAILED(sendStringParameter(article.getBody(), "article body"));
