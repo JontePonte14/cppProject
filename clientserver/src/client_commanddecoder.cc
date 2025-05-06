@@ -160,7 +160,7 @@ void Client_commanddecoder::GET_ART(std::istream& is) {
     auto IdArt = readInputId(is);
     RETURN_IF_ERROR(IdArt);
     //Output
-    auto reply = comhand.DELETE_ART(*Id, *IdArt);
+    auto reply = comhand.GET_ART(*Id, *IdArt);
     printReply(reply);
 }
 
