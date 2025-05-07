@@ -116,24 +116,24 @@ auto ServerCommandHandler::listArticles() const -> Status {
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_LIST_ART));
 
-    const auto articles = database->listArticle(groupID);
-    const auto n = articles.size();
+    const auto _articles = database->listArticle(groupID);
 
-    // Kanske bör ändras. Men har var felet för listArticles()
-    if(n >= 0) {
-        RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
-        RETURN_IF_FAILED(sendIntParameter(n, "# of articles"));
-
-        for(const auto& article : articles) {
-            RETURN_IF_FAILED(sendIntParameter(article.id, "article ID"));
-            RETURN_IF_FAILED(sendStringParameter(article.name, "article title"));
-        }
-    } 
-    
-    else {
+    if(!_articles) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_NAK));
         RETURN_IF_FAILED(sendProtocol(Protocol::ERR_NG_DOES_NOT_EXIST));
+    } 
+    
+    const auto articles = *_articles;
+    const auto n = articles.size();
+
+    RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
+    RETURN_IF_FAILED(sendIntParameter(n, "# of articles"));
+
+    for(const auto& article : articles) {
+        RETURN_IF_FAILED(sendIntParameter(article.id, "article ID"));
+        RETURN_IF_FAILED(sendStringParameter(article.name, "article title"));
     }
+
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
 
@@ -233,4 +233,6 @@ auto ServerCommandHandler::changeDatabase() const -> Status {
     }
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_END));
+
+    return Status::Success;
 }

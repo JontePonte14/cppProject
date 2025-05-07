@@ -9,6 +9,9 @@ template<typename V, typename E>
 class Expected {
 
 public:
+    using value_type = V;
+    using error_type = E;
+
     static_assert(!std::is_same_v<V, E>, "V and E cannot be the same type");
 
     Expected() = default;
@@ -69,6 +72,39 @@ public:
             throw std::logic_error("Accessing error of a value state Expected");
         }
         return std::get<1>(std::move(data)); 
+    }
+
+    // Monadic functions
+    template<typename F>
+    auto transform(F&& func) const -> Expected<decltype(func(std::declval<V>())), E> {
+        using U = decltype(func(std::declval<V>()));
+        if (has_value()) {
+            return func(value());
+        } else {
+            return Expected<U, E>(error());
+        }
+    }
+
+    template<typename F,
+             typename R = decltype(std::declval<F>()(std::declval<V>())),
+             typename = std::enable_if_t<
+                    std::is_same_v<E, typename R::error_type>
+             >>
+    auto and_then(F&& func) const -> R {
+        if (has_value()) {
+            return func(value());
+        } else {
+            return R(error());
+        }
+    }
+
+
+    template<typename F>
+    auto or_else(F&& func) const -> Expected<V, E> {
+        if (!has_value()) {
+            return func(error());
+        }
+        return *this;
     }
 
     // Unpacking with *

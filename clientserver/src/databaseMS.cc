@@ -95,10 +95,10 @@ Database::RemoveStatus DatabaseMS::removeGroup(int groupID){
     return Database::RemoveStatus::SUCCESS;
 }
 
-vector<Database::ListObject> DatabaseMS::listArticle(int groupID){
+Expected<std::vector<Database::ListObject>, Database::RemoveStatus> DatabaseMS::listArticle(int groupID){
     if (memory.find(groupID) == memory.end())  {
         std::cerr << "Group with ID: " << groupID << " not found.\n";
-        return {};
+        return  Database::RemoveStatus::GROUP_NOT_FOUND;
     }
     vector<Database::ListObject> result;
     std::map<int, Article>& articles =memory[groupID].articles;

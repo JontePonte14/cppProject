@@ -36,7 +36,7 @@ class Database {
         virtual bool makeGroup(const std::string& name) = 0;
         virtual RemoveStatus removeGroup(int groupID) = 0;
     
-        virtual std::vector<ListObject>  listArticle(int groupID) = 0;
+        virtual Expected<std::vector<ListObject>, RemoveStatus> listArticle(int groupID) = 0;
         virtual bool makeArticle(int groupID, Article article) = 0;
         virtual RemoveStatus removeArticle(int groupID, int articleID) = 0;
         virtual Expected<Article, RemoveStatus> getArticle(int groupID, int articleID) = 0;

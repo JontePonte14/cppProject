@@ -22,7 +22,7 @@ public:
     bool makeGroup(const std::string& name)override;
     Database::RemoveStatus removeGroup(int groupID)override;
 
-    std::vector<Database::ListObject> listArticle(int groupID) override;
+    Expected<std::vector<Database::ListObject>, Database::RemoveStatus> listArticle(int groupID) override;
     bool makeArticle( int group, Article article) override;
     Database::RemoveStatus removeArticle(int groupID, int articleID) override;
     Expected<Article, RemoveStatus> getArticle(int groupID, int articleID) override;

@@ -86,13 +86,13 @@ Database::RemoveStatus DatabaseDS::removeGroup(int groupID){
 
 }
 
-std::vector<Database::ListObject> DatabaseDS::listArticle(int groupID){
+Expected<std::vector<Database::ListObject>, Database::RemoveStatus> DatabaseDS::listArticle(int groupID){
     std::vector<Database::ListObject> sortedArticles;
     std::string groupFolder = findGroupWithID(groupID);
 
     if (groupFolder == "") {
         std::cerr << "No group was found" << std::endl;
-        return {};
+        return Database::RemoveStatus::GROUP_NOT_FOUND;
     }
 
     int tempIdNbr;

@@ -57,7 +57,7 @@ bool Interface::makeGroup(std::string groupName){ return db->makeGroup(groupName
 
 Database::RemoveStatus Interface::removeGroup(int groupID){    return db->removeGroup(groupID);}
 
-std::vector<Database::ListObject>   Interface::listArticle(int groupID){ return db->listArticle(groupID);}
+Expected<std::vector<Database::ListObject>, Database::RemoveStatus>   Interface::listArticle(int groupID){ return db->listArticle(groupID);}
 
 
 bool Interface::makeArticle(int groupNBR,std::string articleTitle, std::string articleAuthor, std::string text)
