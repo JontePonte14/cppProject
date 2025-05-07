@@ -34,7 +34,7 @@ auto MessageHandler::sendIntParameter(const uint32_t param, const std::string& i
 auto MessageHandler::sendStringParameter(const std::string& param, const std::string& id) const noexcept -> Status
 {
     RETURN_IF_FAILED(sendProtocol(Protocol::PAR_STRING));
-    RETURN_IF_FAILED(sendIntParameter(param.length(), "# of chars"));
+    RETURN_IF_FAILED(sendInt(param.length(), "# of chars"));
 
     for (const byte c : param) {
         RETURN_IF_FAILED(sendByte(c));
@@ -80,7 +80,7 @@ auto MessageHandler::receiveIntParameter() const noexcept -> Expected<uint32_t, 
 auto MessageHandler::receiveStringParameter() const noexcept -> Expected<std::string, Status>
 {
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::PAR_STRING);
-    ASSIGN_OR_RETURN(n, receiveIntParameter());
+    ASSIGN_OR_RETURN(n, receiveInt());
 
     if (n < 1) {
         return Status::InvalidArguments;
