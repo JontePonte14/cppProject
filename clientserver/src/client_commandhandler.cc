@@ -11,10 +11,6 @@
 #include <optional>
 const std::string NO_NEWSGROUPS_MESSAGE = "Newsgroup does not exist";
 const std::string NO_ARTICLES_MESSAGE = "No articles in newsgroups";
-/* #define RETURN_IF_FAILED_CONDITION(expr) \
-    do { \
-        if (!(expr)) return ProtocolViolation; \
-    } while (0) */
 #define RETURN_IF_FAILED_CLIENT(expr)              \
     do {                                    \
         Status _status = (expr);            \
@@ -29,13 +25,6 @@ if (!CONCAT(_result_, __LINE__))                             \
     return CONCAT(_result_, __LINE__).error();               \
 decltype(auto) var = std::move(*CONCAT(_result_, __LINE__));
 
-/* #define RETURN_IF_ERROR(expr)                          \
-    do {                                                \
-        if (!(expr)) {                                  \
-            std::cout << "Got no " #expr " from server" << std::endl; \
-            return (expr).error();                      \
-        }                                               \
-    } while (0) */
 
 
 using std::cout;
@@ -333,12 +322,4 @@ Status Client_commandhandler::checkCondition(bool condition, Status error) const
         return error;
     }
 }
-/* bool Client_commandhandler::checkCode(Protocol expectedCode, Protocol code) const{
-    if(expectedCode == code){
-        return true;
-    }
-    else {
-        cout << "PROTOCOL VIOLATION. Expected: " << to_string(expectedCode) << " Got: " << to_string(code) << endl;
-        return false;
-    }
-}  */
+

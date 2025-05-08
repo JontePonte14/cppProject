@@ -25,7 +25,6 @@ Client_commanddecoder::Client_commanddecoder(const std::shared_ptr<Connection>& 
 }
 
 void Client_commanddecoder::com_decode(std::istream& is){
-    //std::vector<std::string> userInputs = readInputsStream(input); //Look at messege protocol for inputs
     std::string command;
     std::getline(is, command);
 
@@ -218,7 +217,7 @@ Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::i
         printInputError(InputStatus::Exit);
         return InputStatus::Exit;
     }
-    removeWhitespaces(str);
+    cout << "Client string is: " << str << endl;
     return str;
 }
 
