@@ -281,32 +281,40 @@ Expected<std::vector<std::string>, Status> Client_commandhandler::GET_ART(int gr
 Expected<std::vector<std::string>, Status> Client_commandhandler::CHANGE_DATABASE(int dataBaseIndex){
     std::vector<std::string> replyText;
     //Data sent to server
+    std::cerr << "Data sent to server" << std::endl;
     RETURN_IF_FAILED(sendProtocol(Protocol::COM_CHANGE_DATABASE));
     RETURN_IF_FAILED(sendIntParameter(dataBaseIndex));
     RETURN_IF_FAILED(sendProtocol(Protocol::COM_END));
     //ANS_CHANGE_DATABASE
+    std::cerr << "Ans change database" << std::endl;
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_CHANGE_DATABASE);
     //Data from server
+    std::cerr << "Data from server" << std::endl;
     ASSIGN_OR_RETURN(ans, receiveProtocol());
     if (ans == Protocol::ANS_ACK) {
+        std::cerr << "ACK" << std::endl;
         replyText.push_back("Database changed");
     }
     else if (ans == Protocol::ANS_NAK) {
+        std::cerr << "NAK" << std::endl;
         auto error = receiveProtocol();
         if (error && *error == Protocol::ERR_DATABASE_DOES_NOT_EXIST) {
             replyText.push_back("Database does not exist ");
         }
         else
         {
+            std::cerr << "Protocol violation 1" << std::endl;
             return ProtocolViolation;
         }
         
     }
     else {
+        std::cerr << "Protocol violation 1" << std::endl;
         return ProtocolViolation;
     }
     //ANS_END
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::ANS_END);
+    std::cerr << "ANS_END" << std::endl;
     return replyText;
 }
 
