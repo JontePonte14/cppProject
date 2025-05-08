@@ -81,15 +81,15 @@ bool Interface::switchDateBase(int dataBaseIndex)
     if(dataBaseIndex == 1)
     {
         activeDB = 1;
-        db = &db2;
+        db = &db1;
     }
     else if(dataBaseIndex == 2) 
     {
         activeDB = 2;
-        db = &db1;
+        db = &db2;
     } else {
         return false;
     }
 
-    return false;
+    return true;
 }        

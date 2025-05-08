@@ -224,7 +224,6 @@ auto ServerCommandHandler::changeDatabase() const -> Status {
     RECEIVE_AND_VERIFY_PROTOCOL(Protocol::COM_END);
 
     RETURN_IF_FAILED(sendProtocol(Protocol::ANS_CHANGE_DATABASE));
-
     if(database->switchDateBase(dataBaseIndex)) {
         RETURN_IF_FAILED(sendProtocol(Protocol::ANS_ACK));
     } else {
