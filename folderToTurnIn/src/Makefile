@@ -19,7 +19,13 @@ LDFLAGS = -g -lstdc++fs
 #CPPFLAGS += -stdlib=libc++
 #CXXFLAGS += -stdlib=libc++
 #LDFLAGS +=  -stdlib=libc++
+BIN_DIR := ../bin
+EXE_FILES := $(PROGS)
+MOVED_EXE_FILES := $(patsubst %, $(BIN_DIR)/%, $(EXE_FILES))
 
+$(BIN_DIR)/%: %
+	@mkdir -p $(BIN_DIR)
+	mv $< $@
 # Targets
 PROGS = client server
 
@@ -30,8 +36,11 @@ all: $(PROGS)
 
 # Targets rely on implicit rules for compiling and linking
 #testArticle: testArticle.o article.o
+client: article.o
 
-install: 
+server: article.o
+
+install: $(MOVED_EXE_FILES)
 
 # Phony targets
 .PHONY: all test clean distclean
