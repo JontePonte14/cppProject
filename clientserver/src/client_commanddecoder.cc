@@ -217,7 +217,8 @@ Expected<std::string, InputStatus> Client_commanddecoder::readInputString(std::i
         printInputError(InputStatus::Exit);
         return InputStatus::Exit;
     }
-    cout << "Client string is: " << str << endl;
+    // Debug
+    //cout << "Client string is: " << str << endl;
     return str;
 }
 
