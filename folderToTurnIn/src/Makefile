@@ -10,7 +10,8 @@ DEPFLAGS = -MT $@ -MMD -MP -MF $*.d
 # Define preprocessor, compiler, and linker flags. Uncomment the # lines
 # if you use clang++ and wish to use libc++ instead of GNU's libstdc++.
 # -g is for debugging.
-CPPFLAGS = -std=c++17 -I. -I../external
+CPPFLAGS = -std=c++17 -I.
+#CPPFLAGS = -std=c++17 -I. -I../external
 CXXFLAGS =  -O2 -Wall -Wextra -pedantic-errors -Wold-style-cast 
 CXXFLAGS += -std=c++17 
 CXXFLAGS += -g
@@ -21,29 +22,29 @@ LDFLAGS = -g -lstdc++fs
 #LDFLAGS +=  -stdlib=libc++
 BIN_DIR := ../bin
 EXE_FILES := $(PROGS)
-MOVED_EXE_FILES := $(patsubst %, $(BIN_DIR)/%, $(EXE_FILES))
 
 $(BIN_DIR)/%: %
 	@mkdir -p $(BIN_DIR)
 	mv $< $@
-# Targets
-PROGS = client server
+# Targetsm
+PROGS = myClient myServer
 
 all: $(PROGS)
 
-#test: test_coding
-#	./test_coding
-
 # Targets rely on implicit rules for compiling and linking
 #testArticle: testArticle.o article.o
-client: article.o
+myClient: myClient.o connection.o client_commanddecoder.o client_commandhandler.o messagehandler.o logger.o
 
-server: article.o
+myServer: myServer.o article.o commandhandler.o connection.o databaseDS.o databaseMS.o databaseserver.o interface.o logger.o messagehandler.o server.o servercommandhandler.o 	
+	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
 
-install: $(MOVED_EXE_FILES)
+install:
+	@mkdir -p $(BIN_DIR)
+	@mv -f myClient $(BIN_DIR)/myClient
+	@mv -f myServer $(BIN_DIR)/myServer
 
 # Phony targets
-.PHONY: all test clean distclean
+.PHONY: all test install clean distclean
 
 # Standard clean
 clean:
