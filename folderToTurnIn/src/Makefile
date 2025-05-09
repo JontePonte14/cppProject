@@ -40,8 +40,8 @@ myServer: myServer.o article.o commandhandler.o connection.o databaseDS.o databa
 
 install:
 	@mkdir -p $(BIN_DIR)
-	@mv -f myClient $(BIN_DIR)/myClient
-	@mv -f myServer $(BIN_DIR)/myServer
+	@cp -f myClient $(BIN_DIR)/myClient
+	@cp -f myServer $(BIN_DIR)/myServer
 
 # Phony targets
 .PHONY: all test install clean distclean
